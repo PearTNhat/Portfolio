@@ -1,4 +1,7 @@
+'use client';
+
 import * as React from 'react';
+import { motion } from 'framer-motion';
 import { Terminal, Layers, Database, Cpu } from 'lucide-react';
 import { SkillCategory } from '@/types/skill';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
@@ -25,15 +28,15 @@ export function SkillCard({ category }: SkillCardProps) {
   };
 
   return (
-    <Card className="p-5 sm:p-6 border border-slate-200/90 dark:border-slate-800 bg-white/80 dark:bg-slate-900/75 backdrop-blur-md flex flex-col justify-between h-full hover:border-cyan-500/50 shadow-md hover:shadow-cyan-500/10 transition-all duration-300">
+    <Card className="p-5 sm:p-6 border border-slate-200/90 dark:border-slate-800 bg-white/85 dark:bg-slate-900/80 backdrop-blur-md flex flex-col justify-between h-full hover:border-cyan-500/60 shadow-md hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 group">
       <div>
         <CardHeader className="p-0 pb-4">
           <div className="flex items-center gap-3 mb-1.5">
-            <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 shadow-sm">
+            <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 shadow-sm group-hover:scale-110 group-hover:border-cyan-500/40 transition-all duration-300">
               {getHeaderIcon(category.icon)}
             </div>
             <div>
-              <CardTitle className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+              <CardTitle className="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
                 {category.title}
               </CardTitle>
             </div>
@@ -45,12 +48,14 @@ export function SkillCard({ category }: SkillCardProps) {
 
         <CardContent className="p-0 pt-2 space-y-2">
           {category.skills.map((skill, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className="p-2.5 rounded-xl transition-all duration-200 border flex items-start gap-3 bg-slate-50/80 dark:bg-slate-950/60 border-slate-200/80 dark:border-slate-800/80 hover:border-cyan-500/40 dark:hover:border-cyan-500/40 hover:bg-slate-100/80 dark:hover:bg-slate-900/60"
+              whileHover={{ scale: 1.02, x: 3 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              className="p-2.5 rounded-xl transition-all duration-200 border flex items-start gap-3 bg-slate-50/80 dark:bg-slate-950/60 border-slate-200/80 dark:border-slate-800/80 hover:border-cyan-500/50 hover:bg-cyan-500/5 dark:hover:bg-cyan-950/30 hover:shadow-md cursor-default"
             >
-              {/* Technology Icon */}
-              <div className="p-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shrink-0 shadow-xs">
+              {/* Technology Icon with hover glow */}
+              <div className="p-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shrink-0 shadow-xs group-hover/skill:scale-110 transition-transform">
                 {getTechIcon(skill.name)}
               </div>
 
@@ -66,7 +71,7 @@ export function SkillCard({ category }: SkillCardProps) {
                   </p>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
         </CardContent>
       </div>

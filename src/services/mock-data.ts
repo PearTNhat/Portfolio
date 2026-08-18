@@ -102,7 +102,7 @@ export const MOCK_PROJECTS: Project[] = [
     period: '05/2025 - Present',
     role: 'Core Blockchain Developer',
     badgeText: 'Commercial • 12K TPS',
-    verificationStatus: 'Verified Production',
+    verificationStatus: 'Production System',
     githubUrl: 'https://github.com/x3pi/metanode',
     description:
       'A Layer 1 blockchain engine supporting high-throughput transaction processing, DAG & BFT consensus, EVM smart contract execution, and custom dual-tier state storage.',
@@ -153,7 +153,7 @@ export const MOCK_PROJECTS: Project[] = [
     period: '2025',
     role: 'Systems Developer',
     badgeText: 'Commercial • Rust & QUIC',
-    verificationStatus: 'Verified Production',
+    verificationStatus: 'Production System',
     githubUrl: 'https://github.com/x3pi/file-storage',
     description:
       'High-performance distributed file storage built with Rust and QUIC, supporting parallel chunked upload/download and cryptographic Merkle Tree integrity verification.',
@@ -198,7 +198,7 @@ export const MOCK_PROJECTS: Project[] = [
     period: '2025',
     role: 'Backend Developer',
     badgeText: 'Commercial • JSON-RPC',
-    verificationStatus: 'Verified Production',
+    verificationStatus: 'Production System',
     githubUrl: 'https://github.com/x3pi/MetaCoSign',
     description:
       'High-availability Ethereum-compatible JSON-RPC 2.0 API gateway written in Go for standard Web3 client interaction and validator BLS key registration.',

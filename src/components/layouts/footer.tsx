@@ -17,7 +17,7 @@ export function Footer() {
               className="flex items-center gap-2.5 group"
             >
               <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 via-indigo-500 to-purple-600 p-[1.5px] shadow-sm shadow-cyan-500/20">
-                <div className="flex h-full w-full items-center justify-center rounded-[10px] bg-slate-950 dark:bg-slate-900 text-cyan-400 font-black font-mono text-[11px] tracking-wider">
+                <div className="flex h-full w-full items-center justify-center rounded-[10px] bg-white dark:bg-slate-950 text-cyan-600 dark:text-cyan-400 font-black font-mono text-[11px] tracking-wider">
                   LTN
                 </div>
               </div>

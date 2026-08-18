@@ -82,11 +82,11 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           </div>
         )}
 
-        {/* Core Contributions & Verification */}
+        {/* Key Deliverables & Responsibilities */}
         <div className="space-y-3">
           <h4 className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            Key Deliverables & Verified Tasks
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            Key Deliverables & Responsibilities
           </h4>
           <ul className="space-y-2.5">
             {project.contributions.map((c, idx) => (
@@ -98,29 +98,31 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           </ul>
         </div>
 
-        {/* Architecture & Engineering Specs */}
+        {/* Technical Architecture Specs */}
         {project.architecture && (
-          <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-cyan-500/30 space-y-3">
-            <h4 className="font-mono text-xs font-bold text-cyan-700 dark:text-cyan-400 flex items-center gap-1.5">
-              <Layers className="w-4 h-4" />
-              {project.architecture.title}
-            </h4>
-            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+          <div className="space-y-2 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 font-mono text-xs">
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-tight font-bold flex items-center gap-1.5">
+              <Layers className="w-3.5 h-3.5 text-cyan-500" />
+              {project.architecture.title || 'Technical Architecture Specs'}
+            </div>
+            <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-sans text-xs sm:text-sm">
               {project.architecture.description}
             </p>
-            <ul className="space-y-1.5 text-xs text-slate-600 dark:text-slate-400 pt-1">
-              {project.architecture.points.map((pt, pIdx) => (
-                <li key={pIdx} className="flex items-start gap-2">
-                  <span className="text-cyan-600 dark:text-cyan-400 font-mono font-bold">→</span>
-                  <span>{pt}</span>
-                </li>
-              ))}
-            </ul>
+            {project.architecture.points && (
+              <ul className="space-y-1 text-slate-600 dark:text-slate-400 pt-1">
+                {project.architecture.points.map((pt, pIdx) => (
+                  <li key={pIdx} className="flex items-start gap-1.5 font-sans">
+                    <span className="text-cyan-500 font-mono font-bold">→</span>
+                    <span>{pt}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         )}
 
-        {/* Technologies with Vector Icons */}
-        <div className="space-y-2.5">
+        {/* Technologies Used */}
+        <div className="space-y-2">
           <h4 className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
             Technologies & Tools Used
           </h4>
@@ -140,11 +142,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
         </div>
 
         {/* Footer Close */}
-        <div className="pt-3 flex items-center justify-between border-t border-slate-200 dark:border-slate-800">
-          <span className="text-xs font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
-            Proof of Work verified by Lê Tuấn Nhật
-          </span>
+        <div className="pt-3 flex items-center justify-end border-t border-slate-200 dark:border-slate-800">
           <Button variant="outline" size="sm" onClick={onClose}>
             Close Window
           </Button>

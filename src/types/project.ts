@@ -39,5 +39,5 @@ export interface Project {
   docsUrl?: string;
   images?: string[];
   badgeText?: string;
-  verificationStatus?: 'Verified Production' | 'Open Source Repo' | 'Live System';
+  verificationStatus?: 'Production System' | 'Open Source Repo' | 'Live System';
 }

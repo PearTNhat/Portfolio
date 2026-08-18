@@ -26,7 +26,7 @@ export function Navbar() {
             aria-label="Lê Tuấn Nhật (LTN) Portfolio"
           >
             <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 via-indigo-500 to-purple-600 p-[1.5px] shadow-sm shadow-cyan-500/20 group-hover:shadow-md group-hover:shadow-cyan-500/30 transition-all duration-300">
-              <div className="flex h-full w-full items-center justify-center rounded-[10px] bg-slate-950 dark:bg-slate-900 text-cyan-400 font-black font-mono text-xs tracking-wider group-hover:text-white transition-colors">
+              <div className="flex h-full w-full items-center justify-center rounded-[10px] bg-white dark:bg-slate-950 text-cyan-600 dark:text-cyan-400 font-black font-mono text-xs tracking-wider group-hover:bg-gradient-to-br group-hover:from-cyan-500 group-hover:to-indigo-600 group-hover:text-white transition-all duration-300">
                 LTN
               </div>
             </div>

@@ -7,6 +7,7 @@ import { SkillsGrid } from '@/features/skills/components/skills-grid';
 import { ProjectGrid } from '@/features/projects/components/project-grid';
 import { ExperienceTimeline } from '@/features/experience/components/experience-timeline';
 import { ContactSection } from '@/features/contact/components/contact-section';
+import { AnimatedBackground } from '@/components/ui/animated-background';
 
 export default async function HomePage() {
   // Concurrently fetch all section data avoiding waterfalls per RULES.md
@@ -18,8 +19,11 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div className="flex flex-col w-full">
-      {/* 1. Hero & Interactive Terminal */}
+    <div className="flex flex-col w-full relative">
+      {/* Dynamic Animated Cyber Background with Glowing Orbs & Tech Constellations */}
+      <AnimatedBackground />
+
+      {/* 1. Hero & Interactive Profile Overview */}
       <HeroSection profile={profile} />
 
       {/* 2. Technical Arsenal & Skills (Immediately visible to recruiter) */}

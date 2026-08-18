@@ -11,6 +11,7 @@ import { Container } from '@/components/layouts/container';
 import { ProfileFocusCard } from '@/features/profile/components/profile-focus-card';
 import { QuickStats } from '@/features/profile/components/quick-stats';
 import { AnimatedTyping } from '@/components/ui/animated-typing';
+import { FloatingTechBadges } from '@/components/ui/floating-tech-badges';
 
 export interface HeroSectionProps {
   profile: Profile;
@@ -26,6 +27,9 @@ export function HeroSection({ profile }: HeroSectionProps) {
 
   return (
     <section id="overview" className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden bg-grid-pattern">
+      {/* Floating Tech Badges */}
+      <FloatingTechBadges />
+
       <Container size="xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Bio & Core Info */}
@@ -62,12 +66,12 @@ export function HeroSection({ profile }: HeroSectionProps) {
             <div className="space-y-3">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1]">
                 Hi, I&apos;m{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-300 to-sky-400 text-gradient-animated">
                   {profile.name}
                 </span>
               </h1>
               <div className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-200 flex flex-wrap items-center gap-2">
-                <span>Focused on</span>
+                <span className="text-slate-600 dark:text-slate-300">Focused on</span>
                 <AnimatedTyping words={roles} />
               </div>
             </div>

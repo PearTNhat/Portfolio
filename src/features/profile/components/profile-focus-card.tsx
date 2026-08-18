@@ -2,13 +2,17 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, ExternalLink, MapPin, Mail, MessageCircle, Phone, Sparkles } from 'lucide-react';
+import { ShieldCheck, ExternalLink, MapPin, Mail, MessageCircle, Copy, Check } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 import { SITE_METADATA } from '@/lib/constants';
 import { Card } from '@/components/ui/card';
 import { SiGo, SiRust, SiEthereum, SiApachekafka } from 'react-icons/si';
+import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 
 export function ProfileFocusCard() {
+  const { isCopied: isPhoneCopied, copy: copyPhone } = useCopyToClipboard();
+  const { isCopied: isEmailCopied, copy: copyEmail } = useCopyToClipboard();
+
   return (
     <Card className="p-6 sm:p-7 border border-slate-200/90 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-2xl relative overflow-hidden group">
       {/* Top ambient glow */}
@@ -21,9 +25,9 @@ export function ProfileFocusCard() {
         {/* Header: Verified Engineer */}
         <div className="flex items-start justify-between gap-3 pb-4 border-b border-slate-200/80 dark:border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-indigo-600 p-0.5 shadow-md shadow-cyan-500/20">
-              <div className="w-full h-full bg-slate-900 rounded-[14px] flex items-center justify-center text-cyan-400 font-bold text-lg font-mono">
-                TN
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 via-indigo-500 to-purple-600 p-[1.5px] shadow-md shadow-cyan-500/20">
+              <div className="w-full h-full bg-white dark:bg-slate-900 rounded-[14px] flex items-center justify-center text-cyan-600 dark:text-cyan-400 font-black text-sm font-mono tracking-wide">
+                LTN
               </div>
             </div>
             <div>
@@ -106,46 +110,90 @@ export function ProfileFocusCard() {
           </a>
         </div>
 
-        {/* Direct Contact & Zalo Phone Bar */}
-        <div className="pt-2 border-t border-slate-200/80 dark:border-slate-800 space-y-2">
-          {/* Click to Zalo Button */}
-          <a
-            href={SITE_METADATA.zalo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-between p-2.5 rounded-xl bg-blue-500/10 dark:bg-blue-950/50 border border-blue-500/30 hover:border-blue-500/60 hover:bg-blue-500/15 text-blue-700 dark:text-blue-300 transition-all group/zalo"
-            title="Chat directly on Zalo (0944477357)"
-          >
-            <div className="flex items-center gap-2.5">
-              <div className="p-1 rounded-lg bg-blue-500 text-white shadow-xs">
-                <MessageCircle className="w-3.5 h-3.5" />
-              </div>
-              <div>
-                <div className="text-xs font-bold text-blue-700 dark:text-blue-300 flex items-center gap-1.5">
-                  <span>0944 477 357</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-600 dark:text-blue-300">
-                    Zalo Chat 💬
-                  </span>
+        {/* Direct Contact, Zalo & One-Click Copy Bar */}
+        <div className="pt-2 border-t border-slate-200/80 dark:border-slate-800 space-y-2.5">
+          {/* Zalo Phone & Copy Bar */}
+          <div className="p-3 rounded-2xl bg-blue-500/10 dark:bg-blue-950/50 border border-blue-500/30 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <div className="p-1.5 rounded-xl bg-blue-500 text-white shadow-xs shrink-0">
+                  <MessageCircle className="w-4 h-4" />
                 </div>
-                <div className="text-[10px] text-blue-600/80 dark:text-blue-400/80">Direct chat on Zalo (0944 477 357)</div>
+                <div>
+                  <div className="text-xs font-black text-slate-900 dark:text-blue-200 flex items-center gap-1.5 font-mono">
+                    <span>0944 477 357</span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-600 dark:text-blue-300 font-semibold">
+                      Zalo
+                    </span>
+                  </div>
+                  <div className="text-[10px] text-blue-600/80 dark:text-blue-400/80">Phone &amp; Direct Messaging</div>
+                </div>
               </div>
-            </div>
-            <ExternalLink className="w-3.5 h-3.5 text-blue-500 group-hover/zalo:translate-x-0.5 transition-transform" />
-          </a>
 
-          {/* Email & Location footer */}
-          <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-400 pt-1 font-mono">
-            <span className="flex items-center gap-1 text-[11px]">
-              <MapPin className="w-3 h-3 text-cyan-500" />
-              Ho Chi Minh City, VN
-            </span>
+              <a
+                href={SITE_METADATA.zalo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-blue-600 text-white text-xs font-bold shadow-xs hover:bg-blue-700 transition-all hover:scale-105"
+                title="Chat directly on Zalo"
+              >
+                <span>Chat Zalo</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
+            {/* Prominent Copy Phone Button */}
+            <div className="pt-1 border-t border-blue-500/20">
+              <button
+                type="button"
+                onClick={() => copyPhone(SITE_METADATA.phone)}
+                className="w-full inline-flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-700/80 text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-slate-800 text-xs font-mono font-bold transition-all shadow-xs cursor-pointer"
+                title="Copy phone number: 0944477357"
+              >
+                {isPhoneCopied ? (
+                  <>
+                    <Check className="w-4 h-4 text-emerald-500" />
+                    <span className="text-emerald-500 font-bold">Copied: 0944 477 357!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3.5 h-3.5 text-blue-500" />
+                    <span>Copy Phone: 0944 477 357</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Email & Copy Bar */}
+          <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 text-xs font-mono">
             <a
               href={`mailto:${SITE_METADATA.email}`}
-              className="text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1 text-[11px]"
+              className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 hover:underline truncate flex-1 min-w-0"
+              title="Click to send email"
             >
-              <Mail className="w-3 h-3" />
-              letuannhat105@gmail.com
+              <Mail className="w-3.5 h-3.5 shrink-0 text-cyan-500" />
+              <span className="truncate">{SITE_METADATA.email}</span>
             </a>
+
+            <button
+              type="button"
+              onClick={() => copyEmail(SITE_METADATA.email)}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:border-cyan-500 hover:text-cyan-600 transition-all cursor-pointer shrink-0 ml-2 shadow-xs"
+              title="Copy email"
+            >
+              {isEmailCopied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-500" />
+                  <span className="text-emerald-500 font-bold">Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3 h-3 text-slate-400" />
+                  <span>Copy</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
       </div>
