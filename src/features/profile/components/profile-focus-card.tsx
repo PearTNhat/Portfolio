@@ -1,8 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
-import { ShieldCheck, ExternalLink, MapPin, Mail, MessageCircle, Copy, Check } from 'lucide-react';
+import { ShieldCheck, ExternalLink, Mail, MessageCircle, Copy, Check } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 import { SITE_METADATA } from '@/lib/constants';
 import { Card } from '@/components/ui/card';

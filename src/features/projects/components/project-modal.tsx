@@ -6,7 +6,7 @@ import { Modal } from '@/components/ui/modal';
 import { Button } from '@/components/ui/button';
 import { getTechIcon } from '@/components/ui/tech-icons';
 import { GithubIcon } from '@/components/ui/icons';
-import { CheckCircle2, ExternalLink, ShieldCheck, Layers } from 'lucide-react';
+import { CheckCircle2, ExternalLink, Layers } from 'lucide-react';
 
 export interface ProjectModalProps {
   project: Project | null;

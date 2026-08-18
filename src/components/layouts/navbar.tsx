@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Terminal, Menu, X, FileDown, MessageCircle } from 'lucide-react';
+import { Menu, X, FileDown, MessageCircle } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 import { NAV_ITEMS, SITE_METADATA } from '@/lib/constants';
 import { useScrollSpy } from '@/hooks/use-scroll-spy';

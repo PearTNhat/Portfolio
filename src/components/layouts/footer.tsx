@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { Terminal, Mail, Phone, MapPin, ArrowUp } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUp } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 import { SITE_METADATA } from '@/lib/constants';
 import { Container } from '@/components/layouts/container';

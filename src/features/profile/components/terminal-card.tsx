@@ -121,7 +121,7 @@ export function TerminalCard() {
       {/* Terminal Body */}
       <div className="p-4 sm:p-5 space-y-4 max-h-[320px] overflow-y-auto bg-slate-950/90">
         <div className="text-slate-400 text-[11px] pb-1 border-b border-slate-900">
-          // Welcome to Lê Tuấn Nhật CLI. Run commands or click quick actions.
+          {'// Welcome to Lê Tuấn Nhật CLI. Run commands or click quick actions.'}
         </div>
 
         {history.map((item, idx) => (

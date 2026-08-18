@@ -2,8 +2,8 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { SiGo, SiRust, SiEthereum, SiApachekafka } from 'react-icons/si';
-import { Zap, Database } from 'lucide-react';
+import { SiRust, SiApachekafka } from 'react-icons/si';
+import { Zap } from 'lucide-react';
 
 export function FloatingTechBadges() {
   return (

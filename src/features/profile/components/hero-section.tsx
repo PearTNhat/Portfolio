@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { FileDown, Mail, ArrowRight, ShieldCheck, Cpu, Database, Network, Sparkles } from 'lucide-react';
+import { FileDown, Mail, ArrowRight, ShieldCheck, Cpu, Database, Network } from 'lucide-react';
 import { Profile } from '@/types/profile';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';

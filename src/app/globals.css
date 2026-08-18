@@ -94,54 +94,117 @@ body {
   opacity: 0.7;
 }
 
-/* Glowing Neon Keyframes */
+/* Glowing Neon Keyframes (Optimized: only animate opacity and transform, keep filter static) */
 @keyframes pulse-glow {
   0%, 100% {
     opacity: 0.4;
     transform: scale(1);
-    filter: blur(24px);
   }
   50% {
-    opacity: 0.8;
-    transform: scale(1.15);
-    filter: blur(32px);
+    opacity: 0.85;
+    transform: scale(1.1);
   }
 }
 
 .animate-pulse-glow {
   animation: pulse-glow 6s ease-in-out infinite;
+  filter: blur(24px);
+  will-change: transform, opacity;
 }
 
 /* Floating animation */
 @keyframes float-slow {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(1deg); }
+  0%, 100% { transform: translate3d(0, 0px, 0) rotate(0deg); }
+  50% { transform: translate3d(0, -10px, 0) rotate(1deg); }
 }
 
 @keyframes float-reverse {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(10px) rotate(-1deg); }
+  0%, 100% { transform: translate3d(0, 0px, 0) rotate(0deg); }
+  50% { transform: translate3d(0, 10px, 0) rotate(-1deg); }
 }
 
 .animate-float-slow {
   animation: float-slow 5s ease-in-out infinite;
+  will-change: transform;
 }
 
 .animate-float-reverse {
   animation: float-reverse 6s ease-in-out infinite;
+  will-change: transform;
 }
 
-/* Glassmorphism Classes */
+/* GPU-Accelerated Background Orb Animations (Desktop Only) */
+@keyframes orb-float-1 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(45px, -35px, 0) scale(1.15); }
+}
+
+@keyframes orb-float-2 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-35px, 45px, 0) scale(1.12); }
+}
+
+@keyframes orb-float-3 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(30px, -30px, 0) scale(1.1); }
+}
+
+@keyframes orb-float-4 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-25px, 35px, 0) scale(1.15); }
+}
+
+@media (min-width: 768px) {
+  .animate-orb-1 {
+    animation: orb-float-1 20s ease-in-out infinite;
+    will-change: transform;
+  }
+  .animate-orb-2 {
+    animation: orb-float-2 24s ease-in-out infinite;
+    will-change: transform;
+  }
+  .animate-orb-3 {
+    animation: orb-float-3 22s ease-in-out infinite;
+    will-change: transform;
+  }
+  .animate-orb-4 {
+    animation: orb-float-4 26s ease-in-out infinite;
+    will-change: transform;
+  }
+}
+
+/* Glassmorphism Classes with Mobile Performance Optimization */
 .glass-card {
   background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+  .glass-card {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, 0.92);
+  }
+  .dark .glass-card {
+    background: rgba(13, 20, 36, 0.9);
+  }
 }
 
 .glass-card:hover {
   border-color: rgba(0, 173, 216, 0.4);
   box-shadow: 0 12px 30px -10px rgba(0, 173, 216, 0.15);
+}
+
+/* Reduced Motion and Low-Power Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Custom Scrollbar */
@@ -161,3 +224,4 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 173, 216, 0.5);
 }
+

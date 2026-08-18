@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Mail, Phone, MapPin, Copy, Check, ExternalLink, MessageCircle } from 'lucide-react';
+import { Mail, MapPin, Copy, Check, ExternalLink, MessageCircle } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 import { SocialLink } from '@/types/profile';
 import { Card } from '@/components/ui/card';

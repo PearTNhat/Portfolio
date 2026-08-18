@@ -82,6 +82,9 @@ export function getTechIcon(name: string, customClass: string = 'w-5 h-5') {
   if (lower.includes('linux')) {
     return <SiLinux className={`${customClass} text-[#FCC624] shrink-0`} />;
   }
+  if (lower.includes('bash') || lower.includes('shell')) {
+    return <SiGnubash className={`${customClass} text-[#4EAA25] shrink-0`} />;
+  }
   if (lower.includes('rabbitmq')) {
     return <SiRabbitmq className={`${customClass} text-[#FF6600] shrink-0`} />;
   }

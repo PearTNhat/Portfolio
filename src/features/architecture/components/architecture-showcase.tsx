@@ -270,11 +270,11 @@ export function ArchitectureShowcase() {
 
                 <div className="space-y-3 font-mono text-xs">
                   <div className="p-3 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">
-                    <div className="text-emerald-400 font-bold mb-1">// Supported JSON-RPC Standard Methods</div>
+                    <div className="text-emerald-400 font-bold mb-1">{'// Supported JSON-RPC Standard Methods'}</div>
                     <div>eth_getBlockByNumber, eth_sendRawTransaction, eth_call, eth_estimateGas, eth_getTransactionReceipt, net_version...</div>
                   </div>
                   <div className="p-3 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">
-                    <div className="text-cyan-400 font-bold mb-1">// BLS Key Registration Gateway</div>
+                    <div className="text-cyan-400 font-bold mb-1">{'// BLS Key Registration Gateway'}</div>
                     <div>Validates validator public keys, signature proofs, and coordinates registration on-chain.</div>
                   </div>
                 </div>
