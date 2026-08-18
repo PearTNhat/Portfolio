@@ -10,18 +10,18 @@ export function FloatingTechBadges() {
     <>
       {/* Floating Badge 1: 12K TPS DAG/BFT - Top Left */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{
           opacity: 1,
-          y: [0, -12, 0],
-          rotate: [0, 2, 0],
+          y: [0, -10, 0],
+          rotate: [0, 1.5, 0],
         }}
         transition={{
           y: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
           rotate: { duration: 6, repeat: Infinity, ease: 'easeInOut' },
-          opacity: { duration: 0.8 },
+          opacity: { duration: 0.6 },
         }}
-        className="hidden xl:flex absolute -top-8 -left-12 items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-cyan-500/40 shadow-xl shadow-cyan-500/15 backdrop-blur-md z-20"
+        className="hidden xl:flex absolute -top-5 -left-6 items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-cyan-500/40 shadow-xl shadow-cyan-500/15 backdrop-blur-sm z-20 pointer-events-none transform-gpu"
       >
         <div className="p-1 rounded-lg bg-cyan-500/15 text-cyan-500">
           <Zap className="w-4 h-4" />
@@ -32,20 +32,20 @@ export function FloatingTechBadges() {
         </div>
       </motion.div>
 
-      {/* Floating Badge 2: Rust QUIC - Bottom Left */}
+      {/* Floating Badge 2: Rust QUIC - Center Right */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{
           opacity: 1,
-          y: [0, 14, 0],
-          rotate: [0, -2, 0],
+          y: [0, 10, 0],
+          rotate: [0, -1.5, 0],
         }}
         transition={{
           y: { duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 },
           rotate: { duration: 6.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 },
-          opacity: { duration: 0.8, delay: 0.3 },
+          opacity: { duration: 0.6, delay: 0.2 },
         }}
-        className="hidden xl:flex absolute -bottom-10 -left-8 items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-orange-500/40 shadow-xl shadow-orange-500/15 backdrop-blur-md z-20"
+        className="hidden xl:flex absolute top-1/4 -right-7 items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-orange-500/40 shadow-xl shadow-orange-500/15 backdrop-blur-sm z-20 pointer-events-none transform-gpu"
       >
         <div className="p-1 rounded-lg bg-orange-500/15 text-orange-500">
           <SiRust className="w-4 h-4 text-[#DEA584] dark:text-[#F74C00]" />
@@ -56,20 +56,20 @@ export function FloatingTechBadges() {
         </div>
       </motion.div>
 
-      {/* Floating Badge 3: Kafka Streaming - Bottom Right */}
+      {/* Floating Badge 3: Kafka Streaming - Bottom Left */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{
           opacity: 1,
-          y: [0, -14, 0],
-          rotate: [0, 2, 0],
+          y: [0, -10, 0],
+          rotate: [0, 1.5, 0],
         }}
         transition={{
           y: { duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 },
           rotate: { duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 },
-          opacity: { duration: 0.8, delay: 0.5 },
+          opacity: { duration: 0.6, delay: 0.4 },
         }}
-        className="hidden xl:flex absolute -bottom-8 -right-6 items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-pink-500/40 shadow-xl shadow-pink-500/15 backdrop-blur-md z-20"
+        className="hidden xl:flex absolute -bottom-5 -left-5 items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-pink-500/40 shadow-xl shadow-pink-500/15 backdrop-blur-sm z-20 pointer-events-none transform-gpu"
       >
         <div className="p-1 rounded-lg bg-pink-500/15 text-pink-500">
           <SiApachekafka className="w-4 h-4 text-[#E535AB]" />
@@ -82,3 +82,4 @@ export function FloatingTechBadges() {
     </>
   );
 }
+

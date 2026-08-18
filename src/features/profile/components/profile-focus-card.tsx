@@ -5,7 +5,7 @@ import { ShieldCheck, ExternalLink, Mail, MessageCircle, Copy, Check } from 'luc
 import { GithubIcon } from '@/components/ui/icons';
 import { SITE_METADATA } from '@/lib/constants';
 import { Card } from '@/components/ui/card';
-import { SiGo, SiRust, SiEthereum, SiApachekafka } from 'react-icons/si';
+import { SiGo, SiRust, SiEthereum, SiReact } from 'react-icons/si';
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 
 export function ProfileFocusCard() {
@@ -54,7 +54,8 @@ export function ProfileFocusCard() {
             CORE DOMAINS & ENGINEERING FOCUS
           </div>
           <div className="grid grid-cols-2 gap-2.5">
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5">
+            {/* 1. Golang */}
+            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-cyan-500/40 transition-colors">
               <SiGo className="w-5 h-5 text-[#00ADD8] shrink-0" />
               <div>
                 <div className="text-xs font-bold text-slate-900 dark:text-slate-100">Go Backend</div>
@@ -62,27 +63,30 @@ export function ProfileFocusCard() {
               </div>
             </div>
 
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5">
-              <SiEthereum className="w-5 h-5 text-[#627EEA] shrink-0" />
-              <div>
-                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">Layer 1 & EVM</div>
-                <div className="text-[10px] text-slate-500">DAG/BFT Consensus</div>
-              </div>
-            </div>
-
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5">
+            {/* 2. Rust */}
+            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-orange-500/40 transition-colors">
               <SiRust className="w-5 h-5 text-[#DEA584] dark:text-[#F74C00] shrink-0" />
               <div>
                 <div className="text-xs font-bold text-slate-900 dark:text-slate-100">Rust Systems</div>
-                <div className="text-[10px] text-slate-500">QUIC & Tokio</div>
+                <div className="text-[10px] text-slate-500">QUIC & High Perf</div>
               </div>
             </div>
 
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5">
-              <SiApachekafka className="w-5 h-5 text-[#E535AB] shrink-0" />
+            {/* 3. Blockchain */}
+            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-indigo-500/40 transition-colors">
+              <SiEthereum className="w-5 h-5 text-[#627EEA] shrink-0" />
               <div>
-                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">Microservices</div>
-                <div className="text-[10px] text-slate-500">Kafka & gRPC</div>
+                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">Blockchain</div>
+                <div className="text-[10px] text-slate-500">Layer 1 & EVM DAG</div>
+              </div>
+            </div>
+
+            {/* 4. ReactJS */}
+            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-cyan-400/40 transition-colors">
+              <SiReact className="w-5 h-5 text-[#61DAFB] shrink-0" />
+              <div>
+                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">ReactJS / Next</div>
+                <div className="text-[10px] text-slate-500">SPA & Web3 DApps</div>
               </div>
             </div>
           </div>

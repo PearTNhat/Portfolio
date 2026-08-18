@@ -11,7 +11,6 @@ import { Container } from '@/components/layouts/container';
 import { ProfileFocusCard } from '@/features/profile/components/profile-focus-card';
 import { QuickStats } from '@/features/profile/components/quick-stats';
 import { AnimatedTyping } from '@/components/ui/animated-typing';
-import { FloatingTechBadges } from '@/components/ui/floating-tech-badges';
 
 export interface HeroSectionProps {
   profile: Profile;
@@ -19,17 +18,14 @@ export interface HeroSectionProps {
 
 export function HeroSection({ profile }: HeroSectionProps) {
   const roles = [
-    'Blockchain & Golang Engineer',
-    'Layer 1 Consensus (12K TPS)',
-    'Rust & QUIC Storage Developer',
-    'Go & Kafka Microservices',
+    'Golang & Backend Architecture',
+    'Rust Systems & Performance',
+    'Blockchain & Layer 1 Consensus',
+    'ReactJS & Modern Web3 Fullstack',
   ];
 
   return (
     <section id="overview" className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden bg-grid-pattern">
-      {/* Floating Tech Badges */}
-      <FloatingTechBadges />
-
       <Container size="xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Bio & Core Info */}
@@ -84,16 +80,16 @@ export function HeroSection({ profile }: HeroSectionProps) {
             {/* Technical Highlights Badges */}
             <div className="flex flex-wrap gap-2 pt-1">
               <Badge variant="cyan" size="md">
-                <Cpu className="w-3.5 h-3.5 mr-1" /> Go & Rust Core
+                <Cpu className="w-3.5 h-3.5 mr-1" /> Golang Backend
               </Badge>
               <Badge variant="indigo" size="md">
-                <ShieldCheck className="w-3.5 h-3.5 mr-1" /> EVM & DAG/BFT
+                <ShieldCheck className="w-3.5 h-3.5 mr-1" /> Rust Systems
               </Badge>
               <Badge variant="emerald" size="md">
-                <Database className="w-3.5 h-3.5 mr-1" /> LevelDB & Xapian
+                <Database className="w-3.5 h-3.5 mr-1" /> Blockchain & EVM
               </Badge>
               <Badge variant="slate" size="md">
-                <Network className="w-3.5 h-3.5 mr-1" /> Kafka & QUIC
+                <Network className="w-3.5 h-3.5 mr-1" /> ReactJS & Next.js
               </Badge>
             </div>
 
@@ -133,7 +129,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-            className="lg:col-span-5 w-full"
+            className="lg:col-span-5 w-full relative"
           >
             <ProfileFocusCard />
           </motion.div>
