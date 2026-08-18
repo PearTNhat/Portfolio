@@ -1,0 +1,381 @@
+import { Profile } from '@/types/profile';
+import { Project } from '@/types/project';
+import { Experience } from '@/types/experience';
+import { SkillCategory } from '@/types/skill';
+
+export const MOCK_PROFILE: Profile = {
+  name: 'Lê Tuấn Nhật',
+  title: 'Blockchain & Golang Backend Engineer',
+  tagline: 'High-throughput distributed systems, Layer 1 blockchain consensus, and resilient Go/Rust backends.',
+  summary:
+    'Backend & Blockchain Engineer with ~1.5 years experience building core Layer 1 engines (12,000 TPS with DAG & BFT consensus), low-level state storage (NOMT Trie, LevelDB, Xapian), Rust/QUIC protocols, and high-concurrency Go microservices with Kafka & gRPC.',
+  location: 'Hồ Chí Minh, Vietnam',
+  email: 'letuannhat105@gmail.com',
+  phone: '0944477357',
+  github: 'https://github.com/PearTNhat',
+  githubUsername: 'PearTNhat',
+  resumeUrl: '/cv/CV-LeTuanNhat-Blockchain.pdf',
+  highlights: [
+    'Layer 1 Blockchain consensus & state engine scaling up to 12,000 TPS.',
+    'Custom state storage using NOMT Trie, Flat Trie, LevelDB, and Xapian.',
+    'Chunk-based QUIC storage with cryptographic Merkle Tree proofs in Rust.',
+    'Event-driven Go microservices with Kafka, Redis, and gRPC.',
+  ],
+  education: {
+    institution: 'Posts and Telecommunications Institute of Technology (PTIT)',
+    degree: 'Engineer in Information Technology',
+    period: '2021 - 2026',
+    major: 'Information Technology',
+  },
+  stats: [
+    {
+      id: 'stat-yoe',
+      label: 'Experience',
+      value: '~1.5 YOE',
+      description: 'Blockchain & Go backend',
+      highlight: 'Core Systems',
+    },
+    {
+      id: 'stat-tps',
+      label: 'Peak Throughput',
+      value: '12,000 TPS',
+      description: 'Layer 1 transaction engine',
+      highlight: 'High Performance',
+    },
+    {
+      id: 'stat-systems',
+      label: 'Production Systems',
+      value: '4 Core Apps',
+      description: 'L1 Chain, Rust QUIC, RPC, Microservices',
+      highlight: 'Go & Rust',
+    },
+    {
+      id: 'stat-toeic',
+      label: 'English / PTIT',
+      value: 'TOEIC 605',
+      description: 'Technical reading & communication',
+      highlight: 'PTIT Engineer',
+    },
+  ],
+  socials: [
+    {
+      platform: 'github',
+      label: 'GitHub',
+      value: 'github.com/PearTNhat',
+      href: 'https://github.com/PearTNhat',
+      icon: 'Github',
+    },
+    {
+      platform: 'email',
+      label: 'Email',
+      value: 'letuannhat105@gmail.com',
+      href: 'mailto:letuannhat105@gmail.com',
+      icon: 'Mail',
+    },
+    {
+      platform: 'phone',
+      label: 'Phone',
+      value: '0944477357',
+      href: 'tel:0944477357',
+      icon: 'Phone',
+    },
+    {
+      platform: 'location',
+      label: 'Location',
+      value: 'Hồ Chí Minh, Vietnam',
+      href: '#contact',
+      icon: 'MapPin',
+    },
+  ],
+};
+
+export const MOCK_PROJECTS: Project[] = [
+  {
+    id: 'proj-metanode',
+    slug: 'metanode-blockchain',
+    title: 'MetaNode Blockchain (Layer 1)',
+    subtitle: 'High-Throughput Layer 1 Blockchain Engine',
+    type: 'commercial',
+    category: 'blockchain',
+    featured: true,
+    order: 1,
+    period: '05/2025 - Present',
+    role: 'Core Blockchain Developer',
+    badgeText: 'Commercial • 12K TPS',
+    verificationStatus: 'Verified Production',
+    githubUrl: 'https://github.com/x3pi/metanode',
+    description:
+      'A Layer 1 blockchain engine supporting high-throughput transaction processing, DAG & BFT consensus, EVM smart contract execution, and custom dual-tier state storage.',
+    metrics: [
+      { label: 'Throughput', value: '12,000 TPS' },
+      { label: 'Consensus', value: 'DAG + BFT' },
+      { label: 'State Storage', value: 'NOMT & Flat Trie' },
+    ],
+    technologies: [
+      'Go',
+      'Rust',
+      'EVM',
+      'DAG',
+      'BFT',
+      'NOMT Trie',
+      'Flat Trie',
+      'LevelDB',
+      'Xapian',
+      'cgo / FFI',
+      'Linux',
+    ],
+    contributions: [
+      'Developed consensus mechanism for multi-node distributed architecture with sub-second finality.',
+      'Engineered core transaction execution, block generation pipelines, and EVM compatibility.',
+      'Designed dual-tier state storage using NOMT Trie, Flat Trie, LevelDB, and Xapian indexer.',
+      'Benchmarked and optimized transaction throughput up to 12,000 TPS.',
+    ],
+    architecture: {
+      title: 'DAG Ordering + BFT Quorum Consensus Pipeline',
+      description:
+        'Combines Directed Acyclic Graph (DAG) for asynchronous transaction ordering and BFT consensus for deterministic finality, with a optimized dual-trie state structure (NOMT Trie & Flat Trie) on LevelDB.',
+      points: [
+        'Concurrent multi-stage transaction verification.',
+        'High-performance state indexing with LevelDB key-value store and Xapian search engine.',
+        'Zero-copy FFI/cgo bindings between Go execution layers and Rust cryptographic modules.',
+      ],
+    },
+  },
+  {
+    id: 'proj-quic-storage',
+    slug: 'rust-quic-storage',
+    title: 'Distributed File Storage System',
+    subtitle: 'Chunk-Based File Storage over QUIC Protocol',
+    type: 'commercial',
+    category: 'backend',
+    featured: true,
+    order: 2,
+    period: '2025',
+    role: 'Systems Developer',
+    badgeText: 'Commercial • Rust & QUIC',
+    verificationStatus: 'Verified Production',
+    githubUrl: 'https://github.com/x3pi/file-storage',
+    description:
+      'High-performance distributed file storage built with Rust and QUIC, supporting parallel chunked upload/download and cryptographic Merkle Tree integrity verification.',
+    metrics: [
+      { label: 'Protocol', value: 'QUIC / UDP' },
+      { label: 'Integrity', value: 'Merkle Tree' },
+      { label: 'Smart Contract', value: 'Solidity Audit' },
+    ],
+    technologies: [
+      'Rust',
+      'QUIC Protocol',
+      'Merkle Tree',
+      'Smart Contracts',
+      'Solidity',
+      'Tokio Async',
+    ],
+    contributions: [
+      'Engineered client-server architecture using Rust and QUIC to eliminate TCP head-of-line blocking.',
+      'Implemented Merkle Tree proof generation to verify chunk validity without loading full files into memory.',
+      'Integrated smart contracts for immutable metadata storage and audit trails.',
+    ],
+    architecture: {
+      title: 'QUIC Chunk-Streaming with Merkle Cryptographic Verification',
+      description:
+        'Files are split into fixed-size chunks, hashed into a Merkle Tree root recorded on-chain, and transferred over multiplexed QUIC streams.',
+      points: [
+        'Multiplexed stream management avoiding TCP head-of-line blocking.',
+        'Zero-copy chunk verification using Merkle branch proofs.',
+        'Immutable on-chain metadata state validation.',
+      ],
+    },
+  },
+  {
+    id: 'proj-metacosign',
+    slug: 'metacosign-rpc',
+    title: 'MetaCoSign - Web3 JSON-RPC Gateway',
+    subtitle: 'Ethereum-Compatible JSON-RPC & BLS Key Service',
+    type: 'commercial',
+    category: 'blockchain',
+    featured: true,
+    order: 3,
+    period: '2025',
+    role: 'Backend Developer',
+    badgeText: 'Commercial • JSON-RPC',
+    verificationStatus: 'Verified Production',
+    githubUrl: 'https://github.com/x3pi/MetaCoSign',
+    description:
+      'High-availability Ethereum-compatible JSON-RPC 2.0 API gateway written in Go for standard Web3 client interaction and validator BLS key registration.',
+    metrics: [
+      { label: 'Standard', value: 'JSON-RPC 2.0' },
+      { label: 'Compatibility', value: 'Ethereum Geth' },
+      { label: 'Security', value: 'BLS Signature' },
+    ],
+    technologies: [
+      'Go',
+      'JSON-RPC 2.0',
+      'Geth',
+      'BLS Signatures',
+      'React.js',
+      'Docker',
+    ],
+    contributions: [
+      'Developed Go JSON-RPC APIs implementing standard Ethereum methods (eth_*, net_*, web3_*).',
+      'Built secure validator BLS key registration and cryptographic signature validation.',
+      'Optimized RPC concurrency and ensured node cluster consistency.',
+    ],
+    architecture: {
+      title: 'Ethereum JSON-RPC 2.0 Gateway Architecture',
+      description:
+        'Translates standard Ethereum Web3 calls into internal node commands with response caching and BLS signature verification.',
+      points: [
+        'Full compatibility with standard Web3 tooling (ethers.js, Metamask).',
+        'BLS cryptographic registration and signature verification pipeline.',
+      ],
+    },
+  },
+  {
+    id: 'proj-microservice-backend',
+    slug: 'golang-distributed-ecommerce',
+    title: 'Event-Driven Golang Microservices',
+    subtitle: 'High-Concurrency Backend with Kafka, Redis & gRPC',
+    type: 'personal',
+    category: 'personal',
+    featured: true,
+    order: 4,
+    period: '2025',
+    role: 'Personal Project / Lead Engineer',
+    badgeText: 'Personal Project • Open Source',
+    verificationStatus: 'Open Source Repo',
+    githubUrl: 'https://github.com/PearTNhat',
+    description:
+      'A resilient event-driven microservices architecture in Go featuring asynchronous order/payment processing with Apache Kafka, gRPC communication, Redis caching, and PostgreSQL.',
+    metrics: [
+      { label: 'Architecture', value: 'Event-Driven' },
+      { label: 'Queue', value: 'Kafka + Redis' },
+      { label: 'IPC', value: 'gRPC Protobuf' },
+    ],
+    technologies: [
+      'Go',
+      'Apache Kafka',
+      'gRPC / Protobuf',
+      'Redis',
+      'PostgreSQL',
+      'Docker Compose',
+      'Clean Architecture',
+    ],
+    contributions: [
+      'Designed event-driven services with Apache Kafka for asynchronous decoupling and idempotency.',
+      'Implemented ultra-fast inter-service communication using gRPC and Protocol Buffers.',
+      'Structured codebase with Clean Architecture / Domain-Driven Design for testability and scale.',
+      'Integrated Redis distributed caching and connection pooling on PostgreSQL.',
+    ],
+    architecture: {
+      title: 'Event-Driven Microservices with Kafka & gRPC',
+      description:
+        'API Gateway forwards requests to internal Go services via gRPC. Heavy write operations and notification workflows publish events to Kafka consumer groups.',
+      points: [
+        'Kafka partition-based event ordering and consumer group scaling.',
+        'gRPC binary serialization for sub-millisecond IPC latency.',
+        'Transactional outbox pattern ensuring database and event consistency.',
+      ],
+    },
+  },
+];
+
+export const MOCK_EXPERIENCE: Experience[] = [
+  {
+    id: 'exp-be-earning',
+    company: 'BE-EARNING JOINT STOCK COMPANY',
+    position: 'Blockchain Developer',
+    location: 'Hồ Chí Minh, Vietnam',
+    startDate: '05/2025',
+    endDate: 'Current',
+    current: true,
+    summary:
+      'Core backend and blockchain engineer developing Layer 1 consensus protocols (DAG & BFT, 12K TPS), low-level state storage (NOMT Trie, LevelDB, Xapian), Rust/QUIC storage systems, and Ethereum JSON-RPC 2.0 gateways.',
+    technologies: [
+      'Go',
+      'Rust',
+      'EVM',
+      'DAG',
+      'BFT',
+      'NOMT Trie',
+      'LevelDB',
+      'Xapian',
+      'QUIC',
+      'JSON-RPC',
+      'Docker',
+    ],
+    projects: [
+      {
+        name: 'Layer 1 & Systems Development',
+        role: 'Blockchain Developer',
+        technologies: ['Go', 'Rust', 'EVM', 'DAG', 'BFT', 'LevelDB', 'QUIC'],
+        description: 'Developed multi-node consensus, state storage, and chunked storage systems.',
+        contributions: [
+          'Engineered consensus mechanism supporting up to 12,000 TPS throughput.',
+          'Developed NOMT Trie & LevelDB integration for low-latency state retrieval.',
+          'Implemented client-server QUIC file transfer with Merkle Tree verification in Rust.',
+          'Maintained Ethereum-compatible JSON-RPC APIs in Go.',
+        ],
+      },
+    ],
+  },
+];
+
+export const MOCK_SKILLS: SkillCategory[] = [
+  {
+    id: 'core-languages',
+    title: 'Core Systems & Backend',
+    subtitle: 'Primary languages & concurrency models',
+    icon: 'Terminal',
+    skills: [
+      { name: 'Go (Golang)', note: 'Goroutines, channels, cgo, clean arch' },
+      { name: 'Rust', note: 'Ownership, async Tokio, QUIC, memory safety' },
+      { name: 'C / C++', note: 'FFI, low-level pointers & performance' },
+      { name: 'TypeScript / Node', note: 'Fullstack tooling, Next.js, API clients' },
+      { name: 'Python', note: 'Automation, scripting, benchmarks' },
+    ],
+  },
+  {
+    id: 'blockchain-evm',
+    title: 'Blockchain & Consensus',
+    subtitle: 'L1 architecture, EVM, cryptographic proofs',
+    icon: 'Layers',
+    skills: [
+      { name: 'Go-ethereum (Geth)', note: 'Core EVM internals, state trie' },
+      { name: 'DAG & BFT Consensus', note: 'Multi-node distributed consensus' },
+      { name: 'Ethereum JSON-RPC 2.0', note: 'Standard RPC methods & Web3 SDKs' },
+      { name: 'Solidity & EVM Bytecode', note: 'Smart contract execution & receipts' },
+      { name: 'NOMT Trie & Flat Trie', note: 'High-speed blockchain state storage' },
+      { name: 'Merkle Trees & BLS Keys', note: 'Cryptographic proofs & signatures' },
+    ],
+  },
+  {
+    id: 'storage-databases',
+    title: 'Databases & State Engines',
+    subtitle: 'Key-value, search engines & relational stores',
+    icon: 'Database',
+    skills: [
+      { name: 'LevelDB', note: 'LSM-tree engine for blockchain state' },
+      { name: 'Xapian Indexer', note: 'High-speed fulltext search engine' },
+      { name: 'PostgreSQL', note: 'Complex querying, indexing, ACID transactions' },
+      { name: 'MySQL', note: 'Relational data modeling & optimization' },
+      { name: 'Redis', note: 'In-memory caching, distributed locks' },
+      { name: 'MongoDB', note: 'Document model & aggregations' },
+    ],
+  },
+  {
+    id: 'infra-networking',
+    title: 'Networking, Protocols & Infra',
+    subtitle: 'Distributed transport, streaming & containerization',
+    icon: 'Cpu',
+    skills: [
+      { name: 'TCP / UDP Sockets', note: 'Low-level socket programming, connection pooling' },
+      { name: 'HTTP / REST APIs', note: 'High-throughput HTTP/1.1 & HTTP/2, middleware design' },
+      { name: 'QUIC Protocol', note: 'Multiplexed UDP stream transport in Rust' },
+      { name: 'gRPC & Protocol Buffers', note: 'High-throughput binary RPC' },
+      { name: 'Apache Kafka', note: 'Event-driven streaming & partition queues' },
+      { name: 'Docker', note: 'Containerization, multi-stage builds' },
+      { name: 'Linux Systems', note: 'System tuning, kernel sockets, CI/CD' },
+      { name: 'RabbitMQ', note: 'Message brokers & task queues' },
+    ],
+  },
+];
