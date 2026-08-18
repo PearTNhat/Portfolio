@@ -14,6 +14,15 @@ export interface SocialLink {
   icon: string;
 }
 
+export interface ResumeOption {
+  id: string;
+  label: string;
+  role: string;
+  badge: string;
+  url: string;
+  filename: string;
+}
+
 export interface Profile {
   name: string;
   title: string;
@@ -26,6 +35,7 @@ export interface Profile {
   githubUsername: string;
   avatarUrl?: string;
   resumeUrl: string;
+  resumes?: ResumeOption[];
   stats: QuickStat[];
   socials: SocialLink[];
   highlights: string[];

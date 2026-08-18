@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   SiGo,
   SiRust,
@@ -19,8 +18,15 @@ import {
   SiReact,
   SiNextdotjs,
   SiGnubash,
+  SiRedux,
+  SiTailwindcss,
+  SiSocketdotio,
+  SiExpress,
+  SiCloudinary,
+  SiJsonwebtokens,
+  SiVercel,
 } from 'react-icons/si';
-import { Network, Database, Cpu, Search, Layers, Zap, GitBranch, Binary, Globe } from 'lucide-react';
+import { Network, Database, Cpu, Search, Layers, Zap, GitBranch, Binary, Globe, Mail, Sparkles, CreditCard } from 'lucide-react';
 
 export function getTechIcon(name: string, customClass: string = 'w-5 h-5') {
   const text = name.trim();
@@ -96,8 +102,41 @@ export function getTechIcon(name: string, customClass: string = 'w-5 h-5') {
   if (lower.includes('react')) {
     return <SiReact className={`${customClass} text-[#61DAFB] shrink-0`} />;
   }
+  if (lower.includes('redux')) {
+    return <SiRedux className={`${customClass} text-[#764ABC] shrink-0`} />;
+  }
+  if (lower.includes('tailwind')) {
+    return <SiTailwindcss className={`${customClass} text-[#06B6D4] shrink-0`} />;
+  }
+  if (lower.includes('socket')) {
+    return <SiSocketdotio className={`${customClass} text-slate-800 dark:text-slate-100 shrink-0`} />;
+  }
+  if (lower.includes('express')) {
+    return <SiExpress className={`${customClass} text-slate-800 dark:text-slate-200 shrink-0`} />;
+  }
+  if (lower.includes('cloudinary')) {
+    return <SiCloudinary className={`${customClass} text-[#3448C5] shrink-0`} />;
+  }
+  if (lower.includes('jwt') || lower.includes('token')) {
+    return <SiJsonwebtokens className={`${customClass} text-[#D63AFF] shrink-0`} />;
+  }
   if (lower.includes('next')) {
     return <SiNextdotjs className={`${customClass} text-slate-800 dark:text-slate-100 shrink-0`} />;
+  }
+  if (lower.includes('vercel')) {
+    return <SiVercel className={`${customClass} text-slate-900 dark:text-white shrink-0`} />;
+  }
+  if (lower.includes('momo') || lower.includes('pay')) {
+    return <CreditCard className={`${customClass} text-[#A50064] dark:text-[#D82D8B] shrink-0`} />;
+  }
+  if (lower.includes('mailer') || lower.includes('mail') || lower.includes('email')) {
+    return <Mail className={`${customClass} text-sky-500 shrink-0`} />;
+  }
+  if (lower.includes('ai') || lower.includes('recommendation') || lower.includes('ml')) {
+    return <Sparkles className={`${customClass} text-amber-500 dark:text-amber-400 shrink-0`} />;
+  }
+  if (lower.includes('multer')) {
+    return <Layers className={`${customClass} text-indigo-500 shrink-0`} />;
   }
 
   // 5. Programming Languages
@@ -113,7 +152,7 @@ export function getTechIcon(name: string, customClass: string = 'w-5 h-5') {
   if (lower.includes('typescript') || lower.includes('ts')) {
     return <SiTypescript className={`${customClass} text-[#3178C6] shrink-0`} />;
   }
-  if (lower.includes('javascript') || lower.includes('node') || lower.includes('js')) {
+  if (lower.includes('node') || lower.includes('javascript') || lower.includes('js')) {
     return <SiNodedotjs className={`${customClass} text-[#5FA04E] shrink-0`} />;
   }
   if (lower.includes('go') || lower.includes('golang')) {

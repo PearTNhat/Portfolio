@@ -93,21 +93,39 @@ export function HeroSection({ profile }: HeroSectionProps) {
               </Badge>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-3">
+            {/* CTA Buttons - Dual Targeted CV Downloads */}
+            <div className="flex flex-wrap items-center gap-3 pt-3">
               <a
-                href={profile.resumeUrl}
+                href="/cv/CV-LeTuanNhat-Go.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                download="CV-LeTuanNhat-Blockchain.pdf"
+                download="CV-LeTuanNhat-Go.pdf"
+                className="group/cv"
               >
                 <Button
                   variant="primary"
                   size="lg"
-                  leftIcon={<FileDown className="w-5 h-5" />}
-                  className="shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40"
+                  leftIcon={<FileDown className="w-5 h-5 group-hover/cv:-translate-y-0.5 transition-transform" />}
+                  className="shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 font-bold"
                 >
-                  Download CV (PDF)
+                  Download CV (Go Backend)
+                </Button>
+              </a>
+
+              <a
+                href="/cv/CV-LeTuanNhat-Blockchain.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="CV-LeTuanNhat-Blockchain.pdf"
+                className="group/cv"
+              >
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  leftIcon={<FileDown className="w-5 h-5 group-hover/cv:-translate-y-0.5 transition-transform" />}
+                  className="border border-cyan-500/35 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 font-bold"
+                >
+                  Download CV (Blockchain)
                 </Button>
               </a>
 

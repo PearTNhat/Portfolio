@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Menu, X, FileDown, MessageCircle } from 'lucide-react';
+import { Menu, X, FileDown, MessageCircle, ChevronDown } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 import { NAV_ITEMS, SITE_METADATA } from '@/lib/constants';
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
@@ -12,8 +12,20 @@ import { Container } from '@/components/layouts/container';
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [resumeMenuOpen, setResumeMenuOpen] = React.useState(false);
+  const resumeDropdownRef = React.useRef<HTMLDivElement>(null);
   const sectionIds = NAV_ITEMS.map((item) => item.href.replace('#', ''));
   const activeSection = useScrollSpy(sectionIds);
+
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (resumeDropdownRef.current && !resumeDropdownRef.current.contains(event.target as Node)) {
+        setResumeMenuOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-950/75 backdrop-blur-md transition-colors">
@@ -50,10 +62,10 @@ export function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                  className={`px-3 py-1.5 rounded-lg text-xs lg:text-sm font-medium transition-all duration-150 ${
                     isActive
                       ? 'text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 font-semibold'
-                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900/60'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-900'
                   }`}
                 >
                   {item.label}
@@ -62,9 +74,9 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* Right Action Buttons */}
+          {/* Right Action Icons & Targeted Resume Dropdown */}
           <div className="hidden sm:flex items-center space-x-2.5">
-            {/* Zalo Direct Chat */}
+            {/* Direct Zalo link */}
             <a
               href={SITE_METADATA.zalo}
               target="_blank"
@@ -89,20 +101,64 @@ export function Navbar() {
 
             <ThemeToggle />
 
-            <a
-              href="/cv/CV-LeTuanNhat-Blockchain.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              download="CV-LeTuanNhat-Blockchain.pdf"
-            >
+            {/* Resume Dropdown */}
+            <div className="relative" ref={resumeDropdownRef}>
               <Button
                 variant="primary"
                 size="sm"
                 leftIcon={<FileDown className="w-4 h-4" />}
+                rightIcon={<ChevronDown className={`w-3.5 h-3.5 ml-0.5 transition-transform ${resumeMenuOpen ? 'rotate-180' : ''}`} />}
+                onClick={() => setResumeMenuOpen(!resumeMenuOpen)}
+                className="font-bold shadow-sm shadow-cyan-500/20"
               >
                 Resume
               </Button>
-            </a>
+
+              {resumeMenuOpen && (
+                <div className="absolute right-0 mt-2 w-64 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 p-2 shadow-2xl backdrop-blur-md animate-in fade-in zoom-in-95 duration-150 z-50">
+                  <div className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
+                    Select Target CV (PDF)
+                  </div>
+                  <a
+                    href="/cv/CV-LeTuanNhat-Go.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download="CV-LeTuanNhat-Go.pdf"
+                    onClick={() => setResumeMenuOpen(false)}
+                    className="flex flex-col p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors group"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
+                        CV Golang Backend
+                      </span>
+                      <FileDown className="w-3.5 h-3.5 text-cyan-500" />
+                    </div>
+                    <span className="text-[11px] text-slate-500 dark:text-slate-400 pt-0.5">
+                      Target: Go Backend &amp; Systems
+                    </span>
+                  </a>
+
+                  <a
+                    href="/cv/CV-LeTuanNhat-Blockchain.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download="CV-LeTuanNhat-Blockchain.pdf"
+                    onClick={() => setResumeMenuOpen(false)}
+                    className="flex flex-col p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors group"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
+                        CV Blockchain Engineer
+                      </span>
+                      <FileDown className="w-3.5 h-3.5 text-cyan-500" />
+                    </div>
+                    <span className="text-[11px] text-slate-500 dark:text-slate-400 pt-0.5">
+                      Target: Layer 1, EVM &amp; Web3
+                    </span>
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -132,31 +188,45 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
-          <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center gap-3">
-            <a
-              href="/cv/CV-LeTuanNhat-Blockchain.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              download="CV-LeTuanNhat-Blockchain.pdf"
-              className="flex-1"
-            >
-              <Button
-                variant="primary"
-                size="md"
+          <div className="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
+            <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 px-1 font-bold">
+              Download Targeted CV (PDF)
+            </div>
+            <div className="grid grid-cols-1 gap-2">
+              <a
+                href="/cv/CV-LeTuanNhat-Go.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="CV-LeTuanNhat-Go.pdf"
                 className="w-full"
-                leftIcon={<FileDown className="w-4 h-4" />}
               >
-                Download CV
-              </Button>
-            </a>
-            <a
-              href={SITE_METADATA.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300"
-            >
-              <GithubIcon className="w-5 h-5" />
-            </a>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  className="w-full justify-start text-xs font-bold"
+                  leftIcon={<FileDown className="w-4 h-4" />}
+                >
+                  CV Golang Backend
+                </Button>
+              </a>
+
+              <a
+                href="/cv/CV-LeTuanNhat-Blockchain.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="CV-LeTuanNhat-Blockchain.pdf"
+                className="w-full"
+              >
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="w-full justify-start text-xs font-bold border-cyan-500/30 text-cyan-700 dark:text-cyan-300"
+                  leftIcon={<FileDown className="w-4 h-4" />}
+                >
+                  CV Blockchain Developer
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       )}

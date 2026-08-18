@@ -124,29 +124,52 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
           </CardContent>
         </div>
 
-        <CardFooter className="pt-4 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between gap-2">
-          {project.githubUrl ? (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-mono font-bold text-slate-900 dark:text-white transition-all shadow-xs"
-              title="View Repository on GitHub"
-            >
-              <GithubIcon className="w-3.5 h-3.5" />
-              <span>GitHub</span>
-              <ExternalLink className="w-3 h-3 text-slate-400" />
-            </a>
-          ) : (
-            <div />
-          )}
+        <CardFooter className="pt-4 border-t border-slate-200/80 dark:border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center gap-1.5">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-cyan-500/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 transition-all shadow-xs"
+                title="Open Live Website Demo"
+              >
+                <ExternalLink className="w-3 h-3" />
+                <span>Live Demo</span>
+              </a>
+            )}
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-mono font-bold text-slate-900 dark:text-white transition-all shadow-xs"
+                title={project.githubServerUrl ? 'View Frontend Repository on GitHub' : 'View Repository on GitHub'}
+              >
+                <GithubIcon className="w-3.5 h-3.5" />
+                <span>{project.githubServerUrl ? 'GitHub FE' : 'GitHub'}</span>
+              </a>
+            )}
+            {project.githubServerUrl && (
+              <a
+                href={project.githubServerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-mono font-bold text-slate-900 dark:text-white transition-all shadow-xs"
+                title="View Backend Repository on GitHub"
+              >
+                <GithubIcon className="w-3.5 h-3.5" />
+                <span>GitHub BE</span>
+              </a>
+            )}
+          </div>
 
           <Button
             variant="ghost"
             size="sm"
             onClick={() => onViewDetails(project)}
             rightIcon={<ChevronRight className="w-4 h-4 ml-0.5 group-hover:translate-x-1 transition-transform" />}
-            className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 hover:bg-cyan-500/10 font-bold"
+            className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 hover:bg-cyan-500/10 font-bold ml-auto"
           >
             View Specs &amp; Proof
           </Button>

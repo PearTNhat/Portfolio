@@ -41,7 +41,7 @@ export function ProjectGrid({ initialProjects }: ProjectGridProps) {
         <SectionHeader
           badge="Featured Engineering"
           title="Commercial & Personal Projects"
-          subtitle="Real-world production engineering on Layer 1 blockchains, QUIC protocols, Web3 RPCs, and event-driven Go microservices."
+          subtitle="Real-world production engineering on Layer 1 blockchains, QUIC protocols, Web3 RPCs, and fullstack e-commerce platforms."
         />
 
         {/* Filters */}

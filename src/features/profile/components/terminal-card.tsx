@@ -27,6 +27,7 @@ const COMMAND_MAP: Record<string, string[]> = {
     '1. MetaNode Layer 1 Blockchain (12,000 TPS, DAG/BFT, EVM)',
     '2. Rust & QUIC Distributed File Storage (Merkle Integrity)',
     '3. MetaCoSign - Ethereum JSON-RPC & BLS Key Gateway',
+    '4. Laptop E-Commerce Platform (React, Redux, Node.js, MongoDB, Socket.IO, AI & Momo)',
   ],
   'contact': [
     '📧 Email: letuannhat105@gmail.com',

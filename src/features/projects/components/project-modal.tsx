@@ -28,12 +28,30 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             </div>
             {project.role && (
               <div className="text-slate-500 dark:text-slate-400 text-xs pt-1">
-                Role: <span className="text-slate-900 dark:text-slate-200 font-semibold">{project.role}</span> • {project.period}
+                Role: <span className="text-slate-900 dark:text-slate-200 font-semibold">{project.role}</span>
+                {project.teamSize !== undefined && (
+                  <span>
+                    {' '}• Team size: <span className="text-slate-900 dark:text-slate-200 font-semibold">{project.teamSize}</span>
+                  </span>
+                )}
+                {project.period && <span> • {project.period}</span>}
               </div>
             )}
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500 hover:bg-cyan-400 text-slate-950 transition-colors shadow-sm font-mono font-bold"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span>Live Website Demo</span>
+              </a>
+            )}
+
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
@@ -42,20 +60,21 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white dark:text-slate-100 border border-slate-800 dark:border-slate-700 transition-colors shadow-sm"
               >
                 <GithubIcon className="w-4 h-4 text-white" />
-                <span>GitHub Source</span>
+                <span>{project.githubServerUrl ? 'GitHub (Frontend)' : 'GitHub Source'}</span>
                 <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
               </a>
             )}
 
-            {project.liveUrl && (
+            {project.githubServerUrl && (
               <a
-                href={project.liveUrl}
+                href={project.githubServerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500 hover:bg-cyan-400 text-slate-950 transition-colors shadow-sm font-mono"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white dark:text-slate-100 border border-slate-800 dark:border-slate-700 transition-colors shadow-sm"
               >
-                <ExternalLink className="w-3.5 h-3.5" />
-                <span>Live Repository</span>
+                <GithubIcon className="w-4 h-4 text-white" />
+                <span>GitHub (Backend)</span>
+                <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
               </a>
             )}
           </div>

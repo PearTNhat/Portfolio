@@ -25,6 +25,7 @@ export interface Project {
   order: number;
   period?: string;
   role?: string;
+  teamSize?: string | number;
   metrics?: {
     label: string;
     value: string;
@@ -34,10 +35,11 @@ export interface Project {
   architecture?: ArchitectureDetail;
   // Proof of Work & Verification links
   githubUrl?: string;
+  githubServerUrl?: string;
   liveUrl?: string;
   videoDemoUrl?: string;
   docsUrl?: string;
   images?: string[];
   badgeText?: string;
-  verificationStatus?: 'Production System' | 'Open Source Repo' | 'Live System';
+  verificationStatus?: 'Production System' | 'Open Source Repo' | 'Live System' | 'Live Demo';
 }
