@@ -5,10 +5,10 @@ import { SkillCategory } from '@/types/skill';
 
 export const MOCK_PROFILE: Profile = {
   name: 'Lê Tuấn Nhật',
-  title: 'Blockchain & Golang Backend Engineer',
-  tagline: 'High-throughput distributed systems, Layer 1 blockchain consensus, and resilient Go/Rust backends.',
+  title: 'Backend (Golang) & Blockchain Engineer',
+  tagline: 'Backend development with Golang, Layer 1 blockchain systems, and Rust/QUIC protocols.',
   summary:
-    'Backend & Blockchain Engineer with ~1.5 years experience building core Layer 1 engines (12,000 TPS with DAG & BFT consensus), low-level state storage (NOMT Trie, LevelDB, Xapian), Rust/QUIC protocols, and high-concurrency Go microservices with Kafka & gRPC.',
+    'Backend & Blockchain Engineer with ~1.5 years of practical experience: developing backend systems with Golang, participating in Layer 1 blockchain core development (DAG & BFT consensus), low-level state storage, and Rust/QUIC data streaming; strong capability in multi-threading, concurrency, and distributed system development.',
   location: 'Hồ Chí Minh, Vietnam',
   email: 'letuannhat105@gmail.com',
   phone: '0944477357',
@@ -20,7 +20,7 @@ export const MOCK_PROFILE: Profile = {
       id: 'cv-go',
       label: 'CV Golang Backend',
       role: 'Backend Engineer (Go)',
-      badge: 'High Concurrency & Systems',
+      badge: 'REST API, gRPC & Databases',
       url: '/cv/CV-LeTuanNhat-Go.pdf',
       filename: 'CV-LeTuanNhat-Go.pdf',
     },
@@ -34,10 +34,10 @@ export const MOCK_PROFILE: Profile = {
     },
   ],
   highlights: [
-    'Layer 1 Blockchain consensus & state engine scaling up to 12,000 TPS.',
-    'Custom state storage using NOMT Trie, Flat Trie, LevelDB, and Xapian.',
-    'Chunk-based QUIC storage with cryptographic Merkle Tree proofs in Rust.',
-    'Fullstack web & e-commerce applications with React, Node.js, and WebSockets.',
+    'Experienced in Golang backend development, API design, and database management.',
+    'Participated in Layer 1 Blockchain core development and DAG + BFT consensus achieving 12,000 TPS.',
+    'Worked with low-level state storage architecture and blockchain data optimization.',
+    'Built chunk-based distributed data transfer with Rust/QUIC and Fullstack web applications.',
   ],
   education: {
     institution: 'Posts and Telecommunications Institute of Technology (PTIT)',

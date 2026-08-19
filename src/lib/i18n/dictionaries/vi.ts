@@ -18,18 +18,18 @@ export const VI_DATA: I18nDataBundle = {
     },
     hero: {
       readyBadge: {
-        prefix: 'Sẵn sàng cho vị trí ',
+        prefix: 'Sẵn sàng ứng tuyển: ',
         role1: 'Golang Backend',
-        and: ' & ',
-        role2: 'Blockchain',
+        and: ' hoặc ',
+        role2: 'Blockchain Engineer',
       },
       greeting: 'Xin chào, tôi là',
-      focusPrefix: 'Chuyên sâu về',
+      focusPrefix: 'Kinh nghiệm & định hướng về',
       typingRoles: [
-        'Kiến trúc Backend & Golang Hiệu năng cao',
-        'Rust Systems & Tối ưu Băng thông',
-        'Blockchain & Đồng thuận Layer 1',
-        'ReactJS & Fullstack Web3 Hiện đại',
+        'Lập trình Backend với Golang & REST API',
+        'Phát triển Blockchain Layer 1 & Đồng thuận DAG/BFT',
+        'Lập trình Hệ thống Rust & Giao thức QUIC',
+        'Xây dựng Ứng dụng Web Fullstack (React, Node.js)',
       ],
       badges: {
         go: 'Golang Backend',
@@ -48,13 +48,13 @@ export const VI_DATA: I18nDataBundle = {
       coreDomains: 'LĨNH VỰC CỐT LÕI & ĐỊNH HƯỚNG KỸ THUẬT',
       domains: {
         goTitle: 'Go Backend',
-        goSub: 'Đồng thời & cgo',
+        goSub: 'REST API, gRPC, DB',
         rustTitle: 'Hệ thống Rust',
-        rustSub: 'QUIC & Hiệu năng cao',
+        rustSub: 'QUIC & State Engine',
         blockchainTitle: 'Blockchain',
         blockchainSub: 'Layer 1 & EVM DAG',
         reactTitle: 'ReactJS / Next',
-        reactSub: 'SPA & Web3 DApps',
+        reactSub: 'SPA & Web3 Fullstack',
       },
       githubDesc: 'Kho mã nguồn công khai & Commit hệ thống',
       phoneZaloTitle: 'ĐIỆN THOẠI & ZALO (VIỆT NAM)',
@@ -67,15 +67,15 @@ export const VI_DATA: I18nDataBundle = {
     },
     skillsSection: {
       badge: 'Kho Vũ Khí Kỹ Thuật',
-      title: 'Kỹ Năng Cốt Lõi & Stack Phân Tán',
+      title: 'Kỹ Năng Cốt Lõi & Stack Công Nghệ',
       subtitle:
-        'Bộ công nghệ chuyên sâu xây dựng hệ thống phân tán thông lượng lớn, blockchain Layer 1 và backend Golang chịu tải cao.',
+        'Các công nghệ và công cụ tôi đã có kinh nghiệm làm việc thực tế, kết hợp chủ động học hỏi mở rộng.',
     },
     projectsSection: {
       badge: 'Kỹ Thuật Nổi Bật',
       title: 'Dự Án Thương Mại & Cá Nhân',
       subtitle:
-        'Kinh nghiệm thực chiến phát triển blockchain Layer 1, giao thức truyền file QUIC, Web3 RPC Gateway và nền tảng thương mại điện tử Fullstack.',
+        'Kinh nghiệm thực chiến phát triển các tính năng lõi Blockchain Layer 1 (12K TPS), hệ thống truyền file Rust/QUIC, cổng JSON-RPC và nền tảng thương mại điện tử Fullstack.',
       filters: {
         all: 'Tất cả dự án',
         blockchain: 'Layer 1 & EVM',
@@ -101,7 +101,7 @@ export const VI_DATA: I18nDataBundle = {
       badge: 'Lịch Sử Công Việc',
       title: 'Kinh Nghiệm & Học Vấn',
       subtitle:
-        'Kinh nghiệm phát triển thực tế tại doanh nghiệp trong lĩnh vực blockchain và hệ thống backend phân tán.',
+        'Kinh nghiệm phát triển thực tế tại doanh nghiệp trong lĩnh vực công nghệ blockchain và hệ thống backend.',
       present: 'Hiện tại',
       responsibilities: 'Trách nhiệm & Kết quả bàn giao chính',
       stackAndTools: 'STACK & CÔNG CỤ:',
@@ -111,10 +111,10 @@ export const VI_DATA: I18nDataBundle = {
       badge: 'Kết Nối & Hợp Tác',
       title: 'Cùng Xây Dựng Hệ Thống Bền Vững',
       subtitle:
-        'Luôn sẵn sàng đón nhận cơ hội việc làm toàn thời gian, dự án backend hiệu năng cao và phát triển giao thức blockchain.',
+        'Luôn sẵn sàng đón nhận cơ hội việc làm toàn thời gian cho vị trí Golang Backend hoặc Blockchain Engineer.',
       formTitle: 'Gửi Tin Nhắn Trực Tiếp',
       formSubtitle:
-        'Quan tâm đến việc hợp tác hoặc trao đổi cơ hội Golang Backend & Blockchain? Hãy để lại lời nhắn bên dưới.',
+        'Quan tâm đến việc hợp tác hoặc trao đổi cơ hội Golang Backend / Blockchain? Hãy để lại lời nhắn bên dưới.',
       nameLabel: 'Họ và Tên *',
       namePlaceholder: 'Ví dụ: Nguyễn Văn A',
       emailLabel: 'Địa chỉ Email *',
@@ -135,7 +135,7 @@ export const VI_DATA: I18nDataBundle = {
     },
     footer: {
       summary:
-        'Phát triển kiến trúc đồng thuận blockchain Layer 1, công cụ quản lý trạng thái EVM state trie, giao thức Rust/QUIC và hệ thống Go backend chịu tải cao.',
+        'Kỹ sư Backend & Blockchain: Phát triển Backend với Golang, xây dựng hệ thống Blockchain Layer 1, lưu trữ LevelDB và giao thức Rust/QUIC.',
       navigation: 'Điều hướng',
       contactAndInfo: 'Liên hệ & Thông tin',
       allRightsReserved: 'Bảo lưu mọi quyền.',
@@ -151,11 +151,11 @@ export const VI_DATA: I18nDataBundle = {
   },
   profile: {
     name: 'Lê Tuấn Nhật',
-    title: 'Kỹ sư Blockchain & Golang Backend',
+    title: 'Kỹ sư Backend (Golang) & Blockchain',
     tagline:
-      'Hệ thống phân tán thông lượng cao, đồng thuận Blockchain Layer 1 và backend Go/Rust bền vững.',
+      'Phát triển Backend với Golang, xây dựng hệ thống Blockchain Layer 1 và lập trình Rust/QUIC.',
     summary:
-      'Kỹ sư Backend & Blockchain với ~1.5 năm kinh nghiệm chuyên sâu phát triển lõi Layer 1 (12.000 TPS với đồng thuận DAG & BFT), tầng lưu trữ trạng thái cấp thấp (NOMT Trie, Flat Trie, LevelDB, Xapian), giao thức Rust/QUIC và microservices Go đồng thời cao với Kafka & gRPC.',
+      'Kỹ sư Backend & Blockchain với ~1.5 năm kinh nghiệm thực tế: phát triển hệ thống backend với Golang, tham gia xây dựng lõi Blockchain Layer 1 (đồng thuận DAG & BFT), tầng lưu trữ trạng thái cấp thấp và lập trình hệ thống truyền file bằng Rust/QUIC; có khả năng xử lý đa luồng, đồng thời (concurrency) và xây dựng hệ thống phân tán hiệu quả.',
     location: 'Hồ Chí Minh, Việt Nam',
     email: 'letuannhat105@gmail.com',
     phone: '0944477357',
@@ -167,7 +167,7 @@ export const VI_DATA: I18nDataBundle = {
         id: 'cv-go',
         label: 'CV Golang Backend',
         role: 'Kỹ sư Backend (Go)',
-        badge: 'Đồng thời cao & Hệ thống phân tán',
+        badge: 'REST API, gRPC & Databases',
         url: '/cv/CV-LeTuanNhat-Go.pdf',
         filename: 'CV-LeTuanNhat-Go.pdf',
       },
@@ -181,10 +181,10 @@ export const VI_DATA: I18nDataBundle = {
       },
     ],
     highlights: [
-      'Đồng thuận Blockchain Layer 1 & engine trạng thái đạt thông lượng 12.000 TPS.',
-      'Tầng lưu trữ trạng thái tùy chỉnh sử dụng NOMT Trie, Flat Trie, LevelDB và Xapian.',
-      'Lưu trữ phân tán dạng chunk qua giao thức QUIC với bằng chứng mật mã Merkle Tree bằng Rust.',
-      'Ứng dụng web & thương mại điện tử Fullstack với React, Node.js và WebSockets.',
+      'Có kinh nghiệm lập trình Backend bằng Golang, thiết kế API và làm việc với các hệ cơ sở dữ liệu.',
+      'Tham gia phát triển lõi Blockchain Layer 1 và cơ chế đồng thuận DAG + BFT đạt mốc 12.000 TPS.',
+      'Làm việc với tầng lưu trữ trạng thái cấp thấp và tối ưu hóa dữ liệu blockchain.',
+      'Xây dựng hệ thống truyền file phân tán bằng Rust/QUIC và phát triển ứng dụng web Fullstack.',
     ],
     education: {
       institution: 'Học viện Công nghệ Bưu chính Viễn thông (PTIT)',
