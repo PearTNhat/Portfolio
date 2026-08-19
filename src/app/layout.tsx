@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { ThemeProvider } from '@/store/theme-provider';
+import { I18nProvider } from '@/store/i18n-provider';
 import { Navbar } from '@/components/layouts/navbar';
 import { Footer } from '@/components/layouts/footer';
 import { AnimatedBackground } from '@/components/ui/animated-background';
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
   creator: SITE_METADATA.author,
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'vi_VN',
     title: SITE_METADATA.title,
     description: SITE_METADATA.description,
     siteName: SITE_METADATA.title,
@@ -48,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+    <html lang="vi" suppressHydrationWarning className="scroll-smooth">
       <body className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-cyan-500 selection:text-slate-950 relative">
         <ThemeProvider
           attribute="class"
@@ -56,12 +57,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AnimatedBackground />
-          <div className="flex flex-col min-h-screen relative z-10">
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          <I18nProvider>
+            <AnimatedBackground />
+            <div className="flex flex-col min-h-screen relative z-10">
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+          </I18nProvider>
         </ThemeProvider>
       </body>
     </html>

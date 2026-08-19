@@ -8,8 +8,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { contactService } from '@/services/contact.service';
 import { ContactFormInput } from '@/types/contact';
+import { useI18n } from '@/store/i18n-provider';
 
 export function ContactForm() {
+  const { ui } = useI18n();
+
   const [formData, setFormData] = React.useState<ContactFormInput>({
     name: '',
     email: '',
@@ -33,7 +36,7 @@ export function ContactForm() {
     e.preventDefault();
 
     if (!formData.name || !formData.email || !formData.message) {
-      setErrorMessage('Please fill in all required fields.');
+      setErrorMessage(ui.contactSection.requiredFieldsError);
       return;
     }
 
@@ -45,7 +48,7 @@ export function ContactForm() {
       setIsSuccess(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch {
-      setErrorMessage('Failed to send message. Please try again or email directly.');
+      setErrorMessage(ui.contactSection.errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -55,19 +58,17 @@ export function ContactForm() {
     <Card className="p-6 sm:p-8 border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md">
       <div className="mb-6 space-y-1">
         <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-          Send a Direct Message
+          {ui.contactSection.formTitle}
         </h3>
         <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-          Interested in collaborating or discussing Golang backend & Blockchain opportunities? Leave a message below.
+          {ui.contactSection.formSubtitle}
         </p>
       </div>
 
       {isSuccess && (
         <div className="mb-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center gap-3 text-sm animate-in fade-in">
           <CheckCircle2 className="w-5 h-5 shrink-0" />
-          <span>
-            Thank you! Your message has been sent successfully. I will get back to you soon.
-          </span>
+          <span>{ui.contactSection.successMessage}</span>
         </div>
       )}
 
@@ -82,13 +83,13 @@ export function ContactForm() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-1.5">
             <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 font-mono">
-              Your Name *
+              {ui.contactSection.nameLabel}
             </label>
             <Input
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="e.g. Satoshi Nakamoto"
+              placeholder={ui.contactSection.namePlaceholder}
               required
               disabled={isLoading}
             />
@@ -96,14 +97,14 @@ export function ContactForm() {
 
           <div className="space-y-1.5">
             <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 font-mono">
-              Your Email *
+              {ui.contactSection.emailLabel}
             </label>
             <Input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="e.g. satoshi@bitcoin.org"
+              placeholder={ui.contactSection.emailPlaceholder}
               required
               disabled={isLoading}
             />
@@ -112,27 +113,27 @@ export function ContactForm() {
 
         <div className="space-y-1.5">
           <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 font-mono">
-            Subject
+            {ui.contactSection.subjectLabel}
           </label>
           <Input
             name="subject"
             value={formData.subject}
             onChange={handleChange}
-            placeholder="e.g. Golang Backend / Blockchain Engineer Opportunity"
+            placeholder={ui.contactSection.subjectPlaceholder}
             disabled={isLoading}
           />
         </div>
 
         <div className="space-y-1.5">
           <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 font-mono">
-            Message *
+            {ui.contactSection.messageLabel}
           </label>
           <Textarea
             name="message"
             value={formData.message}
             onChange={handleChange}
             rows={4}
-            placeholder="Tell me about your project, team, or opportunity..."
+            placeholder={ui.contactSection.messagePlaceholder}
             required
             disabled={isLoading}
           />
@@ -146,7 +147,7 @@ export function ContactForm() {
           isLoading={isLoading}
           leftIcon={<Send className="w-4 h-4" />}
         >
-          Send Message
+          {isLoading ? ui.contactSection.sending : ui.contactSection.sendMessage}
         </Button>
       </form>
     </Card>

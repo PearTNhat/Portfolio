@@ -7,19 +7,23 @@ import { Container } from '@/components/layouts/container';
 import { SectionHeader } from '@/components/layouts/section-header';
 import { ContactForm } from '@/features/contact/components/contact-form';
 import { SocialCard } from '@/features/contact/components/social-card';
+import { useI18n } from '@/store/i18n-provider';
 
 export interface ContactSectionProps {
-  profile: Profile;
+  profile?: Profile;
 }
 
-export function ContactSection({ profile }: ContactSectionProps) {
+export function ContactSection({ profile: initialProfile }: ContactSectionProps) {
+  const { ui, profile: contextProfile } = useI18n();
+  const profile = initialProfile || contextProfile;
+
   return (
     <section id="contact" className="py-20 sm:py-28 relative">
       <Container size="xl">
         <SectionHeader
-          badge="Get in Touch"
-          title="Let&apos;s Build Resilient Systems Together"
-          subtitle="Open for full-time opportunities, high-throughput backend engineering, and blockchain protocol development."
+          badge={ui.contactSection.badge}
+          title={ui.contactSection.title}
+          subtitle={ui.contactSection.subtitle}
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-6xl mx-auto">

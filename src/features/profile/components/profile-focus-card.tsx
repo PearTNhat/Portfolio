@@ -7,8 +7,10 @@ import { SITE_METADATA } from '@/lib/constants';
 import { Card } from '@/components/ui/card';
 import { SiGo, SiRust, SiEthereum, SiReact } from 'react-icons/si';
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
+import { useI18n } from '@/store/i18n-provider';
 
 export function ProfileFocusCard() {
+  const { ui, profile } = useI18n();
   const { isCopied: isPhoneCopied, copy: copyPhone } = useCopyToClipboard();
   const { isCopied: isEmailCopied, copy: copyEmail } = useCopyToClipboard();
 
@@ -31,8 +33,8 @@ export function ProfileFocusCard() {
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <h3 className="font-bold text-base text-slate-900 dark:text-white">Lê Tuấn Nhật</h3>
-                <span title="Verified Engineer">
+                <h3 className="font-bold text-base text-slate-900 dark:text-white">{profile.name}</h3>
+                <span title={ui.profileCard.verifiedEngineer}>
                   <ShieldCheck className="w-4 h-4 text-cyan-500" />
                 </span>
               </div>
@@ -44,14 +46,14 @@ export function ProfileFocusCard() {
 
           <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-[11px] font-mono font-medium">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            Open for Hire
+            {ui.profileCard.openForHire}
           </div>
         </div>
 
         {/* Core Competencies Matrix */}
         <div className="space-y-2.5">
           <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider font-semibold">
-            CORE DOMAINS & ENGINEERING FOCUS
+            {ui.profileCard.coreDomains}
           </div>
           <div className="grid grid-cols-2 gap-2.5">
             {/* 1. Golang */}
@@ -95,7 +97,7 @@ export function ProfileFocusCard() {
         {/* Verified GitHub Repository */}
         <div className="space-y-1.5 pt-1">
           <a
-            href={SITE_METADATA.github}
+            href={profile.github}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-between p-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-colors group/link"
@@ -106,7 +108,7 @@ export function ProfileFocusCard() {
                 <div className="text-xs font-bold text-slate-900 dark:text-white group-hover/link:text-cyan-500 transition-colors">
                   github.com/PearTNhat
                 </div>
-                <div className="text-[10px] text-slate-500">Public Repositories & System Commits</div>
+                <div className="text-[10px] text-slate-500">{ui.profileCard.githubDesc}</div>
               </div>
             </div>
             <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover/link:text-cyan-500 transition-colors" />
@@ -124,12 +126,12 @@ export function ProfileFocusCard() {
                 </div>
                 <div>
                   <div className="text-xs font-black text-slate-900 dark:text-blue-200 flex items-center gap-1.5 font-mono">
-                    <span>0944 477 357</span>
+                    <span>{profile.phone}</span>
                     <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-600 dark:text-blue-300 font-semibold">
                       Zalo
                     </span>
                   </div>
-                  <div className="text-[10px] text-blue-600/80 dark:text-blue-400/80">Phone &amp; Direct Messaging</div>
+                  <div className="text-[10px] text-blue-600/80 dark:text-blue-400/80">{ui.profileCard.phoneZaloTitle}</div>
                 </div>
               </div>
 
@@ -149,19 +151,19 @@ export function ProfileFocusCard() {
             <div className="pt-1 border-t border-blue-500/20">
               <button
                 type="button"
-                onClick={() => copyPhone(SITE_METADATA.phone)}
+                onClick={() => copyPhone(profile.phone)}
                 className="w-full inline-flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-700/80 text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-slate-800 text-xs font-mono font-bold transition-all shadow-xs cursor-pointer"
-                title="Copy phone number: 0944477357"
+                title={`Copy: ${profile.phone}`}
               >
                 {isPhoneCopied ? (
                   <>
                     <Check className="w-4 h-4 text-emerald-500" />
-                    <span className="text-emerald-500 font-bold">Copied: 0944 477 357!</span>
+                    <span className="text-emerald-500 font-bold">{ui.profileCard.copiedTooltip} {profile.phone}</span>
                   </>
                 ) : (
                   <>
                     <Copy className="w-3.5 h-3.5 text-blue-500" />
-                    <span>Copy Phone: 0944 477 357</span>
+                    <span>{ui.profileCard.copyTooltip} Phone: {profile.phone}</span>
                   </>
                 )}
               </button>
@@ -171,29 +173,29 @@ export function ProfileFocusCard() {
           {/* Email & Copy Bar */}
           <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 text-xs font-mono">
             <a
-              href={`mailto:${SITE_METADATA.email}`}
+              href={`mailto:${profile.email}`}
               className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 hover:underline truncate flex-1 min-w-0"
               title="Click to send email"
             >
               <Mail className="w-3.5 h-3.5 shrink-0 text-cyan-500" />
-              <span className="truncate">{SITE_METADATA.email}</span>
+              <span className="truncate">{profile.email}</span>
             </a>
 
             <button
               type="button"
-              onClick={() => copyEmail(SITE_METADATA.email)}
+              onClick={() => copyEmail(profile.email)}
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:border-cyan-500 hover:text-cyan-600 transition-all cursor-pointer shrink-0 ml-2 shadow-xs"
-              title="Copy email"
+              title={ui.profileCard.copyTooltip}
             >
               {isEmailCopied ? (
                 <>
                   <Check className="w-3.5 h-3.5 text-emerald-500" />
-                  <span className="text-emerald-500 font-bold">Copied!</span>
+                  <span className="text-emerald-500 font-bold">{ui.profileCard.copiedTooltip}</span>
                 </>
               ) : (
                 <>
                   <Copy className="w-3 h-3 text-slate-400" />
-                  <span>Copy</span>
+                  <span>{ui.profileCard.copyTooltip}</span>
                 </>
               )}
             </button>

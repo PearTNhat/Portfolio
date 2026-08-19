@@ -4,17 +4,32 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Menu, X, FileDown, MessageCircle, ChevronDown } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
-import { NAV_ITEMS, SITE_METADATA } from '@/lib/constants';
+import { SITE_METADATA } from '@/lib/constants';
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { LanguageToggle } from '@/components/ui/language-toggle';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/layouts/container';
+import { useI18n } from '@/store/i18n-provider';
 
 export function Navbar() {
+  const { ui } = useI18n();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [resumeMenuOpen, setResumeMenuOpen] = React.useState(false);
   const resumeDropdownRef = React.useRef<HTMLDivElement>(null);
-  const sectionIds = NAV_ITEMS.map((item) => item.href.replace('#', ''));
+
+  const navItems = React.useMemo(
+    () => [
+      { label: ui.navbar.overview, href: '#overview' },
+      { label: ui.navbar.skills, href: '#skills' },
+      { label: ui.navbar.projects, href: '#projects' },
+      { label: ui.navbar.experience, href: '#experience' },
+      { label: ui.navbar.contact, href: '#contact' },
+    ],
+    [ui.navbar]
+  );
+
+  const sectionIds = navItems.map((item) => item.href.replace('#', ''));
   const activeSection = useScrollSpy(sectionIds);
 
   React.useEffect(() => {
@@ -54,7 +69,7 @@ export function Navbar() {
 
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
-            {NAV_ITEMS.map((item) => {
+            {navItems.map((item) => {
               const id = item.href.replace('#', '');
               const isActive = activeSection === id;
 
@@ -85,7 +100,7 @@ export function Navbar() {
               title="Direct Zalo Chat: 0944 477 357"
             >
               <MessageCircle className="w-3.5 h-3.5" />
-              <span className="hidden lg:inline">Zalo: 0944 477 357</span>
+              <span className="hidden lg:inline">{ui.navbar.zaloButton}</span>
               <span className="lg:hidden">Zalo</span>
             </a>
 
@@ -101,6 +116,9 @@ export function Navbar() {
 
             <ThemeToggle />
 
+            {/* Language Switcher */}
+            <LanguageToggle />
+
             {/* Resume Dropdown */}
             <div className="relative" ref={resumeDropdownRef}>
               <Button
@@ -111,13 +129,13 @@ export function Navbar() {
                 onClick={() => setResumeMenuOpen(!resumeMenuOpen)}
                 className="font-bold shadow-sm shadow-cyan-500/20"
               >
-                Resume
+                {ui.navbar.resume}
               </Button>
 
               {resumeMenuOpen && (
                 <div className="absolute right-0 mt-2 w-64 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 p-2 shadow-2xl backdrop-blur-md animate-in fade-in zoom-in-95 duration-150 z-50">
                   <div className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
-                    Select Target CV (PDF)
+                    {ui.navbar.selectTargetCv}
                   </div>
                   <a
                     href="/cv/CV-LeTuanNhat-Go.pdf"
@@ -129,12 +147,12 @@ export function Navbar() {
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
-                        CV Golang Backend
+                        {ui.navbar.cvGolang}
                       </span>
                       <FileDown className="w-3.5 h-3.5 text-cyan-500" />
                     </div>
                     <span className="text-[11px] text-slate-500 dark:text-slate-400 pt-0.5">
-                      Target: Go Backend &amp; Systems
+                      {ui.navbar.cvGolangDesc}
                     </span>
                   </a>
 
@@ -148,12 +166,12 @@ export function Navbar() {
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
-                        CV Blockchain Engineer
+                        {ui.navbar.cvBlockchain}
                       </span>
                       <FileDown className="w-3.5 h-3.5 text-cyan-500" />
                     </div>
                     <span className="text-[11px] text-slate-500 dark:text-slate-400 pt-0.5">
-                      Target: Layer 1, EVM &amp; Web3
+                      {ui.navbar.cvBlockchainDesc}
                     </span>
                   </a>
                 </div>
@@ -161,8 +179,9 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="flex sm:hidden items-center space-x-2">
+          {/* Mobile Actions: Language + Theme + Hamburger */}
+          <div className="flex sm:hidden items-center space-x-1.5">
+            <LanguageToggle />
             <ThemeToggle />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -178,7 +197,7 @@ export function Navbar() {
       {/* Mobile dropdown menu */}
       {mobileMenuOpen && (
         <div className="sm:hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 pt-2 pb-6 space-y-2 animate-in slide-in-from-top-2 duration-200">
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -190,7 +209,7 @@ export function Navbar() {
           ))}
           <div className="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
             <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 px-1 font-bold">
-              Download Targeted CV (PDF)
+              {ui.navbar.selectTargetCv}
             </div>
             <div className="grid grid-cols-1 gap-2">
               <a
@@ -206,7 +225,7 @@ export function Navbar() {
                   className="w-full justify-start text-xs font-bold"
                   leftIcon={<FileDown className="w-4 h-4" />}
                 >
-                  CV Golang Backend
+                  {ui.navbar.cvGolang}
                 </Button>
               </a>
 
@@ -223,7 +242,7 @@ export function Navbar() {
                   className="w-full justify-start text-xs font-bold border-cyan-500/30 text-cyan-700 dark:text-cyan-300"
                   leftIcon={<FileDown className="w-4 h-4" />}
                 >
-                  CV Blockchain Developer
+                  {ui.navbar.cvBlockchain}
                 </Button>
               </a>
             </div>

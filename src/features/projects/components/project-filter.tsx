@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { ProjectCategory } from '@/types/project';
+import { useI18n } from '@/store/i18n-provider';
 
 export interface ProjectFilterProps {
   selectedCategory: ProjectCategory;
@@ -14,11 +15,13 @@ export function ProjectFilter({
   onSelectCategory,
   counts,
 }: ProjectFilterProps) {
+  const { ui } = useI18n();
+
   const filters: { id: ProjectCategory; label: string }[] = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'blockchain', label: 'Layer 1 & EVM' },
-    { id: 'backend', label: 'Rust & QUIC Storage' },
-    { id: 'personal', label: 'Personal Projects' },
+    { id: 'all', label: ui.projectsSection.filters.all },
+    { id: 'blockchain', label: ui.projectsSection.filters.blockchain },
+    { id: 'backend', label: ui.projectsSection.filters.backend },
+    { id: 'personal', label: ui.projectsSection.filters.personal },
   ];
 
   return (

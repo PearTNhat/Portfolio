@@ -11,18 +11,15 @@ import { Container } from '@/components/layouts/container';
 import { ProfileFocusCard } from '@/features/profile/components/profile-focus-card';
 import { QuickStats } from '@/features/profile/components/quick-stats';
 import { AnimatedTyping } from '@/components/ui/animated-typing';
+import { useI18n } from '@/store/i18n-provider';
 
 export interface HeroSectionProps {
-  profile: Profile;
+  profile?: Profile;
 }
 
-export function HeroSection({ profile }: HeroSectionProps) {
-  const roles = [
-    'Golang & Backend Architecture',
-    'Rust Systems & Performance',
-    'Blockchain & Layer 1 Consensus',
-    'ReactJS & Modern Web3 Fullstack',
-  ];
+export function HeroSection({ profile: initialProfile }: HeroSectionProps) {
+  const { ui, profile: contextProfile } = useI18n();
+  const profile = initialProfile || contextProfile;
 
   return (
     <section id="overview" className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden bg-grid-pattern">
@@ -47,13 +44,13 @@ export function HeroSection({ profile }: HeroSectionProps) {
                 <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 shadow-sm" />
               </span>
               <div className="text-xs sm:text-sm font-bold tracking-tight">
-                <span className="text-slate-700 dark:text-slate-200">Ready for </span>
+                <span className="text-slate-700 dark:text-slate-200">{ui.hero.readyBadge.prefix}</span>
                 <span className="text-emerald-600 dark:text-emerald-400 font-black">
-                  Golang Backend
+                  {ui.hero.readyBadge.role1}
                 </span>
-                <span className="text-slate-500 dark:text-slate-400"> &amp; </span>
+                <span className="text-slate-500 dark:text-slate-400">{ui.hero.readyBadge.and}</span>
                 <span className="text-cyan-600 dark:text-cyan-300 font-black">
-                  Blockchain Roles
+                  {ui.hero.readyBadge.role2}
                 </span>
               </div>
             </motion.div>
@@ -61,14 +58,14 @@ export function HeroSection({ profile }: HeroSectionProps) {
             {/* Main Headline */}
             <div className="space-y-3">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1]">
-                Hi, I&apos;m{' '}
+                {ui.hero.greeting}{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-300 to-sky-400 text-gradient-animated">
                   {profile.name}
                 </span>
               </h1>
               <div className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-200 flex flex-wrap items-center gap-2">
-                <span className="text-slate-600 dark:text-slate-300">Focused on</span>
-                <AnimatedTyping words={roles} />
+                <span className="text-slate-600 dark:text-slate-300">{ui.hero.focusPrefix}</span>
+                <AnimatedTyping words={ui.hero.typingRoles} />
               </div>
             </div>
 
@@ -108,7 +105,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
                   leftIcon={<FileDown className="w-5 h-5 group-hover/cv:-translate-y-0.5 transition-transform" />}
                   className="shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 font-bold"
                 >
-                  Download CV (Go Backend)
+                  {ui.hero.downloadCvGo}
                 </Button>
               </a>
 
@@ -125,7 +122,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
                   leftIcon={<FileDown className="w-5 h-5 group-hover/cv:-translate-y-0.5 transition-transform" />}
                   className="border border-cyan-500/35 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 font-bold"
                 >
-                  Download CV (Blockchain)
+                  {ui.hero.downloadCvBlockchain}
                 </Button>
               </a>
 
@@ -136,7 +133,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
                   leftIcon={<Mail className="w-5 h-5" />}
                   rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
                 >
-                  Contact Me
+                  {ui.hero.contactMe}
                 </Button>
               </Link>
             </div>

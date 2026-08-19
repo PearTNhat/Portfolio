@@ -6,19 +6,23 @@ import { SkillCategory } from '@/types/skill';
 import { Container } from '@/components/layouts/container';
 import { SectionHeader } from '@/components/layouts/section-header';
 import { SkillCard } from '@/features/skills/components/skill-card';
+import { useI18n } from '@/store/i18n-provider';
 
 export interface SkillsGridProps {
-  categories: SkillCategory[];
+  categories?: SkillCategory[];
 }
 
-export function SkillsGrid({ categories }: SkillsGridProps) {
+export function SkillsGrid({ categories: initialCategories }: SkillsGridProps) {
+  const { ui, skillCategories: contextCategories } = useI18n();
+  const categories = initialCategories || contextCategories;
+
   return (
     <section id="skills" className="py-20 sm:py-28 bg-slate-100/40 dark:bg-slate-900/20 border-y border-slate-200/80 dark:border-slate-800/80 relative">
       <Container size="xl">
         <SectionHeader
-          badge="Technical Stack"
-          title="Core Skills & Distributed Stack"
-          subtitle="Tech stack for high-throughput distributed systems, Layer 1 blockchain engines, and resilient Go backends."
+          badge={ui.skillsSection.badge}
+          title={ui.skillsSection.title}
+          subtitle={ui.skillsSection.subtitle}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

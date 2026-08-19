@@ -1,15 +1,20 @@
+'use client';
+
 import * as React from 'react';
 import { Briefcase, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
 import { Experience } from '@/types/experience';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { getTechIcon } from '@/components/ui/tech-icons';
+import { useI18n } from '@/store/i18n-provider';
 
 export interface ExperienceCardProps {
   experience: Experience;
 }
 
 export function ExperienceCard({ experience }: ExperienceCardProps) {
+  const { ui } = useI18n();
+
   return (
     <Card className="p-6 sm:p-8 border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md relative overflow-hidden">
       {/* Subtle glow */}
@@ -27,7 +32,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
               </span>
               {experience.current && (
                 <Badge variant="emerald" size="sm">
-                  Present
+                  {ui.experienceSection.present}
                 </Badge>
               )}
             </div>
@@ -55,7 +60,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
 
       <CardContent className="p-0 pt-5 space-y-4">
         <h4 className="font-mono text-xs uppercase tracking-wider text-slate-400 font-semibold">
-          Core Responsibilities & Deliverables
+          {ui.experienceSection.responsibilities}
         </h4>
 
         <ul className="space-y-2.5 text-sm text-slate-700 dark:text-slate-300">
@@ -70,7 +75,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
         {/* Technologies overall */}
         <div className="pt-2">
           <div className="text-xs font-mono text-slate-400 mb-2 font-semibold">
-            STACK & TOOLS:
+            {ui.experienceSection.stackAndTools}
           </div>
           <div className="flex flex-wrap gap-2">
             {experience.technologies.map((tech) => (

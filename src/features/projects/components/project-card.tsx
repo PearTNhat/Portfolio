@@ -9,6 +9,7 @@ import { Project } from '@/types/project';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { useI18n } from '@/store/i18n-provider';
 
 export interface ProjectCardProps {
   project: Project;
@@ -16,6 +17,8 @@ export interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
+  const { ui } = useI18n();
+
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'blockchain':
@@ -60,19 +63,19 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
                 <Badge variant={isPersonal ? 'emerald' : 'cyan'} size="sm">
                   {isPersonal ? (
                     <span className="flex items-center gap-1 font-semibold">
-                      <UserCheck className="w-3.5 h-3.5" /> Personal Project
+                      <UserCheck className="w-3.5 h-3.5" /> {ui.projectsSection.personalProject}
                     </span>
                   ) : (
                     <span className="flex items-center gap-1 font-semibold">
-                      <Briefcase className="w-3.5 h-3.5" /> Commercial
+                      <Briefcase className="w-3.5 h-3.5" /> {ui.projectsSection.commercialProject}
                     </span>
                   )}
                 </Badge>
 
-                {project.verificationStatus && (
+                {project.badgeText && (
                   <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25">
                     <CheckCircle2 className="w-3 h-3" />
-                    {project.verificationStatus}
+                    {project.badgeText}
                   </span>
                 )}
               </div>
@@ -117,7 +120,7 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
               ))}
               {project.technologies.length > 5 && (
                 <span className="text-[11px] text-slate-400 self-center pl-1 font-mono">
-                  +{project.technologies.length - 5} more
+                  +{project.technologies.length - 5} {ui.projectsSection.moreTech}
                 </span>
               )}
             </div>
@@ -135,7 +138,7 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
                 title="Open Live Website Demo"
               >
                 <ExternalLink className="w-3 h-3" />
-                <span>Live Demo</span>
+                <span>{ui.projectsSection.liveDemo}</span>
               </a>
             )}
             {project.githubUrl && (
@@ -171,7 +174,7 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
             rightIcon={<ChevronRight className="w-4 h-4 ml-0.5 group-hover:translate-x-1 transition-transform" />}
             className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 hover:bg-cyan-500/10 font-bold ml-auto"
           >
-            View Specs &amp; Proof
+            {ui.projectsSection.viewSpecs}
           </Button>
         </CardFooter>
       </Card>

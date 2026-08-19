@@ -8,30 +8,39 @@ import { SectionHeader } from '@/components/layouts/section-header';
 import { ProjectCard } from '@/features/projects/components/project-card';
 import { ProjectFilter } from '@/features/projects/components/project-filter';
 import { ProjectModal } from '@/features/projects/components/project-modal';
+import { useI18n } from '@/store/i18n-provider';
 
 export interface ProjectGridProps {
-  initialProjects: Project[];
+  initialProjects?: Project[];
 }
 
 export function ProjectGrid({ initialProjects }: ProjectGridProps) {
+  const { ui, projects: contextProjects } = useI18n();
+  const projects = initialProjects || contextProjects;
+
   const [selectedCategory, setSelectedCategory] = React.useState<ProjectCategory>('all');
-  const [activeProject, setActiveProject] = React.useState<Project | null>(null);
+  const [activeProjectId, setActiveProjectId] = React.useState<string | null>(null);
   const [modalOpen, setModalOpen] = React.useState(false);
 
   // Compute counts per category
   const counts: Record<ProjectCategory, number> = {
-    all: initialProjects.length,
-    blockchain: initialProjects.filter((p) => p.category === 'blockchain').length,
-    backend: initialProjects.filter((p) => p.category === 'backend').length,
-    personal: initialProjects.filter((p) => p.category === 'personal').length,
+    all: projects.length,
+    blockchain: projects.filter((p) => p.category === 'blockchain').length,
+    backend: projects.filter((p) => p.category === 'backend').length,
+    personal: projects.filter((p) => p.category === 'personal').length,
   };
 
   const filteredProjects = selectedCategory === 'all'
-    ? initialProjects
-    : initialProjects.filter((p) => p.category === selectedCategory);
+    ? projects
+    : projects.filter((p) => p.category === selectedCategory);
+
+  const activeProject = React.useMemo(
+    () => projects.find((p) => p.id === activeProjectId) || null,
+    [projects, activeProjectId]
+  );
 
   const handleViewDetails = (project: Project) => {
-    setActiveProject(project);
+    setActiveProjectId(project.id);
     setModalOpen(true);
   };
 
@@ -39,9 +48,9 @@ export function ProjectGrid({ initialProjects }: ProjectGridProps) {
     <section id="projects" className="py-20 sm:py-28 relative">
       <Container size="xl">
         <SectionHeader
-          badge="Featured Engineering"
-          title="Commercial & Personal Projects"
-          subtitle="Real-world production engineering on Layer 1 blockchains, QUIC protocols, Web3 RPCs, and fullstack e-commerce platforms."
+          badge={ui.projectsSection.badge}
+          title={ui.projectsSection.title}
+          subtitle={ui.projectsSection.subtitle}
         />
 
         {/* Filters */}

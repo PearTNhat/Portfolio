@@ -4,12 +4,16 @@ import * as React from 'react';
 import { motion } from 'framer-motion';
 import { QuickStat } from '@/types/profile';
 import { Card } from '@/components/ui/card';
+import { useI18n } from '@/store/i18n-provider';
 
 export interface QuickStatsProps {
-  stats: QuickStat[];
+  stats?: QuickStat[];
 }
 
-export function QuickStats({ stats }: QuickStatsProps) {
+export function QuickStats({ stats: initialStats }: QuickStatsProps) {
+  const { profile } = useI18n();
+  const stats = initialStats || profile.stats;
+
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full">
       {stats.map((stat, idx) => (

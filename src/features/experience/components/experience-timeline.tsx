@@ -8,10 +8,11 @@ import { SectionHeader } from '@/components/layouts/section-header';
 import { ExperienceCard } from '@/features/experience/components/experience-card';
 import { GraduationCap } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { useI18n } from '@/store/i18n-provider';
 
 export interface ExperienceTimelineProps {
-  experiences: Experience[];
-  education: {
+  experiences?: Experience[];
+  education?: {
     institution: string;
     degree: string;
     period: string;
@@ -20,16 +21,20 @@ export interface ExperienceTimelineProps {
 }
 
 export function ExperienceTimeline({
-  experiences,
-  education,
+  experiences: initialExperiences,
+  education: initialEducation,
 }: ExperienceTimelineProps) {
+  const { ui, experiences: contextExperiences, profile } = useI18n();
+  const experiences = initialExperiences || contextExperiences;
+  const education = initialEducation || profile.education;
+
   return (
     <section id="experience" className="py-20 sm:py-28 bg-slate-100/40 dark:bg-slate-900/20 border-y border-slate-200/80 dark:border-slate-800/80 relative">
       <Container size="xl">
         <SectionHeader
-          badge="Work History"
-          title="Experience & Education"
-          subtitle="Commercial development experience in blockchain and distributed backend systems."
+          badge={ui.experienceSection.badge}
+          title={ui.experienceSection.title}
+          subtitle={ui.experienceSection.subtitle}
         />
 
         <div className="space-y-6 max-w-4xl mx-auto">
@@ -66,7 +71,7 @@ export function ExperienceTimeline({
                       {education.institution}
                     </h4>
                     <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-                      {education.degree} • Major in {education.major}
+                      {education.degree} • {ui.experienceSection.educationMajor} {education.major}
                     </p>
                   </div>
                 </div>

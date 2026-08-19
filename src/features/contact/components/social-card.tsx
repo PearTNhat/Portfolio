@@ -7,6 +7,7 @@ import { SocialLink } from '@/types/profile';
 import { Card } from '@/components/ui/card';
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 import { SITE_METADATA } from '@/lib/constants';
+import { useI18n } from '@/store/i18n-provider';
 
 export interface SocialCardProps {
   socials: SocialLink[];
@@ -17,6 +18,7 @@ export interface SocialCardProps {
 }
 
 export function SocialCard({ email, phone, location, github }: SocialCardProps) {
+  const { ui } = useI18n();
   const { isCopied: isEmailCopied, copy: copyEmail } = useCopyToClipboard();
   const { isCopied: isPhoneCopied, copy: copyPhone } = useCopyToClipboard();
 
@@ -24,7 +26,7 @@ export function SocialCard({ email, phone, location, github }: SocialCardProps) 
     <div className="space-y-4">
       <Card className="p-6 border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md space-y-5">
         <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-          Direct Coordinates
+          {ui.contactSection.coordinatesTitle}
         </h3>
 
         <div className="space-y-4 text-sm">
@@ -36,7 +38,7 @@ export function SocialCard({ email, phone, location, github }: SocialCardProps) 
               </div>
               <div>
                 <div className="text-[11px] font-mono text-blue-600 dark:text-blue-400 uppercase font-semibold">
-                  Phone &amp; Zalo (Vietnam)
+                  {ui.profileCard.phoneZaloTitle}
                 </div>
                 <a
                   href={SITE_METADATA.zalo}
@@ -46,7 +48,7 @@ export function SocialCard({ email, phone, location, github }: SocialCardProps) 
                 >
                   <span>{phone}</span>
                   <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-600 dark:text-blue-300">
-                    Open Zalo 💬
+                    {ui.contactSection.openZalo}
                   </span>
                 </a>
               </div>
@@ -65,7 +67,7 @@ export function SocialCard({ email, phone, location, github }: SocialCardProps) 
               <button
                 onClick={() => copyPhone(phone)}
                 className="p-1.5 rounded-lg text-slate-400 hover:text-blue-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
-                title="Copy Phone"
+                title={ui.profileCard.copyTooltip}
               >
                 {isPhoneCopied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
               </button>
@@ -79,7 +81,7 @@ export function SocialCard({ email, phone, location, github }: SocialCardProps) 
                 <Mail className="w-4 h-4" />
               </div>
               <div>
-                <div className="text-[11px] font-mono text-slate-400 uppercase">Email Address</div>
+                <div className="text-[11px] font-mono text-slate-400 uppercase">{ui.profileCard.emailTitle}</div>
                 <a
                   href={`mailto:${email}`}
                   className="font-semibold text-slate-800 dark:text-slate-200 hover:text-cyan-500"
@@ -92,7 +94,7 @@ export function SocialCard({ email, phone, location, github }: SocialCardProps) 
             <button
               onClick={() => copyEmail(email)}
               className="p-1.5 rounded-lg text-slate-400 hover:text-cyan-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
-              title="Copy Email"
+              title={ui.profileCard.copyTooltip}
             >
               {isEmailCopied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
             </button>
@@ -105,7 +107,7 @@ export function SocialCard({ email, phone, location, github }: SocialCardProps) 
                 <MapPin className="w-4 h-4" />
               </div>
               <div>
-                <div className="text-[11px] font-mono text-slate-400 uppercase">Location</div>
+                <div className="text-[11px] font-mono text-slate-400 uppercase">{ui.profileCard.locationTitle}</div>
                 <div className="font-semibold text-slate-800 dark:text-slate-200">{location}</div>
               </div>
             </div>

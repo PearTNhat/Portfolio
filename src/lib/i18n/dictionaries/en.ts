@@ -1,0 +1,141 @@
+import { I18nDataBundle } from '../types';
+import {
+  MOCK_PROFILE,
+  MOCK_PROJECTS,
+  MOCK_EXPERIENCE,
+  MOCK_SKILLS,
+} from '@/services/mock-data';
+
+export const EN_DATA: I18nDataBundle = {
+  ui: {
+    navbar: {
+      overview: 'Overview',
+      skills: 'Skills & Stack',
+      projects: 'Projects',
+      experience: 'Experience',
+      contact: 'Contact',
+      resume: 'Resume',
+      selectTargetCv: 'Select Target CV (PDF)',
+      cvGolang: 'CV Golang Backend',
+      cvGolangDesc: 'Target: Go Backend & Systems',
+      cvBlockchain: 'CV Blockchain Engineer',
+      cvBlockchainDesc: 'Target: Layer 1, EVM & Web3',
+      zaloButton: 'Zalo: 0944 477 357',
+    },
+    hero: {
+      readyBadge: {
+        prefix: 'Ready for ',
+        role1: 'Golang Backend',
+        and: ' & ',
+        role2: 'Blockchain Roles',
+      },
+      greeting: "Hi, I'm",
+      focusPrefix: 'Focused on',
+      typingRoles: [
+        'Golang & Backend Architecture',
+        'Rust Systems & Performance',
+        'Blockchain & Layer 1 Consensus',
+        'ReactJS & Modern Web3 Fullstack',
+      ],
+      downloadCvGo: 'Download CV (Go Backend)',
+      downloadCvBlockchain: 'Download CV (Blockchain)',
+      contactMe: 'Contact Me',
+    },
+    profileCard: {
+      verifiedEngineer: 'Verified Engineer',
+      ptitEducation: 'PTIT Information Technology',
+      openForHire: 'Open for Hire',
+      coreDomains: 'CORE DOMAINS & ENGINEERING FOCUS',
+      githubDesc: 'Public Repositories & System Commits',
+      phoneZaloTitle: 'PHONE & ZALO (VIETNAM)',
+      emailTitle: 'EMAIL ADDRESS',
+      locationTitle: 'LOCATION',
+      copyTooltip: 'Copy',
+      copiedTooltip: 'Copied!',
+    },
+    skillsSection: {
+      badge: 'Technical Stack',
+      title: 'Core Skills & Distributed Stack',
+      subtitle:
+        'Tech stack for high-throughput distributed systems, Layer 1 blockchain engines, and resilient Go backends.',
+    },
+    projectsSection: {
+      badge: 'Featured Engineering',
+      title: 'Commercial & Personal Projects',
+      subtitle:
+        'Real-world production engineering on Layer 1 blockchains, QUIC protocols, Web3 RPCs, and fullstack e-commerce platforms.',
+      filters: {
+        all: 'All Projects',
+        blockchain: 'Layer 1 & EVM',
+        backend: 'Rust & QUIC Storage',
+        personal: 'Personal Projects',
+      },
+      personalProject: 'Personal Project',
+      commercialProject: 'Commercial',
+      liveDemo: 'Live Demo',
+      viewSpecs: 'View Specs & Proof',
+      modalRole: 'Role',
+      modalTeamSize: 'Team size',
+      keyDeliverables: 'Key Deliverables & Responsibilities',
+      techArchitecture: 'Technical Architecture Specs',
+      techStack: 'Technologies & Tools Used',
+      close: 'Close Window',
+      moreTech: 'more',
+    },
+    experienceSection: {
+      badge: 'Work History',
+      title: 'Experience & Education',
+      subtitle:
+        'Commercial development experience in blockchain and distributed backend systems.',
+      present: 'Present',
+      responsibilities: 'Core Responsibilities & Deliverables',
+      stackAndTools: 'STACK & TOOLS:',
+      educationMajor: 'Major in',
+    },
+    contactSection: {
+      badge: 'Get in Touch',
+      title: "Let's Build Resilient Systems Together",
+      subtitle:
+        'Open for full-time opportunities, high-throughput backend engineering, and blockchain protocol development.',
+      formTitle: 'Send a Direct Message',
+      formSubtitle:
+        'Interested in collaborating or discussing Golang backend & Blockchain opportunities? Leave a message below.',
+      nameLabel: 'Your Name *',
+      namePlaceholder: 'e.g. Satoshi Nakamoto',
+      emailLabel: 'Your Email *',
+      emailPlaceholder: 'e.g. satoshi@bitcoin.org',
+      subjectLabel: 'Subject',
+      subjectPlaceholder: 'e.g. Discussing Golang Backend Position',
+      messageLabel: 'Message *',
+      messagePlaceholder: 'Write your message here...',
+      sending: 'Sending message...',
+      sendMessage: 'Send Direct Message',
+      successMessage:
+        'Thank you! Your message has been sent successfully. I will get back to you soon.',
+      errorMessage:
+        'Failed to send message. Please try again or email / contact via Zalo directly.',
+      requiredFieldsError: 'Please fill in all required fields (Name, Email, Message).',
+      coordinatesTitle: 'Direct Coordinates',
+      openZalo: 'Open Zalo 💬',
+    },
+    footer: {
+      summary:
+        'Building Layer 1 blockchain consensus architectures, EVM state trie engines, Rust/QUIC protocols, and high-performance Go backend systems.',
+      navigation: 'Navigation',
+      contactAndInfo: 'Contact & Info',
+      allRightsReserved: 'All rights reserved.',
+      availableForWork: 'Available for Opportunities',
+      backToTop: 'Back to top',
+    },
+    notFound: {
+      badge: 'Error 404 • Block Not Found',
+      title: 'Page Does Not Exist',
+      description: 'The requested route or hash could not be resolved on this network node.',
+      returnHome: 'Return to Overview',
+    },
+  },
+  profile: MOCK_PROFILE,
+  projects: MOCK_PROJECTS,
+  experiences: MOCK_EXPERIENCE,
+  skillCategories: MOCK_SKILLS,
+};

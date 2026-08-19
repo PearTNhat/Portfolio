@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { getTechIcon } from '@/components/ui/tech-icons';
 import { GithubIcon } from '@/components/ui/icons';
 import { CheckCircle2, ExternalLink, Layers } from 'lucide-react';
+import { useI18n } from '@/store/i18n-provider';
 
 export interface ProjectModalProps {
   project: Project | null;
@@ -15,6 +16,7 @@ export interface ProjectModalProps {
 }
 
 export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
+  const { ui } = useI18n();
   if (!project) return null;
 
   return (
@@ -28,10 +30,10 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             </div>
             {project.role && (
               <div className="text-slate-500 dark:text-slate-400 text-xs pt-1">
-                Role: <span className="text-slate-900 dark:text-slate-200 font-semibold">{project.role}</span>
+                {ui.projectsSection.modalRole}: <span className="text-slate-900 dark:text-slate-200 font-semibold">{project.role}</span>
                 {project.teamSize !== undefined && (
                   <span>
-                    {' '}• Team size: <span className="text-slate-900 dark:text-slate-200 font-semibold">{project.teamSize}</span>
+                    {' '}• {ui.projectsSection.modalTeamSize}: <span className="text-slate-900 dark:text-slate-200 font-semibold">{project.teamSize}</span>
                   </span>
                 )}
                 {project.period && <span> • {project.period}</span>}
@@ -48,7 +50,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500 hover:bg-cyan-400 text-slate-950 transition-colors shadow-sm font-mono font-bold"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
-                <span>Live Website Demo</span>
+                <span>{ui.projectsSection.liveDemo}</span>
               </a>
             )}
 
@@ -105,7 +107,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
         <div className="space-y-3">
           <h4 className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold flex items-center gap-1.5">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            Key Deliverables & Responsibilities
+            {ui.projectsSection.keyDeliverables}
           </h4>
           <ul className="space-y-2.5">
             {project.contributions.map((c, idx) => (
@@ -122,7 +124,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           <div className="space-y-2 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 font-mono text-xs">
             <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-tight font-bold flex items-center gap-1.5">
               <Layers className="w-3.5 h-3.5 text-cyan-500" />
-              {project.architecture.title || 'Technical Architecture Specs'}
+              {project.architecture.title || ui.projectsSection.techArchitecture}
             </div>
             <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-sans text-xs sm:text-sm">
               {project.architecture.description}
@@ -143,7 +145,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
         {/* Technologies Used */}
         <div className="space-y-2">
           <h4 className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
-            Technologies & Tools Used
+            {ui.projectsSection.techStack}
           </h4>
           <div className="flex flex-wrap gap-2">
             {project.technologies.map((t) => (
@@ -163,7 +165,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
         {/* Footer Close */}
         <div className="pt-3 flex items-center justify-end border-t border-slate-200 dark:border-slate-800">
           <Button variant="outline" size="sm" onClick={onClose}>
-            Close Window
+            {ui.projectsSection.close}
           </Button>
         </div>
       </div>
