@@ -30,6 +30,12 @@ export interface I18nUiDictionary {
     greeting: string;
     focusPrefix: string;
     typingRoles: string[];
+    badges: {
+      go: string;
+      rust: string;
+      blockchain: string;
+      react: string;
+    };
     downloadCvGo: string;
     downloadCvBlockchain: string;
     contactMe: string;
@@ -39,12 +45,24 @@ export interface I18nUiDictionary {
     ptitEducation: string;
     openForHire: string;
     coreDomains: string;
+    domains: {
+      goTitle: string;
+      goSub: string;
+      rustTitle: string;
+      rustSub: string;
+      blockchainTitle: string;
+      blockchainSub: string;
+      reactTitle: string;
+      reactSub: string;
+    };
     githubDesc: string;
     phoneZaloTitle: string;
     emailTitle: string;
     locationTitle: string;
+    chatZalo: string;
     copyTooltip: string;
     copiedTooltip: string;
+    copyPhoneBtn: string;
   };
   skillsSection: {
     badge: string;
@@ -72,6 +90,9 @@ export interface I18nUiDictionary {
     techStack: string;
     close: string;
     moreTech: string;
+    githubFrontend: string;
+    githubBackend: string;
+    githubSource: string;
   };
   experienceSection: {
     badge: string;

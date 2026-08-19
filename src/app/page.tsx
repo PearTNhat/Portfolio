@@ -1,7 +1,3 @@
-import { profileService } from '@/services/profile.service';
-import { projectsService } from '@/services/projects.service';
-import { experienceService } from '@/services/experience.service';
-import { skillsService } from '@/services/skills.service';
 import { HeroSection } from '@/features/profile/components/hero-section';
 import { SkillsGrid } from '@/features/skills/components/skills-grid';
 import { ProjectGrid } from '@/features/projects/components/project-grid';
@@ -9,37 +5,26 @@ import { ExperienceTimeline } from '@/features/experience/components/experience-
 import { ContactSection } from '@/features/contact/components/contact-section';
 import { AnimatedBackground } from '@/components/ui/animated-background';
 
-export default async function HomePage() {
-  // Concurrently fetch all section data avoiding waterfalls per RULES.md
-  const [profile, projects, experiences, skillCategories] = await Promise.all([
-    profileService.getProfile(),
-    projectsService.getProjects(),
-    experienceService.getExperiences(),
-    skillsService.getSkillCategories(),
-  ]);
-
+export default function HomePage() {
   return (
     <div className="flex flex-col w-full relative">
       {/* Dynamic Animated Cyber Background with Glowing Orbs & Tech Constellations */}
       <AnimatedBackground />
 
       {/* 1. Hero & Interactive Profile Overview */}
-      <HeroSection profile={profile} />
+      <HeroSection />
 
       {/* 2. Technical Arsenal & Skills (Immediately visible to recruiter) */}
-      <SkillsGrid categories={skillCategories} />
+      <SkillsGrid />
 
       {/* 3. Featured Commercial & Personal Projects */}
-      <ProjectGrid initialProjects={projects} />
+      <ProjectGrid />
 
       {/* 4. Work Experience & Education Timeline */}
-      <ExperienceTimeline
-        experiences={experiences}
-        education={profile.education}
-      />
+      <ExperienceTimeline />
 
       {/* 5. Contact Form & Direct Coordinates */}
-      <ContactSection profile={profile} />
+      <ContactSection />
     </div>
   );
 }

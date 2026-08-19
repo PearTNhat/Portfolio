@@ -77,33 +77,33 @@ export function HeroSection({ profile: initialProfile }: HeroSectionProps) {
             {/* Technical Highlights Badges */}
             <div className="flex flex-wrap gap-2 pt-1">
               <Badge variant="cyan" size="md">
-                <Cpu className="w-3.5 h-3.5 mr-1" /> Golang Backend
+                <Cpu className="w-3.5 h-3.5 mr-1" /> {ui.hero.badges.go}
               </Badge>
               <Badge variant="indigo" size="md">
-                <ShieldCheck className="w-3.5 h-3.5 mr-1" /> Rust Systems
+                <ShieldCheck className="w-3.5 h-3.5 mr-1" /> {ui.hero.badges.rust}
               </Badge>
               <Badge variant="emerald" size="md">
-                <Database className="w-3.5 h-3.5 mr-1" /> Blockchain & EVM
+                <Database className="w-3.5 h-3.5 mr-1" /> {ui.hero.badges.blockchain}
               </Badge>
               <Badge variant="slate" size="md">
-                <Network className="w-3.5 h-3.5 mr-1" /> ReactJS & Next.js
+                <Network className="w-3.5 h-3.5 mr-1" /> {ui.hero.badges.react}
               </Badge>
             </div>
 
             {/* CTA Buttons - Dual Targeted CV Downloads */}
-            <div className="flex flex-wrap items-center gap-3 pt-3">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 pt-3">
               <a
                 href="/cv/CV-LeTuanNhat-Go.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 download="CV-LeTuanNhat-Go.pdf"
-                className="group/cv"
+                className="group/cv w-full sm:w-auto"
               >
                 <Button
                   variant="primary"
-                  size="lg"
-                  leftIcon={<FileDown className="w-5 h-5 group-hover/cv:-translate-y-0.5 transition-transform" />}
-                  className="shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 font-bold"
+                  size="md"
+                  leftIcon={<FileDown className="w-4 h-4 sm:w-5 sm:h-5 group-hover/cv:-translate-y-0.5 transition-transform" />}
+                  className="w-full sm:w-auto shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 font-bold text-xs sm:text-sm px-4 py-2.5 sm:py-3"
                 >
                   {ui.hero.downloadCvGo}
                 </Button>
@@ -114,24 +114,25 @@ export function HeroSection({ profile: initialProfile }: HeroSectionProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 download="CV-LeTuanNhat-Blockchain.pdf"
-                className="group/cv"
+                className="group/cv w-full sm:w-auto"
               >
                 <Button
                   variant="secondary"
-                  size="lg"
-                  leftIcon={<FileDown className="w-5 h-5 group-hover/cv:-translate-y-0.5 transition-transform" />}
-                  className="border border-cyan-500/35 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 font-bold"
+                  size="md"
+                  leftIcon={<FileDown className="w-4 h-4 sm:w-5 sm:h-5 group-hover/cv:-translate-y-0.5 transition-transform" />}
+                  className="w-full sm:w-auto border border-cyan-500/35 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 font-bold text-xs sm:text-sm px-4 py-2.5 sm:py-3"
                 >
                   {ui.hero.downloadCvBlockchain}
                 </Button>
               </a>
 
-              <Link href="#contact">
+              <Link href="#contact" className="w-full sm:w-auto">
                 <Button
                   variant="outline"
-                  size="lg"
-                  leftIcon={<Mail className="w-5 h-5" />}
+                  size="md"
+                  leftIcon={<Mail className="w-4 h-4 sm:w-5 sm:h-5" />}
                   rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
+                  className="w-full sm:w-auto text-xs sm:text-sm px-4 py-2.5 sm:py-3"
                 >
                   {ui.hero.contactMe}
                 </Button>

@@ -62,7 +62,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white dark:text-slate-100 border border-slate-800 dark:border-slate-700 transition-colors shadow-sm"
               >
                 <GithubIcon className="w-4 h-4 text-white" />
-                <span>{project.githubServerUrl ? 'GitHub (Frontend)' : 'GitHub Source'}</span>
+                <span>{project.githubServerUrl ? ui.projectsSection.githubFrontend : ui.projectsSection.githubSource}</span>
                 <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
               </a>
             )}
@@ -75,7 +75,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white dark:text-slate-100 border border-slate-800 dark:border-slate-700 transition-colors shadow-sm"
               >
                 <GithubIcon className="w-4 h-4 text-white" />
-                <span>GitHub (Backend)</span>
+                <span>{ui.projectsSection.githubBackend}</span>
                 <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
               </a>
             )}

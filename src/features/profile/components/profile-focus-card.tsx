@@ -39,7 +39,7 @@ export function ProfileFocusCard() {
                 </span>
               </div>
               <div className="text-xs font-mono text-cyan-600 dark:text-cyan-400">
-                PTIT Information Technology
+                {ui.profileCard.ptitEducation}
               </div>
             </div>
           </div>
@@ -60,8 +60,8 @@ export function ProfileFocusCard() {
             <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-cyan-500/40 transition-colors">
               <SiGo className="w-5 h-5 text-[#00ADD8] shrink-0" />
               <div>
-                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">Go Backend</div>
-                <div className="text-[10px] text-slate-500">Concurrency & cgo</div>
+                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">{ui.profileCard.domains.goTitle}</div>
+                <div className="text-[10px] text-slate-500">{ui.profileCard.domains.goSub}</div>
               </div>
             </div>
 
@@ -69,8 +69,8 @@ export function ProfileFocusCard() {
             <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-orange-500/40 transition-colors">
               <SiRust className="w-5 h-5 text-[#DEA584] dark:text-[#F74C00] shrink-0" />
               <div>
-                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">Rust Systems</div>
-                <div className="text-[10px] text-slate-500">QUIC & High Perf</div>
+                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">{ui.profileCard.domains.rustTitle}</div>
+                <div className="text-[10px] text-slate-500">{ui.profileCard.domains.rustSub}</div>
               </div>
             </div>
 
@@ -78,8 +78,8 @@ export function ProfileFocusCard() {
             <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-indigo-500/40 transition-colors">
               <SiEthereum className="w-5 h-5 text-[#627EEA] shrink-0" />
               <div>
-                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">Blockchain</div>
-                <div className="text-[10px] text-slate-500">Layer 1 & EVM DAG</div>
+                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">{ui.profileCard.domains.blockchainTitle}</div>
+                <div className="text-[10px] text-slate-500">{ui.profileCard.domains.blockchainSub}</div>
               </div>
             </div>
 
@@ -87,8 +87,8 @@ export function ProfileFocusCard() {
             <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-cyan-400/40 transition-colors">
               <SiReact className="w-5 h-5 text-[#61DAFB] shrink-0" />
               <div>
-                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">ReactJS / Next</div>
-                <div className="text-[10px] text-slate-500">SPA & Web3 DApps</div>
+                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">{ui.profileCard.domains.reactTitle}</div>
+                <div className="text-[10px] text-slate-500">{ui.profileCard.domains.reactSub}</div>
               </div>
             </div>
           </div>
