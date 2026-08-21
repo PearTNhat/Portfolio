@@ -63,8 +63,8 @@ export const MOCK_PROFILE: Profile = {
     {
       id: 'stat-systems',
       label: 'Production Systems',
-      value: '4 Core Apps',
-      description: 'L1 Chain, Rust QUIC, RPC, E-Commerce',
+      value: '5 Core Systems',
+      description: 'L1 Chain, Go Microservices, Rust QUIC, RPC, MERN',
       highlight: 'Fullstack & Systems',
     },
     {

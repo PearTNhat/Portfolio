@@ -210,8 +210,8 @@ export const VI_DATA: I18nDataBundle = {
       {
         id: 'stat-systems',
         label: 'Hệ thống thực tế',
-        value: '4 Nền tảng',
-        description: 'L1 Chain, Rust QUIC, RPC, E-Commerce',
+        value: '5 Nền tảng',
+        description: 'L1 Chain, Go Microservices, Rust QUIC, RPC, MERN',
         highlight: 'Fullstack & Systems',
       },
       {
