@@ -162,10 +162,10 @@ export const MOCK_PROJECTS: Project[] = [
   {
     id: 'proj-quic-storage',
     slug: 'rust-quic-storage',
-    title: 'Distributed File Storage System',
+    title: 'File Storage System (Rust & QUIC)',
     subtitle: 'Chunk-Based File Storage over QUIC Protocol',
     type: 'commercial',
-    category: 'backend',
+    category: 'storage',
     featured: true,
     order: 2,
     period: '2025',
@@ -174,7 +174,7 @@ export const MOCK_PROJECTS: Project[] = [
     verificationStatus: 'Production System',
     githubUrl: 'https://github.com/x3pi/file-storage',
     description:
-      'High-performance distributed file storage built with Rust and QUIC, supporting parallel chunked upload/download and cryptographic Merkle Tree integrity verification.',
+      'High-performance chunk-based file storage built with Rust and QUIC, supporting parallel upload/download and cryptographic Merkle Tree integrity verification.',
     metrics: [
       { label: 'Protocol', value: 'QUIC / UDP' },
       { label: 'Integrity', value: 'Merkle Tree' },
@@ -207,10 +207,10 @@ export const MOCK_PROJECTS: Project[] = [
   {
     id: 'proj-ecom-microservices',
     slug: 'golang-ecommerce-microservices',
-    title: 'Enterprise E-Commerce Microservices Platform',
+    title: 'Golang E-Commerce Microservices Platform',
     subtitle: 'High-Concurrency Golang Microservices with Kafka, RabbitMQ, Redis & Graylog',
     type: 'personal',
-    category: 'backend',
+    category: 'ecommerce',
     featured: true,
     order: 3,
     period: '2025 - 2026',
@@ -220,7 +220,7 @@ export const MOCK_PROJECTS: Project[] = [
     verificationStatus: 'Open Source Repo',
     githubUrl: 'https://github.com/PearTNhat/microservice-base',
     description:
-      'Enterprise-grade distributed e-commerce backend built with Go, featuring Clean Architecture/DDD, API Gateway reverse proxy, Redis atomic Flash Sale stock locks, Apache Kafka event streaming, RabbitMQ DLX asynchronous workflows, and centralized Graylog/OpenSearch observability.',
+      'Distributed e-commerce microservices backend built with Go, featuring Clean Architecture/DDD, API Gateway reverse proxy, Redis atomic Flash Sale stock locks, Apache Kafka event streaming, RabbitMQ DLX asynchronous workflows, and centralized Graylog/OpenSearch observability.',
     metrics: [
       { label: 'Architecture', value: 'Clean DDD & gRPC' },
       { label: 'Event Streaming', value: 'Kafka & RabbitMQ' },
@@ -308,7 +308,7 @@ export const MOCK_PROJECTS: Project[] = [
     title: 'Laptop E-Commerce Platform',
     subtitle: 'Fullstack MERN Store with AI Recommendations & MoMo Payment',
     type: 'personal',
-    category: 'personal',
+    category: 'ecommerce',
     featured: true,
     order: 5,
     period: '01/09/2024 - 04/12/2024',

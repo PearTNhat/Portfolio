@@ -26,8 +26,8 @@ export function ProjectGrid({ initialProjects }: ProjectGridProps) {
   const counts: Record<ProjectCategory, number> = {
     all: projects.length,
     blockchain: projects.filter((p) => p.category === 'blockchain').length,
-    backend: projects.filter((p) => p.category === 'backend').length,
-    personal: projects.filter((p) => p.category === 'personal').length,
+    storage: projects.filter((p) => p.category === 'storage').length,
+    ecommerce: projects.filter((p) => p.category === 'ecommerce').length,
   };
 
   const filteredProjects = selectedCategory === 'all'

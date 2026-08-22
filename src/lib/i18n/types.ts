@@ -76,8 +76,8 @@ export interface I18nUiDictionary {
     filters: {
       all: string;
       blockchain: string;
-      backend: string;
-      personal: string;
+      storage: string;
+      ecommerce: string;
     };
     personalProject: string;
     commercialProject: string;

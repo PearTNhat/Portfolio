@@ -78,9 +78,9 @@ export const VI_DATA: I18nDataBundle = {
         'Kinh nghiệm thực chiến phát triển các tính năng lõi Blockchain Layer 1 (12K TPS), hệ thống truyền file Rust/QUIC, cổng JSON-RPC và nền tảng thương mại điện tử Fullstack.',
       filters: {
         all: 'Tất cả dự án',
-        blockchain: 'Layer 1 & EVM',
-        backend: 'Rust & Lưu trữ QUIC',
-        personal: 'Dự án cá nhân',
+        blockchain: 'Blockchain & EVM',
+        storage: 'Lưu trữ tệp (QUIC)',
+        ecommerce: 'Thương mại điện tử',
       },
       personalProject: 'Dự án cá nhân',
       commercialProject: 'Dự án thương mại',
@@ -308,10 +308,10 @@ export const VI_DATA: I18nDataBundle = {
     {
       id: 'proj-quic-storage',
       slug: 'rust-quic-storage',
-      title: 'Hệ Thống Lưu Trữ Tệp Phân Tán',
+      title: 'Hệ Thống Lưu Trữ Tệp (Rust & QUIC)',
       subtitle: 'Lưu Trữ Tệp Dạng Chunk Qua Giao Thức QUIC',
       type: 'commercial',
-      category: 'backend',
+      category: 'storage',
       featured: true,
       order: 2,
       period: '2025',
@@ -320,7 +320,7 @@ export const VI_DATA: I18nDataBundle = {
       verificationStatus: 'Production System',
       githubUrl: 'https://github.com/x3pi/file-storage',
       description:
-        'Hệ thống lưu trữ tệp phân tán hiệu năng cao viết bằng Rust và giao thức QUIC, hỗ trợ tải lên/tải xuống phân đoạn song song và kiểm tra tính toàn vẹn bằng Merkle Tree.',
+        'Hệ thống lưu trữ tệp hiệu năng cao viết bằng Rust và giao thức QUIC, hỗ trợ tải lên/tải xuống phân đoạn song song và kiểm tra tính toàn vẹn bằng Merkle Tree.',
       metrics: [
         { label: 'Giao thức', value: 'QUIC / UDP' },
         { label: 'Toàn vẹn', value: 'Merkle Tree' },
@@ -353,10 +353,10 @@ export const VI_DATA: I18nDataBundle = {
     {
       id: 'proj-ecom-microservices',
       slug: 'golang-ecommerce-microservices',
-      title: 'Hệ Thống Microservices Thương Mại Điện Tử Enterprise',
+      title: 'Hệ Thống Microservices Thương Mại Điện Tử',
       subtitle: 'Kiến Trúc Golang Microservices Chịu Tải Cao với Kafka, RabbitMQ, Redis & Graylog',
       type: 'personal',
-      category: 'backend',
+      category: 'ecommerce',
       featured: true,
       order: 3,
       period: '2025 - 2026',
@@ -366,7 +366,7 @@ export const VI_DATA: I18nDataBundle = {
       verificationStatus: 'Open Source Repo',
       githubUrl: 'https://github.com/PearTNhat/microservice-base',
       description:
-        'Hệ thống backend thương mại điện tử phân tán cấp Enterprise viết bằng Go, xây dựng theo Clean Architecture / DDD, tích hợp API Gateway điều phối Reverse Proxy, Redis Atomic Lua Script xử lý Flash Sale chống bán âm, Apache Kafka phân tích lượt xem thời gian thực, RabbitMQ DLX xử lý đơn hàng bất đồng bộ và giám sát tập trung qua Graylog/OpenSearch.',
+        'Hệ thống backend thương mại điện tử phân tán viết bằng Go, xây dựng theo Clean Architecture / DDD, tích hợp API Gateway điều phối Reverse Proxy, Redis Atomic Lua Script xử lý Flash Sale chống bán âm, Apache Kafka phân tích lượt xem thời gian thực, RabbitMQ DLX xử lý đơn hàng bất đồng bộ và giám sát tập trung qua Graylog/OpenSearch.',
       metrics: [
         { label: 'Kiến trúc', value: 'Clean DDD & gRPC' },
         { label: 'Message Broker', value: 'Kafka & RabbitMQ' },
@@ -454,7 +454,7 @@ export const VI_DATA: I18nDataBundle = {
       title: 'Nền Tảng Thương Mại Điện Tử Laptop',
       subtitle: 'Cửa Hàng Fullstack MERN Tích Hợp AI Gợi Ý & Cổng Thanh Toán MoMo',
       type: 'personal',
-      category: 'personal',
+      category: 'ecommerce',
       featured: true,
       order: 5,
       period: '01/09/2024 - 04/12/2024',

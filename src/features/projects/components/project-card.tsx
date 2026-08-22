@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight, Zap, Database, Server, UserCheck, Briefcase, ExternalLink, CheckCircle2 } from 'lucide-react';
+import { ChevronRight, Zap, HardDrive, ShoppingCart, Database, Server, UserCheck, Briefcase, ExternalLink, CheckCircle2 } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 import { getTechIcon } from '@/components/ui/tech-icons';
 import { Project } from '@/types/project';
@@ -23,10 +23,10 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
     switch (category) {
       case 'blockchain':
         return <Zap className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />;
-      case 'backend':
-        return <Database className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />;
-      case 'personal':
-        return <Server className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />;
+      case 'storage':
+        return <HardDrive className="w-4 h-4 text-amber-500 dark:text-amber-400" />;
+      case 'ecommerce':
+        return <ShoppingCart className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />;
       default:
         return <Zap className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />;
     }

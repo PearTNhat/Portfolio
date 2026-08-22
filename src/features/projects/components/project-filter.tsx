@@ -20,8 +20,8 @@ export function ProjectFilter({
   const filters: { id: ProjectCategory; label: string }[] = [
     { id: 'all', label: ui.projectsSection.filters.all },
     { id: 'blockchain', label: ui.projectsSection.filters.blockchain },
-    { id: 'backend', label: ui.projectsSection.filters.backend },
-    { id: 'personal', label: ui.projectsSection.filters.personal },
+    { id: 'storage', label: ui.projectsSection.filters.storage },
+    { id: 'ecommerce', label: ui.projectsSection.filters.ecommerce },
   ];
 
   return (

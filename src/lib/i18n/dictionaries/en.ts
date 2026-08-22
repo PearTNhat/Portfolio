@@ -84,9 +84,9 @@ export const EN_DATA: I18nDataBundle = {
         'Real-world production engineering on Layer 1 blockchains, QUIC protocols, Web3 RPCs, and fullstack e-commerce platforms.',
       filters: {
         all: 'All Projects',
-        blockchain: 'Layer 1 & EVM',
-        backend: 'Rust & QUIC Storage',
-        personal: 'Personal Projects',
+        blockchain: 'Blockchain & EVM',
+        storage: 'File Storage (QUIC)',
+        ecommerce: 'E-Commerce',
       },
       personalProject: 'Personal Project',
       commercialProject: 'Commercial',

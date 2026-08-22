@@ -1,5 +1,5 @@
 export type ProjectType = 'commercial' | 'personal';
-export type ProjectCategory = 'all' | 'blockchain' | 'backend' | 'personal';
+export type ProjectCategory = 'all' | 'blockchain' | 'storage' | 'ecommerce';
 
 export interface ArchitectureDetail {
   title: string;
