@@ -68,11 +68,11 @@ export const MOCK_PROFILE: Profile = {
       highlight: 'Fullstack & Systems',
     },
     {
-      id: 'stat-toeic',
-      label: 'English / PTIT',
-      value: 'TOEIC 605',
-      description: 'Technical reading & communication',
-      highlight: 'PTIT Engineer',
+      id: 'stat-english',
+      label: 'English Proficiency',
+      value: 'Pre-Intermediate',
+      description: 'Good technical reading, Pre-Intermediate speaking',
+      highlight: 'Technical English',
     },
   ],
   socials: [

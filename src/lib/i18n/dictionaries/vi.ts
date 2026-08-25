@@ -215,11 +215,11 @@ export const VI_DATA: I18nDataBundle = {
         highlight: 'Fullstack & Systems',
       },
       {
-        id: 'stat-toeic',
-        label: 'Ngoại ngữ / PTIT',
-        value: 'TOEIC 605',
-        description: 'Đọc hiểu tài liệu & Giao tiếp kỹ thuật',
-        highlight: 'Kỹ sư PTIT',
+        id: 'stat-english',
+        label: 'Trình độ ngoại ngữ',
+        value: 'Pre-Intermediate',
+        description: 'Good technical reading, Pre-Intermediate speaking',
+        highlight: 'Tiếng Anh Kỹ Thuật',
       },
     ],
     socials: [
