@@ -8,7 +8,7 @@ export const MOCK_PROFILE: Profile = {
   title: 'Backend (Golang) & Blockchain Engineer',
   tagline: 'Backend development with Golang, Layer 1 blockchain systems, and Rust/QUIC protocols.',
   summary:
-    'Backend Engineer with 1.5 years of professional experience developing core blockchain systems. Strong foundation in multi-threading, concurrency, and database optimization gained from optimizing a Layer 1 blockchain to handle 12,000 TPS. Additionally, I have solid experience building robust RESTful APIs using Java (Spring Boot), Go, Node.js (Express/NestJS), and TypeScript, integrated with databases (MongoDB, PostgreSQL, MySQL), optimizing database queries, and ensuring system reliability through deep debugging and unit testing.',
+    'Backend Engineer with 1.5 years of professional experience developing core blockchain systems. Strong foundation in multi-threading, concurrency, and database optimization gained from optimizing a Layer 1 blockchain to handle 12,000 TPS. Additionally, I have solid experience building robust RESTful APIs using Java (Spring Boot), Go, Node.js (Express/NestJS), and TypeScript, integrated with databases (MongoDB, PostgreSQL, MySQL), optimizing database queries, and strong capability in deep system debugging to ensure high reliability.',
   location: 'Hồ Chí Minh, Vietnam',
   email: 'letuannhat105@gmail.com',
   phone: '0944477357',

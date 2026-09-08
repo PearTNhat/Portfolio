@@ -154,7 +154,7 @@ export const VI_DATA: I18nDataBundle = {
     tagline:
       'Phát triển Backend với Golang, xây dựng hệ thống Blockchain Layer 1 và lập trình Rust/QUIC.',
     summary:
-      'Kỹ sư Backend với 1.5 năm kinh nghiệm thực tế phát triển các hệ thống blockchain cốt lõi. Nền tảng vững chắc về đa luồng (multi-threading), xử lý đồng thời (concurrency) và tối ưu hóa cơ sở dữ liệu từ kinh nghiệm tối ưu mạng lưới Blockchain Layer 1 đạt mốc 12.000 TPS. Bên cạnh đó, tôi có kinh nghiệm vững vàng trong việc xây dựng các hệ thống RESTful API tin cậy bằng Java (Spring Boot), Go, Node.js (Express/NestJS) và TypeScript, kết hợp với các cơ sở dữ liệu (MongoDB, PostgreSQL, MySQL), tối ưu hóa truy vấn CSDL và đảm bảo độ ổn định hệ thống thông qua gỡ lỗi chuyên sâu và kiểm thử đơn vị (unit testing).',
+      'Kỹ sư Backend với 1.5 năm kinh nghiệm thực tế phát triển các hệ thống blockchain cốt lõi. Nền tảng vững chắc về đa luồng (multi-threading), xử lý đồng thời (concurrency) và tối ưu hóa cơ sở dữ liệu từ kinh nghiệm tối ưu mạng lưới Blockchain Layer 1 đạt mốc 12.000 TPS. Bên cạnh đó, tôi có kinh nghiệm vững vàng trong việc xây dựng các hệ thống RESTful API tin cậy bằng Java (Spring Boot), Go, Node.js (Express/NestJS) và TypeScript, kết hợp với các cơ sở dữ liệu (MongoDB, PostgreSQL, MySQL), tối ưu hóa truy vấn CSDL và có khả năng debug hệ thống chuyên sâu để đảm bảo độ ổn định cao.',
     location: 'Hồ Chí Minh, Việt Nam',
     email: 'letuannhat105@gmail.com',
     phone: '0944477357',
