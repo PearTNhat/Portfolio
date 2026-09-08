@@ -14,11 +14,11 @@ export default function HomePage() {
       {/* 1. Hero & Interactive Profile Overview */}
       <HeroSection />
 
-      {/* 2. Technical Arsenal & Skills (Immediately visible to recruiter) */}
-      <SkillsGrid />
-
-      {/* 3. Featured Commercial & Personal Projects */}
+      {/* 2. Featured Commercial & Personal Projects */}
       <ProjectGrid />
+
+      {/* 3. Technical Arsenal & Skills */}
+      <SkillsGrid />
 
       {/* 4. Work Experience & Education Timeline */}
       <ExperienceTimeline />

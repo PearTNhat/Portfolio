@@ -25,12 +25,34 @@ import {
   SiCloudinary,
   SiJsonwebtokens,
   SiVercel,
+  SiSpringboot,
+  SiSpringsecurity,
+  SiSpring,
+  SiGooglegemini,
 } from 'react-icons/si';
-import { Network, Database, Cpu, Search, Layers, Zap, GitBranch, Binary, Globe, Mail, Sparkles, CreditCard } from 'lucide-react';
+import { FaJava } from 'react-icons/fa6';
+import { Network, Database, Cpu, Search, Layers, Zap, GitBranch, Binary, Globe, Mail, Sparkles, CreditCard, KeyRound, ShieldCheck } from 'lucide-react';
 
 export function getTechIcon(name: string, customClass: string = 'w-5 h-5') {
   const text = name.trim();
   const lower = text.toLowerCase();
+
+  // 0. Java & Spring Framework Ecosystem
+  if (lower.includes('spring security')) {
+    return <SiSpringsecurity className={`${customClass} text-[#6DB33F] shrink-0`} />;
+  }
+  if (lower.includes('spring boot') || lower.includes('springboot')) {
+    return <SiSpringboot className={`${customClass} text-[#6DB33F] shrink-0`} />;
+  }
+  if (lower.includes('spring')) {
+    return <SiSpring className={`${customClass} text-[#6DB33F] shrink-0`} />;
+  }
+  if (lower.includes('oauth')) {
+    return <KeyRound className={`${customClass} text-[#00B4D8] dark:text-[#38BDF8] shrink-0`} />;
+  }
+  if (lower.includes('gemini')) {
+    return <SiGooglegemini className={`${customClass} text-[#8E75FF] dark:text-[#A78BFA] shrink-0`} />;
+  }
 
   // 1. Specific Database & Backend checks first
   if (lower.includes('mongo')) {
@@ -154,6 +176,9 @@ export function getTechIcon(name: string, customClass: string = 'w-5 h-5') {
   }
   if (lower.includes('node') || lower.includes('javascript') || lower.includes('js')) {
     return <SiNodedotjs className={`${customClass} text-[#5FA04E] shrink-0`} />;
+  }
+  if (lower.includes('java') && !lower.includes('javascript') && !lower.includes('script')) {
+    return <FaJava className={`${customClass} text-[#ED8B00] dark:text-[#E76F00] shrink-0`} />;
   }
   if (lower.includes('go') || lower.includes('golang')) {
     return <SiGo className={`${customClass} text-[#00ADD8] shrink-0`} />;

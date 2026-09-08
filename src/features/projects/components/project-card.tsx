@@ -42,7 +42,8 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
     >
       <Card
         hoverable
-        className="flex flex-col justify-between h-full group border border-slate-200/90 dark:border-slate-800 bg-white/85 dark:bg-slate-900/80 backdrop-blur-md relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/15"
+        onClick={() => onViewDetails(project)}
+        className="flex flex-col justify-between h-full group border border-slate-200/90 dark:border-slate-800 bg-white/85 dark:bg-slate-900/80 backdrop-blur-md relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/15 cursor-pointer"
       >
         {/* Colorful Accent top line */}
         <div
@@ -134,6 +135,7 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-cyan-500/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 transition-all shadow-xs"
                 title="Open Live Website Demo"
               >
@@ -146,6 +148,7 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-mono font-bold text-slate-900 dark:text-white transition-all shadow-xs"
                 title={project.githubServerUrl ? 'View Frontend Repository on GitHub' : 'View Repository on GitHub'}
               >
@@ -158,6 +161,7 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
                 href={project.githubServerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-mono font-bold text-slate-900 dark:text-white transition-all shadow-xs"
                 title="View Backend Repository on GitHub"
               >
@@ -170,7 +174,10 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => onViewDetails(project)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onViewDetails(project);
+            }}
             rightIcon={<ChevronRight className="w-4 h-4 ml-0.5 group-hover:translate-x-1 transition-transform" />}
             className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 hover:bg-cyan-500/10 font-bold ml-auto"
           >

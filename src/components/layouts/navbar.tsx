@@ -2,27 +2,24 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Menu, X, FileDown, MessageCircle, ChevronDown } from 'lucide-react';
+import { Menu, X, MessageCircle } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 import { SITE_METADATA } from '@/lib/constants';
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { LanguageToggle } from '@/components/ui/language-toggle';
-import { Button } from '@/components/ui/button';
 import { Container } from '@/components/layouts/container';
 import { useI18n } from '@/store/i18n-provider';
 
 export function Navbar() {
   const { ui } = useI18n();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
-  const [resumeMenuOpen, setResumeMenuOpen] = React.useState(false);
-  const resumeDropdownRef = React.useRef<HTMLDivElement>(null);
 
   const navItems = React.useMemo(
     () => [
       { label: ui.navbar.overview, href: '#overview' },
-      { label: ui.navbar.skills, href: '#skills' },
       { label: ui.navbar.projects, href: '#projects' },
+      { label: ui.navbar.skills, href: '#skills' },
       { label: ui.navbar.experience, href: '#experience' },
       { label: ui.navbar.contact, href: '#contact' },
     ],
@@ -31,16 +28,6 @@ export function Navbar() {
 
   const sectionIds = navItems.map((item) => item.href.replace('#', ''));
   const activeSection = useScrollSpy(sectionIds);
-
-  React.useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (resumeDropdownRef.current && !resumeDropdownRef.current.contains(event.target as Node)) {
-        setResumeMenuOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md transition-colors">
@@ -121,65 +108,6 @@ export function Navbar() {
             {/* Language Switcher Dropdown (Always visible, compact) */}
             <LanguageToggle />
 
-            {/* Resume Dropdown Button (Tablet & Desktop >= 640px) */}
-            <div className="hidden sm:block relative" ref={resumeDropdownRef}>
-              <Button
-                variant="primary"
-                size="sm"
-                leftIcon={<FileDown className="w-4 h-4" />}
-                rightIcon={<ChevronDown className={`w-3.5 h-3.5 ml-0.5 transition-transform ${resumeMenuOpen ? 'rotate-180' : ''}`} />}
-                onClick={() => setResumeMenuOpen(!resumeMenuOpen)}
-                className="font-bold shadow-sm shadow-cyan-500/20 text-xs sm:text-sm"
-              >
-                {ui.navbar.resume}
-              </Button>
-
-              {resumeMenuOpen && (
-                <div className="absolute right-0 mt-2 w-64 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 p-2 shadow-2xl backdrop-blur-md animate-in fade-in zoom-in-95 duration-150 z-50">
-                  <div className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
-                    {ui.navbar.selectTargetCv}
-                  </div>
-                  <a
-                    href="/cv/CV-LeTuanNhat-Go.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download="CV-LeTuanNhat-Go.pdf"
-                    onClick={() => setResumeMenuOpen(false)}
-                    className="flex flex-col p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors group"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
-                        {ui.navbar.cvGolang}
-                      </span>
-                      <FileDown className="w-3.5 h-3.5 text-cyan-500" />
-                    </div>
-                    <span className="text-[11px] text-slate-500 dark:text-slate-400 pt-0.5">
-                      {ui.navbar.cvGolangDesc}
-                    </span>
-                  </a>
-
-                  <a
-                    href="/cv/CV-LeTuanNhat-Blockchain.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download="CV-LeTuanNhat-Blockchain.pdf"
-                    onClick={() => setResumeMenuOpen(false)}
-                    className="flex flex-col p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors group"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
-                        {ui.navbar.cvBlockchain}
-                      </span>
-                      <FileDown className="w-3.5 h-3.5 text-cyan-500" />
-                    </div>
-                    <span className="text-[11px] text-slate-500 dark:text-slate-400 pt-0.5">
-                      {ui.navbar.cvBlockchainDesc}
-                    </span>
-                  </a>
-                </div>
-              )}
-            </div>
-
             {/* Mobile / Tablet Hamburger Menu Button (< 1024px) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -239,48 +167,6 @@ export function Navbar() {
                 <GithubIcon className="w-4 h-4" />
                 <span>GitHub</span>
               </a>
-            </div>
-
-            {/* Target Resume Downloads */}
-            <div className="space-y-1.5">
-              <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 px-1 font-bold">
-                {ui.navbar.selectTargetCv}
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <a
-                  href="/cv/CV-LeTuanNhat-Go.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download="CV-LeTuanNhat-Go.pdf"
-                  className="w-full"
-                >
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    className="w-full justify-start text-xs font-bold"
-                    leftIcon={<FileDown className="w-4 h-4" />}
-                  >
-                    {ui.navbar.cvGolang}
-                  </Button>
-                </a>
-
-                <a
-                  href="/cv/CV-LeTuanNhat-Blockchain.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download="CV-LeTuanNhat-Blockchain.pdf"
-                  className="w-full"
-                >
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    className="w-full justify-start text-xs font-bold border-cyan-500/30 text-cyan-700 dark:text-cyan-300"
-                    leftIcon={<FileDown className="w-4 h-4" />}
-                  >
-                    {ui.navbar.cvBlockchain}
-                  </Button>
-                </a>
-              </div>
             </div>
           </div>
         </div>

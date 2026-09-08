@@ -31,13 +31,12 @@ export interface I18nUiDictionary {
     focusPrefix: string;
     typingRoles: string[];
     badges: {
+      java: string;
+      nodejs: string;
       go: string;
-      rust: string;
-      blockchain: string;
       react: string;
     };
-    downloadCvGo: string;
-    downloadCvBlockchain: string;
+    exploreProjects: string;
     contactMe: string;
   };
   profileCard: {
@@ -46,12 +45,12 @@ export interface I18nUiDictionary {
     openForHire: string;
     coreDomains: string;
     domains: {
+      javaTitle: string;
+      javaSub: string;
+      nodeTitle: string;
+      nodeSub: string;
       goTitle: string;
       goSub: string;
-      rustTitle: string;
-      rustSub: string;
-      blockchainTitle: string;
-      blockchainSub: string;
       reactTitle: string;
       reactSub: string;
     };

@@ -5,7 +5,8 @@ import { ShieldCheck, ExternalLink, Mail, MessageCircle, Copy, Check } from 'luc
 import { GithubIcon } from '@/components/ui/icons';
 import { SITE_METADATA } from '@/lib/constants';
 import { Card } from '@/components/ui/card';
-import { SiGo, SiRust, SiEthereum, SiReact } from 'react-icons/si';
+import { SiGo, SiNodedotjs, SiReact } from 'react-icons/si';
+import { FaJava } from 'react-icons/fa6';
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 import { useI18n } from '@/store/i18n-provider';
 
@@ -56,7 +57,25 @@ export function ProfileFocusCard() {
             {ui.profileCard.coreDomains}
           </div>
           <div className="grid grid-cols-2 gap-2.5">
-            {/* 1. Golang */}
+            {/* 1. Java */}
+            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-amber-500/40 transition-colors">
+              <FaJava className="w-5 h-5 text-[#ED8B00] shrink-0" />
+              <div>
+                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">{ui.profileCard.domains.javaTitle}</div>
+                <div className="text-[10px] text-slate-500">{ui.profileCard.domains.javaSub}</div>
+              </div>
+            </div>
+
+            {/* 2. Node.js */}
+            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-emerald-500/40 transition-colors">
+              <SiNodedotjs className="w-5 h-5 text-[#5FA04E] shrink-0" />
+              <div>
+                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">{ui.profileCard.domains.nodeTitle}</div>
+                <div className="text-[10px] text-slate-500">{ui.profileCard.domains.nodeSub}</div>
+              </div>
+            </div>
+
+            {/* 3. Go */}
             <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-cyan-500/40 transition-colors">
               <SiGo className="w-5 h-5 text-[#00ADD8] shrink-0" />
               <div>
@@ -65,26 +84,8 @@ export function ProfileFocusCard() {
               </div>
             </div>
 
-            {/* 2. Rust */}
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-orange-500/40 transition-colors">
-              <SiRust className="w-5 h-5 text-[#DEA584] dark:text-[#F74C00] shrink-0" />
-              <div>
-                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">{ui.profileCard.domains.rustTitle}</div>
-                <div className="text-[10px] text-slate-500">{ui.profileCard.domains.rustSub}</div>
-              </div>
-            </div>
-
-            {/* 3. Blockchain */}
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-indigo-500/40 transition-colors">
-              <SiEthereum className="w-5 h-5 text-[#627EEA] shrink-0" />
-              <div>
-                <div className="text-xs font-bold text-slate-900 dark:text-slate-100">{ui.profileCard.domains.blockchainTitle}</div>
-                <div className="text-[10px] text-slate-500">{ui.profileCard.domains.blockchainSub}</div>
-              </div>
-            </div>
-
-            {/* 4. ReactJS */}
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-cyan-400/40 transition-colors">
+            {/* 4. React */}
+            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 hover:border-sky-400/40 transition-colors">
               <SiReact className="w-5 h-5 text-[#61DAFB] shrink-0" />
               <div>
                 <div className="text-xs font-bold text-slate-900 dark:text-slate-100">{ui.profileCard.domains.reactTitle}</div>
