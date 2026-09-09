@@ -95,6 +95,7 @@ export const VI_DATA: I18nDataBundle = {
       githubFrontend: 'GitHub (Frontend)',
       githubBackend: 'GitHub (Backend)',
       githubSource: 'Mã nguồn GitHub',
+      playStore: 'Google Play Store',
     },
     experienceSection: {
       badge: 'Lịch Sử Công Việc',
@@ -267,8 +268,9 @@ export const VI_DATA: I18nDataBundle = {
       badgeText: 'Thương mại • 12K TPS',
       verificationStatus: 'Production System',
       githubUrl: 'https://github.com/x3pi/metanode',
+      playStoreUrl: 'https://play.google.com/store/apps/details?id=com.metanode.main&hl=en',
       description:
-        'Hệ thống Blockchain Layer 1 nền tảng hiệu năng cao do tôi trực tiếp tham gia phát triển sâu các module lõi: tối ưu hóa đường ống thực thi (Execution Pipeline) và đồng thuận DAG/BFT đạt thông lượng kỷ lục 12.000 TPS; trực tiếp phát hiện, phân tích và giải quyết triệt để các bài toán thắt cổ chai, nghẽn luồng đồng thời (Concurrency Bottlenecks) và tranh chấp tài nguyên đa luồng phức tạp.',
+        'Hệ thống Blockchain Layer 1 và hạ tầng RPC backend phục vụ trực tiếp cho hệ sinh thái Web3 và ứng dụng di động Metanode trên Google Play Store: tối ưu hóa đường ống thực thi (Execution Pipeline) và đồng thuận DAG/BFT đạt thông lượng 12.000 TPS; phát triển các gateway gRPC & JSON-RPC chịu tải cao cho phép ứng dụng client tương tác hợp đồng thông minh và thực hiện các giao dịch phân tán (như tính năng Chat & truyền tải dữ liệu phi tập trung).',
       metrics: [
         { label: 'Thông lượng', value: '12.000 TPS' },
         { label: 'Đồng thuận', value: 'DAG + BFT' },
@@ -293,7 +295,7 @@ export const VI_DATA: I18nDataBundle = {
         'Đóng vai trò chủ lực trong việc điều tra, debug chuyên sâu và xử lý triệt để hàng loạt lỗi nghẽn đa luồng (Multi-threading Bottlenecks): khắc phục tranh chấp tài nguyên (race conditions), thắt cổ chai khóa đồng bộ (mutex contention/deadlocks) trong quy trình xử lý giao dịch song song quy mô lớn.',
         'Tối ưu hóa đường ống xác thực giao dịch đa luồng đồng thời (Concurrent Transaction Pipeline) và khử nghẽn tầng mạng P2P (TCP) khi truyền tải dữ liệu block liên tục giữa các validator nodes.',
         'Xây dựng tầng lưu trữ trạng thái hai lớp sử dụng NOMT Trie, Flat Trie kết hợp LevelDB và Xapian indexer, giảm thiểu độ trễ truy xuất I/O đĩa dưới tải cao.',
-        'Phát triển các cổng giao tiếp chuẩn Ethereum JSON-RPC 2.0 và dịch vụ gRPC (Protobuf) nội bộ cho phép tương tác mạng lưới độ trễ cực thấp.',
+        'Phát triển các cổng giao tiếp chuẩn Ethereum JSON-RPC 2.0 và dịch vụ gRPC (Protobuf) nội bộ kết nối trực tiếp với ứng dụng Android Metanode trên Google Play Store, cho phép client tương tác mạng lưới với độ trễ cực thấp.',
         'Phát hiện và xử lý các lỗi rò rỉ bộ nhớ, bất đồng bộ luồng tại ranh giới FFI/cgo giữa Go và các module mã hóa Rust, bảo đảm tính toàn vẹn và độ ổn định dài hạn của node.',
       ],
       architecture: {
@@ -322,8 +324,9 @@ export const VI_DATA: I18nDataBundle = {
       badgeText: 'Thương mại • Rust & QUIC',
       verificationStatus: 'Production System',
       githubUrl: 'https://github.com/x3pi/file-storage',
+      playStoreUrl: 'https://play.google.com/store/apps/details?id=com.metanode.main&hl=en',
       description:
-        'Hệ thống lưu trữ tệp hiệu năng cao viết bằng Rust và giao thức QUIC, hỗ trợ tải lên/tải xuống phân đoạn song song và kiểm tra tính toàn vẹn bằng Merkle Tree.',
+        'Hệ thống lưu trữ tệp phân tán hiệu năng cao viết bằng Rust và giao thức QUIC, đóng vai trò backend cốt lõi cho tính năng gửi tệp ("Send File") tích hợp vào ứng dụng Metanode trên Google Play Store. Hỗ trợ truyền tải tệp phân đoạn song song, kiểm tra tính toàn vẹn bằng Merkle Tree và kiểm toán giao dịch qua Smart Contract.',
       metrics: [
         { label: 'Giao thức', value: 'QUIC / UDP' },
         { label: 'Toàn vẹn', value: 'Merkle Tree' },
@@ -338,7 +341,7 @@ export const VI_DATA: I18nDataBundle = {
         'Tokio Async',
       ],
       contributions: [
-        'Xây dựng kiến trúc client-server bằng Rust và QUIC nhằm loại bỏ triệt để hiện tượng nghẽn đầu hàng (Head-of-Line Blocking) của TCP.',
+        'Xây dựng giao thức và dịch vụ truyền file dạng chunking phục vụ tính năng "Send File" cho app Android Metanode trên Google Play Store, sử dụng Rust và QUIC nhằm loại bỏ triệt để hiện tượng nghẽn đầu hàng (Head-of-Line Blocking) của TCP.',
         'Phát triển cơ chế tạo bằng chứng Merkle Tree để xác minh tính toàn vẹn của từng mảnh tệp mà không cần nạp toàn bộ file vào RAM.',
         'Tích hợp hợp đồng thông minh lưu trữ metadata bất biến và hỗ trợ kiểm toán dữ liệu.',
       ],
@@ -579,7 +582,7 @@ export const VI_DATA: I18nDataBundle = {
       endDate: 'Hiện tại',
       current: true,
       summary:
-        'Kỹ sư phát triển lõi Blockchain Layer 1 & Hệ thống Backend: Trực tiếp phát triển và tối ưu hóa hệ thống mạng lưới Layer 1 đạt thông lượng xử lý kỷ lục 12.000 TPS; chuyên sâu điều tra và giải quyết triệt để các sự cố nghẽn đa luồng (multi-threading bottlenecks), tranh chấp khóa tài nguyên (mutex contention) và xây dựng tầng lưu trữ trạng thái cấp thấp cùng giao thức truyền file Rust/QUIC.',
+        'Kỹ sư phát triển lõi Blockchain Layer 1 & Hệ thống Backend: Trực tiếp phát triển và tối ưu hóa hệ thống mạng lưới Layer 1 và giao thức lưu trữ backend phục vụ ứng dụng di động Metanode trên Google Play Store (đạt đỉnh 12.000 TPS); chuyên sâu điều tra và giải quyết triệt để các sự cố nghẽn đa luồng (multi-threading bottlenecks), tranh chấp khóa tài nguyên (mutex contention) và xây dựng tầng lưu trữ trạng thái cấp thấp cùng giao thức truyền file Rust/QUIC.',
       technologies: [
         'Go',
         'Rust',
@@ -605,8 +608,8 @@ export const VI_DATA: I18nDataBundle = {
             'Chủ lực debug, cô lập và fix thành công nhiều sự cố nghẽn đa luồng phức tạp: giải quyết race conditions, tranh chấp mutex và deadlock khi hàng nghìn giao dịch đổ vào đồng thời.',
             'Tối ưu hóa tầng mạng P2P (TCP Sockets) và streaming liên node, khử hiện tượng nghẽn hàng đợi (queue blocking) khi đồng bộ trạng thái.',
             'Tích hợp NOMT Trie & LevelDB cho phép truy xuất trạng thái với độ trễ cực thấp dưới tải nặng.',
-            'Lập trình module truyền nhận file client-server qua giao thức QUIC kèm xác thực Merkle Tree bằng Rust.',
-            'Xây dựng và tối ưu các API JSON-RPC tương thích chuẩn Ethereum và gRPC nội bộ bằng Golang.',
+            'Lập trình module truyền nhận file client-server qua giao thức QUIC kèm xác thực Merkle Tree bằng Rust phục vụ tính năng "Send File".',
+            'Xây dựng và tối ưu các API JSON-RPC tương thích chuẩn Ethereum và gRPC nội bộ bằng Golang, làm cầu nối xử lý giao dịch cho ứng dụng di động Metanode trên Google Play Store.',
           ],
         },
       ],

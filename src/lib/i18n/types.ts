@@ -92,6 +92,7 @@ export interface I18nUiDictionary {
     githubFrontend: string;
     githubBackend: string;
     githubSource: string;
+    playStore: string;
   };
   experienceSection: {
     badge: string;

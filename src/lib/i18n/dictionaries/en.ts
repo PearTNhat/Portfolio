@@ -101,6 +101,7 @@ export const EN_DATA: I18nDataBundle = {
       githubFrontend: 'GitHub (Frontend)',
       githubBackend: 'GitHub (Backend)',
       githubSource: 'GitHub Source',
+      playStore: 'Google Play Store',
     },
     experienceSection: {
       badge: 'Work History',

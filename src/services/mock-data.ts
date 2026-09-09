@@ -122,8 +122,9 @@ export const MOCK_PROJECTS: Project[] = [
     badgeText: 'Commercial • 12K TPS',
     verificationStatus: 'Production System',
     githubUrl: 'https://github.com/x3pi/metanode',
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.metanode.main&hl=en',
     description:
-      'High-performance Layer 1 blockchain system with extensive core module contributions: optimized the concurrent transaction execution pipeline and DAG/BFT consensus engine to reach a peak throughput of 12,000 TPS. Actively investigated, debugged, and eliminated complex multi-threading bottlenecks, thread contention, and distributed race conditions.',
+      'High-performance Layer 1 blockchain engine and RPC backend infrastructure powering the production Metanode Web3 ecosystem and Android DApp on Google Play. Optimized the concurrent transaction execution pipeline and DAG/BFT consensus engine to reach 12,000 TPS, while developing low-latency RPC gateways that client applications call to execute smart contracts and process decentralized transactions (such as chat and decentralized interactions).',
     metrics: [
       { label: 'Throughput', value: '12,000 TPS' },
       { label: 'Consensus', value: 'DAG + BFT' },
@@ -148,7 +149,7 @@ export const MOCK_PROJECTS: Project[] = [
       'Spearheaded deep multi-threading debugging: identified and eradicated severe race conditions, mutex contention, and deadlocks across parallel transaction validation pipelines.',
       'Eliminated P2P/TCP network queue congestion and buffer bottlenecks during continuous block propagation across distributed validator nodes.',
       'Architected dual-layer state storage utilizing NOMT Trie, Flat Trie, LevelDB, and Xapian indexer, drastically minimizing disk I/O latency under heavy transactional loads.',
-      'Engineered high-availability Ethereum JSON-RPC 2.0 gateways and internal gRPC (Protobuf) services for ultra-low-latency client interactions.',
+      'Engineered high-availability Ethereum JSON-RPC 2.0 gateways and internal gRPC (Protobuf) services powering the production Metanode Android app on Google Play for ultra-low-latency client interactions.',
       'Investigated and resolved thread synchronization, goroutine leaks, and memory safety issues at the FFI/cgo boundary between Go execution runtime and Rust cryptographic crates.',
     ],
     architecture: {
@@ -176,8 +177,9 @@ export const MOCK_PROJECTS: Project[] = [
     badgeText: 'Commercial • Rust & QUIC',
     verificationStatus: 'Production System',
     githubUrl: 'https://github.com/x3pi/file-storage',
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.metanode.main&hl=en',
     description:
-      'High-performance distributed file storage system built with Rust and the QUIC transport protocol, featuring parallel chunk upload/download, cryptographic Merkle Tree integrity validation, and smart contract audit trails.',
+      'High-performance distributed file storage backend built with Rust and QUIC, serving as the core engine powering the "Send File" feature inside the Metanode Android ecosystem on Google Play. Features parallel chunk upload/download, cryptographic Merkle Tree integrity validation, and smart contract audit trails.',
     metrics: [
       { label: 'Protocol', value: 'QUIC / UDP' },
       { label: 'Integrity', value: 'Merkle Tree' },
@@ -193,7 +195,7 @@ export const MOCK_PROJECTS: Project[] = [
       'UDP Sockets',
     ],
     contributions: [
-      'Engineered a high-performance client-server storage architecture using Rust and the QUIC protocol to completely eliminate TCP Head-of-Line (HoL) blocking over volatile networks.',
+      'Engineered the chunk-streaming file transfer protocol powering the "Send File" feature in the Metanode Android production app, utilizing Rust and QUIC to eliminate TCP Head-of-Line (HoL) blocking over volatile networks.',
       'Designed a fixed-size chunk streaming mechanism with cryptographic Merkle Tree proof generation, verifying chunk validity without buffering entire files in memory.',
       'Integrated Ethereum Solidity smart contracts on-chain to immutably store file metadata, verify cryptographic proofs, and record user download activities for auditability.',
       'Conducted extensive network stress testing, handled packet loss and timeout scenarios, and benchmarked transfer throughput with multi-gigabyte files.',
@@ -437,7 +439,7 @@ export const MOCK_EXPERIENCE: Experience[] = [
     endDate: 'Current',
     current: true,
     summary:
-      'Core Layer 1 Blockchain & Backend Engineer: Extensively developed and optimized the high-throughput Layer 1 network to achieve 12,000 TPS. Specialized in deep multi-threading debugging, concurrency bottleneck elimination, low-level state storage, and distributed Rust/QUIC file protocols.',
+      'Core Layer 1 Blockchain & Backend Engineer: Extensively developed and optimized the high-throughput Layer 1 network and storage protocols powering the Metanode mobile ecosystem on Google Play (12,000 TPS). Specialized in deep multi-threading debugging, concurrency bottleneck elimination, low-level state storage, and distributed Rust/QUIC file protocols.',
     technologies: [
       'Go',
       'Rust',
@@ -462,8 +464,8 @@ export const MOCK_EXPERIENCE: Experience[] = [
           'Spearheaded deep multi-threading debugging, resolving critical race conditions, deadlocks, and mutex contention under high-concurrency workloads.',
           'Optimized TCP P2P networking and inter-node block streaming to eliminate queue blocking and buffer congestion.',
           'Developed NOMT Trie & LevelDB integration for low-latency state retrieval.',
-          'Implemented client-server QUIC file transfer with Merkle Tree verification in Rust.',
-          'Maintained Ethereum-compatible JSON-RPC APIs and internal gRPC services in Go.',
+          'Implemented client-server QUIC file transfer with Merkle Tree verification in Rust powering the "Send File" feature.',
+          'Maintained Ethereum-compatible JSON-RPC APIs and internal gRPC services in Go, serving as the backend backbone for the Metanode Android production app on Google Play.',
         ],
       },
     ],

@@ -37,6 +37,7 @@ export interface Project {
   githubUrl?: string;
   githubServerUrl?: string;
   liveUrl?: string;
+  playStoreUrl?: string;
   videoDemoUrl?: string;
   docsUrl?: string;
   images?: string[];

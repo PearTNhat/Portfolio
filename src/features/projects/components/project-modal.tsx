@@ -6,7 +6,7 @@ import { Modal } from '@/components/ui/modal';
 import { Button } from '@/components/ui/button';
 import { getTechIcon } from '@/components/ui/tech-icons';
 import { GithubIcon } from '@/components/ui/icons';
-import { CheckCircle2, ExternalLink, Layers } from 'lucide-react';
+import { CheckCircle2, ExternalLink, Layers, Smartphone } from 'lucide-react';
 import { useI18n } from '@/store/i18n-provider';
 
 export interface ProjectModalProps {
@@ -42,6 +42,20 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+            {project.playStoreUrl && (
+              <a
+                href={project.playStoreUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition-colors shadow-sm font-mono font-bold"
+                title="Production Android Client on Google Play"
+              >
+                <Smartphone className="w-3.5 h-3.5" />
+                <span>{ui.projectsSection.playStore}</span>
+                <ExternalLink className="w-3.5 h-3.5 text-emerald-200" />
+              </a>
+            )}
+
             {project.liveUrl && (
               <a
                 href={project.liveUrl}

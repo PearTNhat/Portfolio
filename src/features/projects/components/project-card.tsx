@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight, Zap, HardDrive, ShoppingCart, Database, Server, UserCheck, Briefcase, ExternalLink, CheckCircle2 } from 'lucide-react';
+import { ChevronRight, Zap, HardDrive, ShoppingCart, Database, Server, UserCheck, Briefcase, ExternalLink, CheckCircle2, Smartphone } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 import { getTechIcon } from '@/components/ui/tech-icons';
 import { Project } from '@/types/project';
@@ -130,6 +130,19 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
 
         <CardFooter className="pt-4 border-t border-slate-200/80 dark:border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-1.5">
+            {project.playStoreUrl && (
+              <a
+                href={project.playStoreUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 transition-all shadow-xs"
+                title="View Production Client App on Google Play Store"
+              >
+                <Smartphone className="w-3 h-3" />
+                <span>Google Play</span>
+              </a>
+            )}
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
