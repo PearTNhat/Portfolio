@@ -68,21 +68,46 @@ export class ApiClient {
     const timeout = setTimeout(() => controller.abort(), options.timeoutMs || this.defaultTimeout);
 
     try {
+      const headers = new Headers(options.headers);
+      if (typeof window !== 'undefined') {
+        const token = localStorage.getItem('admin_token');
+        if (token && !headers.has('Authorization')) {
+          headers.set('Authorization', `Bearer ${token}`);
+        }
+      }
+
       const response = await fetch(url, {
         ...options,
+        headers,
+        credentials: 'include',
         signal: controller.signal,
       });
 
       clearTimeout(timeout);
 
       if (!response.ok) {
-        throw new Error(`API Error [${response.status}]: ${response.statusText}`);
+        let errorMsg = `API Error [${response.status}]: ${response.statusText}`;
+        try {
+          const errBody = await response.json();
+          if (errBody && errBody.message) {
+            errorMsg = errBody.message;
+          }
+        } catch {
+          // ignore json parse error
+        }
+        throw new Error(errorMsg);
       }
 
-      const data = await response.json();
+      const resJson = await response.json();
+      // Handle both raw data and standard API response envelope ({ success, data, message })
+      const data = resJson && typeof resJson === 'object' && 'data' in resJson && 'success' in resJson
+        ? (resJson as { data: T }).data
+        : (resJson as T);
+
       return {
         success: true,
         data,
+        message: resJson?.message,
       };
     } catch (error) {
       clearTimeout(timeout);
