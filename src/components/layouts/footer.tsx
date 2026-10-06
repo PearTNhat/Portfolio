@@ -2,13 +2,19 @@
 
 import * as React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Mail, Phone, MapPin, ArrowUp } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 import { Container } from '@/components/layouts/container';
 import { useI18n } from '@/store/i18n-provider';
 
 export function Footer() {
+  const pathname = usePathname();
   const { ui, profile } = useI18n();
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   return (
     <footer className="border-t border-slate-200/80 dark:border-slate-850 bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 py-12 transition-colors">

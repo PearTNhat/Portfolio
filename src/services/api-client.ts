@@ -62,6 +62,14 @@ export class ApiClient {
     return this.request<T>(endpoint, { ...options, method: 'DELETE' });
   }
 
+  async upload<T>(endpoint: string, formData: FormData, options: RequestOptions = {}): Promise<ApiResponse<T>> {
+    return this.request<T>(endpoint, {
+      ...options,
+      method: 'POST',
+      body: formData,
+    });
+  }
+
   private async request<T>(endpoint: string, options: RequestOptions): Promise<ApiResponse<T>> {
     const url = this.buildUrl(endpoint, options.params);
     const controller = new AbortController();

@@ -8,6 +8,8 @@ import { getTechIcon } from '@/components/ui/tech-icons';
 import { GithubIcon } from '@/components/ui/icons';
 import { CheckCircle2, ExternalLink, Layers, Smartphone } from 'lucide-react';
 import { useI18n } from '@/store/i18n-provider';
+import { RichTextContent } from '@/features/projects/components/rich-text-content';
+import { formatMediaUrl } from '@/services/upload.service';
 
 export interface ProjectModalProps {
   project: Project | null;
@@ -16,21 +18,49 @@ export interface ProjectModalProps {
 }
 
 export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
-  const { ui } = useI18n();
+  const { ui, language } = useI18n();
   if (!project) return null;
 
+  const title = project.titleI18n?.[language] || project.title;
+  const subtitle = project.subtitleI18n?.[language] || project.subtitle;
+  const description = project.descriptionI18n?.[language] || project.description;
+  const role = project.roleI18n?.[language] || project.role;
+  const contributions = project.contributionsI18n?.[language] || project.contributions;
+  const architecture = project.architectureI18n
+    ? {
+        title: project.architectureI18n.title[language] || project.architecture?.title || '',
+        description: project.architectureI18n.description[language] || project.architecture?.description || '',
+        points: project.architectureI18n.points[language] || project.architecture?.points || [],
+      }
+    : project.architecture;
+
+  const coverImage = project.thumbnail || (project.images && project.images.length > 0 ? project.images[0] : null);
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} maxWidth="3xl" title={project.title}>
+    <Modal isOpen={isOpen} onClose={onClose} maxWidth="3xl" title={title}>
       <div className="space-y-6 text-sm">
+        {/* Optional Cover / Brand Banner */}
+        {coverImage && (
+          <div className="relative w-full h-44 sm:h-52 overflow-hidden rounded-2xl bg-slate-950/80 border border-slate-200 dark:border-slate-800 flex items-center justify-center p-4">
+            <div className="absolute inset-0 bg-radial from-slate-800/30 to-slate-950/90 pointer-events-none" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={formatMediaUrl(coverImage)}
+              alt={title}
+              className="max-h-full max-w-full object-contain relative z-10 drop-shadow-md"
+            />
+          </div>
+        )}
+
         {/* Header Badges & Proof Links */}
         <div className="flex flex-wrap items-center justify-between gap-3 p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800">
           <div>
             <div className="text-cyan-600 dark:text-cyan-400 font-mono font-bold text-xs sm:text-sm">
-              {project.subtitle}
+              {subtitle}
             </div>
-            {project.role && (
+            {role && (
               <div className="text-slate-500 dark:text-slate-400 text-xs pt-1">
-                {ui.projectsSection.modalRole}: <span className="text-slate-900 dark:text-slate-200 font-semibold">{project.role}</span>
+                {ui.projectsSection.modalRole}: <span className="text-slate-900 dark:text-slate-200 font-semibold">{role}</span>
                 {project.teamSize !== undefined && (
                   <span>
                     {' '}• {ui.projectsSection.modalTeamSize}: <span className="text-slate-900 dark:text-slate-200 font-semibold">{project.teamSize}</span>
@@ -97,9 +127,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
         </div>
 
         {/* Description */}
-        <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
-          {project.description}
-        </p>
+        <RichTextContent content={description} className="text-sm leading-relaxed text-slate-700 dark:text-slate-300 sm:text-base" />
 
         {/* Metrics Grid */}
         {project.metrics && project.metrics.length > 0 && (
@@ -118,34 +146,36 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
         )}
 
         {/* Key Deliverables & Responsibilities */}
-        <div className="space-y-3">
-          <h4 className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            {ui.projectsSection.keyDeliverables}
-          </h4>
-          <ul className="space-y-2.5">
-            {project.contributions.map((c, idx) => (
-              <li key={idx} className="flex items-start gap-2.5 text-slate-800 dark:text-slate-200">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
-                <span className="leading-snug text-xs sm:text-sm">{c}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {contributions && contributions.length > 0 && (
+          <div className="space-y-3">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              {ui.projectsSection.keyDeliverables}
+            </h4>
+            <ul className="space-y-2.5">
+              {contributions.map((c, idx) => (
+                <li key={idx} className="flex items-start gap-2.5 text-slate-800 dark:text-slate-200">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
+                  <span className="leading-snug text-xs sm:text-sm">{c}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {/* Technical Architecture Specs */}
-        {project.architecture && (
+        {architecture && (
           <div className="space-y-2 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 font-mono text-xs">
             <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-tight font-bold flex items-center gap-1.5">
               <Layers className="w-3.5 h-3.5 text-cyan-500" />
-              {project.architecture.title || ui.projectsSection.techArchitecture}
+              {architecture.title || ui.projectsSection.techArchitecture}
             </div>
             <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-sans text-xs sm:text-sm">
-              {project.architecture.description}
+              {architecture.description}
             </p>
-            {project.architecture.points && (
+            {architecture.points && (
               <ul className="space-y-1 text-slate-600 dark:text-slate-400 pt-1">
-                {project.architecture.points.map((pt, pIdx) => (
+                {architecture.points.map((pt, pIdx) => (
                   <li key={pIdx} className="flex items-start gap-1.5 font-sans">
                     <span className="text-cyan-500 font-mono font-bold">→</span>
                     <span>{pt}</span>

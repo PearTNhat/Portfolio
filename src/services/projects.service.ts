@@ -4,40 +4,53 @@ import { MOCK_PROJECTS } from '@/services/mock-data';
 import { Project, ProjectCategory } from '@/types/project';
 
 export class ProjectsService {
-  async getProjects(category: ProjectCategory = 'all'): Promise<Project[]> {
-    if (config.useMock) {
-      if (category === 'all') {
-        return MOCK_PROJECTS;
-      }
-      return MOCK_PROJECTS.filter((p) => p.category === category);
-    }
+  async getAdminProjects(lang?: string): Promise<Project[]> {
+    const response = await apiClient.get<Project[]>('/projects', {
+      params: lang ? { lang } : undefined,
+    });
+    return response.data;
+  }
 
+  async getProjects(category: ProjectCategory = 'all', lang: string = 'vi'): Promise<Project[]> {
     try {
       const response = await apiClient.get<Project[]>('/projects', {
-        params: category !== 'all' ? { category } : undefined,
+        params: {
+          category: category !== 'all' ? category : undefined,
+          lang,
+        },
       });
-      return response.data;
-    } catch {
+      return response.data || [];
+    } catch (err) {
+      console.warn('[ProjectsService] Live API call failed, falling back to local data:', err);
       return category === 'all'
         ? MOCK_PROJECTS
         : MOCK_PROJECTS.filter((p) => p.category === category);
     }
   }
 
-  async getProjectBySlug(slug: string): Promise<Project | null> {
-    if (config.useMock) {
-      return MOCK_PROJECTS.find((p) => p.slug === slug) || null;
-    }
-
+  async getProjectById(id: string, lang?: string): Promise<Project | null> {
     try {
-      const response = await apiClient.get<Project>(`/projects/${slug}`);
+      const response = await apiClient.get<Project>(`/admin/projects/${id}`, {
+        params: lang ? { lang } : undefined,
+      });
+      return response.data;
+    } catch {
+      const list = await this.getAdminProjects(lang);
+      return list.find((p) => p.id === id) || null;
+    }
+  }
+
+  async getProjectBySlug(slug: string, lang: string = 'vi'): Promise<Project | null> {
+    try {
+      const response = await apiClient.get<Project>(`/projects/${slug}`, {
+        params: { lang },
+      });
       return response.data;
     } catch {
       return MOCK_PROJECTS.find((p) => p.slug === slug) || null;
     }
   }
 
-  // Future CRUD methods for Golang Backend
   async createProject(project: Omit<Project, 'id'>): Promise<Project> {
     const response = await apiClient.post<Project>('/projects', project);
     return response.data;

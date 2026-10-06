@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X, MessageCircle } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 import { SITE_METADATA } from '@/lib/constants';
@@ -12,8 +13,13 @@ import { Container } from '@/components/layouts/container';
 import { useI18n } from '@/store/i18n-provider';
 
 export function Navbar() {
+  const pathname = usePathname();
   const { ui } = useI18n();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   const navItems = React.useMemo(
     () => [

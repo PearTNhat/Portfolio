@@ -9,6 +9,8 @@ import { Project } from '@/types/project';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { RichTextContent } from '@/features/projects/components/rich-text-content';
+import { formatMediaUrl } from '@/services/upload.service';
 import { useI18n } from '@/store/i18n-provider';
 
 export interface ProjectCardProps {
@@ -17,7 +19,12 @@ export interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
-  const { ui } = useI18n();
+  const { ui, language } = useI18n();
+
+  const title = project.titleI18n?.[language] || project.title;
+  const subtitle = project.subtitleI18n?.[language] || project.subtitle;
+  const description = project.descriptionI18n?.[language] || project.description;
+  const badgeText = project.badgeTextI18n?.[language] || project.badgeText;
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
@@ -33,6 +40,7 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
   };
 
   const isPersonal = project.type === 'personal';
+  const coverImage = project.thumbnail || (project.images && project.images.length > 0 ? project.images[0] : null);
 
   return (
     <motion.div
@@ -54,6 +62,20 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
           }`}
         />
 
+        {/* Optional Cover / Brand Image Banner */}
+        {coverImage && (
+          <div className="relative w-full h-36 sm:h-40 overflow-hidden bg-slate-950/60 dark:bg-slate-950/80 border-b border-slate-200/80 dark:border-slate-800/80 flex items-center justify-center p-3">
+            <div className="absolute inset-0 bg-radial from-slate-800/20 to-slate-950/80 pointer-events-none" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={formatMediaUrl(coverImage)}
+              alt={project.title}
+              className="max-h-full max-w-full object-contain relative z-10 transition-transform duration-500 group-hover:scale-105 drop-shadow-md"
+            />
+            <div className="absolute bottom-0 inset-x-0 h-6 bg-gradient-to-t from-slate-900/30 to-transparent pointer-events-none" />
+          </div>
+        )}
+
         <div>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between gap-2 mb-2">
@@ -73,23 +95,23 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
                   )}
                 </Badge>
 
-                {project.badgeText && (
+                {badgeText && (
                   <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25">
                     <CheckCircle2 className="w-3 h-3" />
-                    {project.badgeText}
+                    {badgeText}
                   </span>
                 )}
               </div>
             </div>
 
             <CardTitle className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
-              {project.title}
+              {title}
             </CardTitle>
             <div className="text-xs font-mono text-cyan-600 dark:text-cyan-400 font-semibold pt-0.5">
-              {project.subtitle}
+              {subtitle}
             </div>
             <CardDescription className="pt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              {project.description}
+              <RichTextContent content={description} />
             </CardDescription>
           </CardHeader>
 

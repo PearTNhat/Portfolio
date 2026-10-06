@@ -8,6 +8,10 @@ import { Profile } from '@/types/profile';
 import { Project } from '@/types/project';
 import { Experience } from '@/types/experience';
 import { SkillCategory } from '@/types/skill';
+import { projectsService } from '@/services/projects.service';
+import { profileService } from '@/services/profile.service';
+import { experienceService } from '@/services/experience.service';
+import { skillsService } from '@/services/skills.service';
 
 interface I18nContextType {
   language: Language;
@@ -57,8 +61,40 @@ function getServerSnapshot(): Language {
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   const language = React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
+  // Live database data loaded from real Go Backend APIs
+  const [liveProjects, setLiveProjects] = React.useState<Project[] | null>(null);
+  const [liveProfile, setLiveProfile] = React.useState<Profile | null>(null);
+  const [liveExperiences, setLiveExperiences] = React.useState<Experience[] | null>(null);
+  const [liveSkills, setLiveSkills] = React.useState<SkillCategory[] | null>(null);
+
   React.useEffect(() => {
     document.documentElement.lang = language;
+  }, [language]);
+
+  React.useEffect(() => {
+    let isCancelled = false;
+
+    // Fetch all real database data from Go Backend API
+    Promise.all([
+      projectsService.getProjects('all', language),
+      profileService.getProfile(language),
+      experienceService.getExperiences(language),
+      skillsService.getSkillCategories(language),
+    ])
+      .then(([projects, profile, experiences, skills]) => {
+        if (isCancelled) return;
+        if (projects && projects.length > 0) setLiveProjects(projects);
+        if (profile) setLiveProfile(profile);
+        if (experiences && experiences.length > 0) setLiveExperiences(experiences);
+        if (skills && skills.length > 0) setLiveSkills(skills);
+      })
+      .catch((err) => {
+        console.warn('[I18nProvider] Failed to fetch live data from Backend API:', err);
+      });
+
+    return () => {
+      isCancelled = true;
+    };
   }, [language]);
 
   const setLanguage = React.useCallback((lang: Language) => {
@@ -85,13 +121,13 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
       setLanguage,
       toggleLanguage,
       ui: activeBundle.ui,
-      profile: activeBundle.profile,
-      projects: activeBundle.projects,
-      experiences: activeBundle.experiences,
-      skillCategories: activeBundle.skillCategories,
+      profile: liveProfile || activeBundle.profile,
+      projects: liveProjects || activeBundle.projects,
+      experiences: liveExperiences || activeBundle.experiences,
+      skillCategories: liveSkills || activeBundle.skillCategories,
       isHydrated: true,
     }),
-    [language, setLanguage, toggleLanguage, activeBundle]
+    [language, setLanguage, toggleLanguage, activeBundle, liveProfile, liveProjects, liveExperiences, liveSkills]
   );
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
