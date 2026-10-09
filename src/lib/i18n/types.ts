@@ -143,8 +143,8 @@ export interface I18nUiDictionary {
 
 export interface I18nDataBundle {
   ui: I18nUiDictionary;
-  profile: Profile;
-  projects: Project[];
-  experiences: Experience[];
-  skillCategories: SkillCategory[];
+  profile?: Profile;
+  projects?: Project[];
+  experiences?: Experience[];
+  skillCategories?: SkillCategory[];
 }

@@ -24,10 +24,10 @@ const COMMAND_MAP: Record<string, string[]> = {
     '→ Systems: QUIC, TCP/UDP, Kafka, gRPC, Docker, Linux cgo/FFI',
   ],
   'projects': [
-    '1. MetaNode Layer 1 Blockchain (12,000 TPS, DAG/BFT, EVM)',
+    '1. MetaNode Layer 1 Blockchain (12,000 TPS, DAG/BFT, EVM, React Web3 & JSON-RPC)',
     '2. Rust & QUIC File Storage System (Merkle Integrity)',
     '3. Golang E-Commerce Microservices (Kafka, RabbitMQ, Redis, Graylog)',
-    '4. MetaCoSign - Ethereum JSON-RPC & BLS Key Gateway',
+    '4. Stationery E-Commerce Platform (Java Spring Boot, OAuth2, Gemini AI & MoMo)',
     '5. Laptop E-Commerce Platform (React, Redux, Node.js, MongoDB, Socket.IO, AI & Momo)',
   ],
   'contact': [

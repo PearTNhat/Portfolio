@@ -1,6 +1,4 @@
-import { config } from '@/lib/config';
 import { apiClient } from '@/services/api-client';
-import { MOCK_PROJECTS } from '@/services/mock-data';
 import { Project, ProjectCategory } from '@/types/project';
 
 export class ProjectsService {
@@ -8,7 +6,7 @@ export class ProjectsService {
     const response = await apiClient.get<Project[]>('/projects', {
       params: lang ? { lang } : undefined,
     });
-    return response.data;
+    return response.data || [];
   }
 
   async getProjects(category: ProjectCategory = 'all', lang: string = 'vi'): Promise<Project[]> {
@@ -21,10 +19,8 @@ export class ProjectsService {
       });
       return response.data || [];
     } catch (err) {
-      console.warn('[ProjectsService] Live API call failed, falling back to local data:', err);
-      return category === 'all'
-        ? MOCK_PROJECTS
-        : MOCK_PROJECTS.filter((p) => p.category === category);
+      console.error('[ProjectsService] Failed to fetch projects from API:', err);
+      return [];
     }
   }
 
@@ -33,7 +29,7 @@ export class ProjectsService {
       const response = await apiClient.get<Project>(`/admin/projects/${id}`, {
         params: lang ? { lang } : undefined,
       });
-      return response.data;
+      return response.data || null;
     } catch {
       const list = await this.getAdminProjects(lang);
       return list.find((p) => p.id === id) || null;
@@ -45,9 +41,9 @@ export class ProjectsService {
       const response = await apiClient.get<Project>(`/projects/${slug}`, {
         params: { lang },
       });
-      return response.data;
+      return response.data || null;
     } catch {
-      return MOCK_PROJECTS.find((p) => p.slug === slug) || null;
+      return null;
     }
   }
 

@@ -1,6 +1,5 @@
 import { apiClient } from '@/services/api-client';
-import { MOCK_EXPERIENCE } from '@/services/mock-data';
-import { Experience } from '@/types/experience';
+import { Experience, RawExperience } from '@/types/experience';
 
 export class ExperienceService {
   async getExperiences(lang: string = 'vi'): Promise<Experience[]> {
@@ -8,11 +7,44 @@ export class ExperienceService {
       const response = await apiClient.get<Experience[]>('/experiences', {
         params: { lang },
       });
-      return response.data || MOCK_EXPERIENCE;
+      return response.data || [];
     } catch (err) {
-      console.warn('[ExperienceService] Live API call failed, using fallback bundle:', err);
-      return MOCK_EXPERIENCE;
+      console.error('[ExperienceService] Failed to load experiences from API:', err);
+      return [];
     }
+  }
+
+  async getRawExperiences(): Promise<RawExperience[]> {
+    const response = await apiClient.get<RawExperience[]>('/admin/experiences');
+    return response.data || [];
+  }
+
+  async getExperienceById(id: string): Promise<RawExperience> {
+    const response = await apiClient.get<RawExperience>(`/admin/experiences/${id}`);
+    if (!response.data) {
+      throw new Error(response.message || 'Không tìm thấy kinh nghiệm.');
+    }
+    return response.data;
+  }
+
+  async createExperience(data: RawExperience): Promise<RawExperience> {
+    const response = await apiClient.post<RawExperience>('/admin/experiences', data);
+    if (!response.data) {
+      throw new Error(response.message || 'Không thể tạo kinh nghiệm mới.');
+    }
+    return response.data;
+  }
+
+  async updateExperience(id: string, data: RawExperience): Promise<RawExperience> {
+    const response = await apiClient.put<RawExperience>(`/admin/experiences/${id}`, data);
+    if (!response.data) {
+      throw new Error(response.message || 'Không thể cập nhật kinh nghiệm.');
+    }
+    return response.data;
+  }
+
+  async deleteExperience(id: string): Promise<void> {
+    await apiClient.delete(`/admin/experiences/${id}`);
   }
 }
 

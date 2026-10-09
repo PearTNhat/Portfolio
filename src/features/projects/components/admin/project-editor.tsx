@@ -31,8 +31,14 @@ import { Input } from '@/components/ui/input';
 import { RichTextEditor } from '@/features/projects/components/admin/rich-text-editor';
 import { projectsService } from '@/services/projects.service';
 import { categoriesService } from '@/services/categories.service';
-import { uploadService, formatMediaUrl } from '@/services/upload.service';
+import {
+  formatMediaUrl,
+  registerPendingBlob,
+  uploadIfBlob,
+  processAndUploadPendingBlobs,
+} from '@/services/upload.service';
 import { Project, ProjectCategory, ProjectType } from '@/types/project';
+import { invalidatePortfolioCache } from '@/store/i18n-provider';
 import { Category } from '@/types/category';
 
 type ProjectPayload = Omit<Project, 'id'>;
@@ -350,39 +356,25 @@ export function ProjectEditor({ mode, projectId }: ProjectEditorProps) {
 
   const isEditing = mode === 'edit';
 
-  const handleThumbnailUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleThumbnailUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    setIsUploadingThumbnail(true);
-    try {
-      const res = await uploadService.uploadFile(file);
-      const url = formatMediaUrl(res.url);
-      updateCommon('thumbnail', url);
-    } catch (err) {
-      alert(err instanceof Error ? err.message : 'Tải ảnh đại diện thất bại.');
-    } finally {
-      setIsUploadingThumbnail(false);
-      if (thumbnailInputRef.current) thumbnailInputRef.current.value = '';
-    }
+    const blobUrl = URL.createObjectURL(file);
+    registerPendingBlob(blobUrl, file);
+    updateCommon('thumbnail', blobUrl);
+    if (thumbnailInputRef.current) thumbnailInputRef.current.value = '';
   };
 
-  const handleMediaUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleMediaUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    setIsUploadingMedia(true);
-    try {
-      const res = await uploadService.uploadFile(file);
-      const url = formatMediaUrl(res.url);
-      const current = values.images.trim();
-      updateCommon('images', current ? `${current}\n${url}` : url);
-    } catch (err) {
-      alert(err instanceof Error ? err.message : 'Tải ảnh lên thất bại.');
-    } finally {
-      setIsUploadingMedia(false);
-      if (mediaInputRef.current) mediaInputRef.current.value = '';
-    }
+    const blobUrl = URL.createObjectURL(file);
+    registerPendingBlob(blobUrl, file);
+    const current = values.images.trim();
+    updateCommon('images', current ? `${current}\n${blobUrl}` : blobUrl);
+    if (mediaInputRef.current) mediaInputRef.current.value = '';
   };
 
   React.useEffect(() => {
@@ -475,14 +467,39 @@ export function ProjectEditor({ mode, projectId }: ProjectEditorProps) {
     setIsSaving(true);
 
     try {
-      const payload = buildPayload(values, project, editorLang);
+      // Upload-on-Save: Process any pending blob images in descriptions
+      const descVi = await processAndUploadPendingBlobs(values.vi.description);
+      const descEn = await processAndUploadPendingBlobs(values.en.description);
+
+      // Process thumbnail if blob
+      const finalThumbnail = await uploadIfBlob(values.thumbnail);
+
+      // Process media images if any is blob
+      let finalImages = values.images;
+      if (finalImages && finalImages.includes('blob:')) {
+        const lines = finalImages.split('\n');
+        const processedLines = await Promise.all(lines.map((l) => uploadIfBlob(l)));
+        finalImages = processedLines.join('\n');
+      }
+
+      const updatedValues: ProjectFormValues = {
+        ...values,
+        thumbnail: finalThumbnail,
+        images: finalImages,
+        vi: { ...values.vi, description: descVi },
+        en: { ...values.en, description: descEn },
+      };
+
+      const payload = buildPayload(updatedValues, project, editorLang);
       let savedProject: Project;
 
       if (isEditing && project) {
         savedProject = await projectsService.updateProject(project.id, payload);
+        invalidatePortfolioCache();
         setSuccessMsg(`Đã cập nhật dự án "${savedProject.title}" thành công!`);
       } else {
         savedProject = await projectsService.createProject(payload);
+        invalidatePortfolioCache();
         setSuccessMsg(`Đã tạo mới dự án "${savedProject.title}" thành công!`);
         setTimeout(() => {
           router.push(`/admin/projects/${savedProject.id}`);

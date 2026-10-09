@@ -1,10 +1,4 @@
 import { I18nDataBundle } from '../types';
-import {
-  MOCK_PROFILE,
-  MOCK_PROJECTS,
-  MOCK_EXPERIENCE,
-  MOCK_SKILLS,
-} from '@/services/mock-data';
 
 export const EN_DATA: I18nDataBundle = {
   ui: {
@@ -155,8 +149,4 @@ export const EN_DATA: I18nDataBundle = {
       returnHome: 'Return to Overview',
     },
   },
-  profile: MOCK_PROFILE,
-  projects: MOCK_PROJECTS,
-  experiences: MOCK_EXPERIENCE,
-  skillCategories: MOCK_SKILLS,
 };

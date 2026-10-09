@@ -35,19 +35,29 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
     : project.architecture;
 
   const coverImage = project.thumbnail || (project.images && project.images.length > 0 ? project.images[0] : null);
+  const isLogo = Boolean(
+    coverImage &&
+      (coverImage.toLowerCase().endsWith('.png') ||
+        coverImage.includes('logo') ||
+        coverImage.includes('metanode'))
+  );
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} maxWidth="3xl" title={title}>
       <div className="space-y-6 text-sm">
         {/* Optional Cover / Brand Banner */}
         {coverImage && (
-          <div className="relative w-full h-44 sm:h-52 overflow-hidden rounded-2xl bg-slate-950/80 border border-slate-200 dark:border-slate-800 flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-radial from-slate-800/30 to-slate-950/90 pointer-events-none" />
+          <div className="relative w-full h-44 sm:h-52 overflow-hidden rounded-2xl bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-center">
+            <div className="absolute inset-0 bg-radial from-slate-800/10 to-slate-950/70 pointer-events-none z-10" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={formatMediaUrl(coverImage)}
               alt={title}
-              className="max-h-full max-w-full object-contain relative z-10 drop-shadow-md"
+              className={`transition-transform duration-500 hover:scale-105 ${
+                isLogo
+                  ? 'max-h-full max-w-full object-contain p-4 drop-shadow-md relative z-0'
+                  : 'w-full h-full object-cover relative z-0'
+              }`}
             />
           </div>
         )}

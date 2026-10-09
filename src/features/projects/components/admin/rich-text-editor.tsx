@@ -21,7 +21,7 @@ import {
   Upload,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { uploadService, formatMediaUrl } from '@/services/upload.service';
+import { formatMediaUrl, registerPendingBlob } from '@/services/upload.service';
 
 interface RichTextEditorProps {
   value: string;
@@ -132,22 +132,20 @@ export function RichTextEditor({
     editor.chain().focus().extendMarkRange('link').setLink({ href: url.trim() }).run();
   };
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !editor) return;
 
     setShowImageMenu(false);
-    setIsUploadingImage(true);
 
     try {
-      const res = await uploadService.uploadFile(file);
-      const formattedUrl = formatMediaUrl(res.url);
+      const blobUrl = URL.createObjectURL(file);
+      registerPendingBlob(blobUrl, file);
       const altText = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
-      editor.chain().focus().setImage({ src: formattedUrl, alt: altText || 'Sơ đồ luồng' }).run();
+      editor.chain().focus().setImage({ src: blobUrl, alt: altText || 'Sơ đồ luồng' }).run();
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Tải ảnh lên thất bại.');
+      alert(err instanceof Error ? err.message : 'Tải ảnh xem trước thất bại.');
     } finally {
-      setIsUploadingImage(false);
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }

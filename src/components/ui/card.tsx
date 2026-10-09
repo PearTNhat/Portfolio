@@ -55,9 +55,9 @@ export function CardDescription({
   className,
   children,
   ...props
-}: React.HTMLAttributes<HTMLParagraphElement>) {
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <p
+    <div
       className={cn(
         'text-sm text-slate-600 dark:text-slate-400 leading-relaxed',
         className
@@ -65,7 +65,7 @@ export function CardDescription({
       {...props}
     >
       {children}
-    </p>
+    </div>
   );
 }
 

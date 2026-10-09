@@ -41,6 +41,12 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
 
   const isPersonal = project.type === 'personal';
   const coverImage = project.thumbnail || (project.images && project.images.length > 0 ? project.images[0] : null);
+  const isLogo = Boolean(
+    coverImage &&
+      (coverImage.toLowerCase().endsWith('.png') ||
+        coverImage.includes('logo') ||
+        coverImage.includes('metanode'))
+  );
 
   return (
     <motion.div
@@ -62,46 +68,56 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
           }`}
         />
 
-        {/* Optional Cover / Brand Image Banner */}
-        {coverImage && (
-          <div className="relative w-full h-36 sm:h-40 overflow-hidden bg-slate-950/60 dark:bg-slate-950/80 border-b border-slate-200/80 dark:border-slate-800/80 flex items-center justify-center p-3">
-            <div className="absolute inset-0 bg-radial from-slate-800/20 to-slate-950/80 pointer-events-none" />
+        {/* Cover / Brand Image Banner or Fallback Banner for perfect grid alignment */}
+        {coverImage ? (
+          <div className="relative w-full h-36 sm:h-40 overflow-hidden bg-slate-950 border-b border-slate-200/80 dark:border-slate-800/80 flex items-center justify-center">
+            <div className="absolute inset-0 bg-radial from-slate-800/20 to-slate-950/70 pointer-events-none z-10" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={formatMediaUrl(coverImage)}
               alt={project.title}
-              className="max-h-full max-w-full object-contain relative z-10 transition-transform duration-500 group-hover:scale-105 drop-shadow-md"
+              className={`transition-transform duration-500 group-hover:scale-105 ${
+                isLogo
+                  ? 'max-h-full max-w-full object-contain p-4 drop-shadow-md relative z-0'
+                  : 'w-full h-full object-cover relative z-0'
+              }`}
             />
-            <div className="absolute bottom-0 inset-x-0 h-6 bg-gradient-to-t from-slate-900/30 to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 inset-x-0 h-6 bg-gradient-to-t from-slate-950/50 to-transparent pointer-events-none z-10" />
+          </div>
+        ) : (
+          /* Sleek fallback banner so any project without a custom image maintains identical card height */
+          <div className="relative w-full h-36 sm:h-40 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 border-b border-slate-200/80 dark:border-slate-800/80 flex flex-col items-center justify-center gap-2 p-4">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-900/20 via-slate-950/40 to-transparent pointer-events-none" />
+            <div className="p-3.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 group-hover:scale-110 group-hover:border-cyan-500/40 transition-all duration-300 relative z-10 shadow-inner">
+              {getCategoryIcon(project.category)}
+            </div>
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 relative z-10 font-semibold">
+              {project.category}
+            </span>
           </div>
         )}
 
         <div>
           <CardHeader className="pb-3">
-            <div className="flex items-center justify-between gap-2 mb-2">
-              <span className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/60 shadow-sm group-hover:scale-110 transition-transform">
-                {getCategoryIcon(project.category)}
-              </span>
-              <div className="flex items-center gap-1.5">
-                <Badge variant={isPersonal ? 'emerald' : 'cyan'} size="sm">
-                  {isPersonal ? (
-                    <span className="flex items-center gap-1 font-semibold">
-                      <UserCheck className="w-3.5 h-3.5" /> {ui.projectsSection.personalProject}
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-1 font-semibold">
-                      <Briefcase className="w-3.5 h-3.5" /> {ui.projectsSection.commercialProject}
-                    </span>
-                  )}
-                </Badge>
-
-                {badgeText && (
-                  <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25">
-                    <CheckCircle2 className="w-3 h-3" />
-                    {badgeText}
+            <div className="flex items-center gap-1.5 flex-wrap mb-2">
+              <Badge variant={isPersonal ? 'emerald' : 'cyan'} size="sm">
+                {isPersonal ? (
+                  <span className="flex items-center gap-1 font-semibold">
+                    <UserCheck className="w-3.5 h-3.5" /> {ui.projectsSection.personalProject}
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-1 font-semibold">
+                    <Briefcase className="w-3.5 h-3.5" /> {ui.projectsSection.commercialProject}
                   </span>
                 )}
-              </div>
+              </Badge>
+
+              {badgeText && (
+                <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25">
+                  <CheckCircle2 className="w-3 h-3" />
+                  {badgeText}
+                </span>
+              )}
             </div>
 
             <CardTitle className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
@@ -110,9 +126,9 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
             <div className="text-xs font-mono text-cyan-600 dark:text-cyan-400 font-semibold pt-0.5">
               {subtitle}
             </div>
-            <CardDescription className="pt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            <div className="pt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
               <RichTextContent content={description} />
-            </CardDescription>
+            </div>
           </CardHeader>
 
           <CardContent className="space-y-3.5">

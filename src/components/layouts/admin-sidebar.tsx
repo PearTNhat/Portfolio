@@ -13,6 +13,9 @@ import {
   Sparkles,
   Layers,
   Tag,
+  UserCircle,
+  Briefcase,
+  Cpu,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { authService } from '@/services/auth.service';
@@ -40,6 +43,24 @@ const navSections: NavSection[] = [
         href: '/admin/projects',
         icon: FolderKanban,
         description: 'Quản lý bài viết portfolio',
+      },
+      {
+        name: 'Hồ sơ cá nhân (Profile)',
+        href: '/admin/profile',
+        icon: UserCircle,
+        description: 'Thông tin cá nhân & bio',
+      },
+      {
+        name: 'Kinh nghiệm (Experiences)',
+        href: '/admin/experiences',
+        icon: Briefcase,
+        description: 'Lịch sử làm việc & vị trí',
+      },
+      {
+        name: 'Kỹ năng (Skills)',
+        href: '/admin/skills',
+        icon: Cpu,
+        description: 'Nhóm kỹ năng & chuyên môn',
       },
       {
         name: 'Danh mục (Categories)',

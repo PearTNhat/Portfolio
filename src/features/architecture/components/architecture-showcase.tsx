@@ -263,7 +263,7 @@ export function ArchitectureShowcase() {
                 <div className="flex items-center justify-between pb-4 border-b border-slate-800">
                   <span className="font-mono text-xs text-emerald-400 flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    Ethereum JSON-RPC 2.0 & BLS Key Management (MetaCoSign)
+                    Ethereum JSON-RPC 2.0 & BLS Key Management (MetaNode Ecosystem)
                   </span>
                   <Badge variant="emerald" size="sm">EVM Tooling</Badge>
                 </div>

@@ -11,20 +11,83 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/layouts/container';
 import { ProfileFocusCard } from '@/features/profile/components/profile-focus-card';
-import { QuickStats } from '@/features/profile/components/quick-stats';
 import { AnimatedTyping } from '@/components/ui/animated-typing';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useI18n } from '@/store/i18n-provider';
 
 export interface HeroSectionProps {
   profile?: Profile;
 }
 
+export function HeroSectionSkeleton() {
+  return (
+    <section id="overview" className="relative pt-28 pb-12 sm:pt-36 sm:pb-16 overflow-hidden bg-grid-pattern">
+      <Container size="xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          {/* Left Column Skeleton */}
+          <div className="lg:col-span-7 space-y-6">
+            <Skeleton className="h-9 w-64 rounded-2xl" />
+            <div className="space-y-3">
+              <Skeleton className="h-14 w-3/4 rounded-2xl" />
+              <Skeleton className="h-8 w-1/2 rounded-xl" />
+            </div>
+            <Skeleton className="h-24 w-full rounded-2xl" />
+            <div className="flex flex-wrap gap-2 pt-1">
+              <Skeleton className="h-8 w-24 rounded-full" />
+              <Skeleton className="h-8 w-28 rounded-full" />
+              <Skeleton className="h-8 w-24 rounded-full" />
+              <Skeleton className="h-8 w-24 rounded-full" />
+            </div>
+            <div className="flex gap-3 pt-3">
+              <Skeleton className="h-11 w-36 rounded-xl" />
+              <Skeleton className="h-11 w-36 rounded-xl" />
+            </div>
+          </div>
+
+          {/* Right Column Skeleton */}
+          <div className="lg:col-span-5 w-full">
+            <div className="p-6 sm:p-7 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-2xl space-y-5">
+              <div className="flex items-center justify-between pb-4 border-b border-slate-200/80 dark:border-slate-800">
+                <div className="flex items-center gap-3">
+                  <Skeleton className="w-12 h-12 rounded-2xl" />
+                  <div className="space-y-2">
+                    <Skeleton className="h-5 w-32 rounded-lg" />
+                    <Skeleton className="h-3 w-40 rounded-md" />
+                  </div>
+                </div>
+                <Skeleton className="h-6 w-24 rounded-full" />
+              </div>
+              <div className="space-y-2.5">
+                <Skeleton className="h-3 w-28 rounded" />
+                <div className="grid grid-cols-2 gap-2.5">
+                  <Skeleton className="h-14 rounded-xl" />
+                  <Skeleton className="h-14 rounded-xl" />
+                  <Skeleton className="h-14 rounded-xl" />
+                  <Skeleton className="h-14 rounded-xl" />
+                </div>
+              </div>
+              <div className="pt-2 space-y-2 border-t border-slate-200/80 dark:border-slate-800">
+                <Skeleton className="h-8 w-full rounded-xl" />
+                <Skeleton className="h-8 w-full rounded-xl" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
 export function HeroSection({ profile: initialProfile }: HeroSectionProps) {
-  const { ui, profile: contextProfile } = useI18n();
+  const { ui, profile: contextProfile, isLoading } = useI18n();
   const profile = initialProfile || contextProfile;
 
+  if (isLoading && !initialProfile) {
+    return <HeroSectionSkeleton />;
+  }
+
   return (
-    <section id="overview" className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden bg-grid-pattern">
+    <section id="overview" className="relative pt-28 pb-12 sm:pt-36 sm:pb-16 overflow-hidden bg-grid-pattern">
       <Container size="xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Bio & Core Info */}
@@ -128,11 +191,6 @@ export function HeroSection({ profile: initialProfile }: HeroSectionProps) {
           >
             <ProfileFocusCard />
           </motion.div>
-        </div>
-
-        {/* Quick Stats Grid */}
-        <div className="mt-14 sm:mt-20">
-          <QuickStats stats={profile.stats} />
         </div>
       </Container>
     </section>

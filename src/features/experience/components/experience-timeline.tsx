@@ -8,6 +8,7 @@ import { SectionHeader } from '@/components/layouts/section-header';
 import { ExperienceCard } from '@/features/experience/components/experience-card';
 import { GraduationCap } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useI18n } from '@/store/i18n-provider';
 
 export interface ExperienceTimelineProps {
@@ -20,13 +21,72 @@ export interface ExperienceTimelineProps {
   };
 }
 
+export function ExperienceTimelineSkeleton() {
+  return (
+    <section id="experience" className="py-20 sm:py-28 bg-slate-100/40 dark:bg-slate-900/20 border-y border-slate-200/80 dark:border-slate-800/80 relative">
+      <Container size="xl">
+        <div className="flex flex-col items-center text-center space-y-3 mb-12">
+          <Skeleton className="h-6 w-28 rounded-full mx-auto" />
+          <Skeleton className="h-10 w-72 rounded-2xl mx-auto" />
+          <Skeleton className="h-5 w-96 rounded-xl max-w-full mx-auto" />
+        </div>
+
+        <div className="space-y-6 max-w-4xl mx-auto">
+          {[1, 2].map((i) => (
+            <div
+              key={i}
+              className="p-6 sm:p-8 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 space-y-4 shadow-sm"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200/80 dark:border-slate-800">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Skeleton className="w-8 h-8 rounded-lg" />
+                    <Skeleton className="h-4 w-32 rounded" />
+                  </div>
+                  <Skeleton className="h-7 w-48 rounded-lg" />
+                </div>
+                <Skeleton className="h-5 w-36 rounded-md" />
+              </div>
+              <Skeleton className="h-16 w-full rounded-xl" />
+              <div className="space-y-2 pt-2">
+                <Skeleton className="h-4 w-5/6 rounded" />
+                <Skeleton className="h-4 w-4/6 rounded" />
+              </div>
+              <div className="flex flex-wrap gap-2 pt-3 border-t border-slate-200/80 dark:border-slate-800">
+                <Skeleton className="h-6 w-16 rounded-md" />
+                <Skeleton className="h-6 w-20 rounded-md" />
+                <Skeleton className="h-6 w-16 rounded-md" />
+              </div>
+            </div>
+          ))}
+
+          {/* Education card skeleton */}
+          <div className="p-6 sm:p-8 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 space-y-4 shadow-sm">
+            <div className="flex items-center gap-3">
+              <Skeleton className="w-10 h-10 rounded-xl" />
+              <div className="space-y-1.5 flex-1">
+                <Skeleton className="h-6 w-48 rounded-lg" />
+                <Skeleton className="h-4 w-64 rounded-md" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
 export function ExperienceTimeline({
   experiences: initialExperiences,
   education: initialEducation,
 }: ExperienceTimelineProps) {
-  const { ui, experiences: contextExperiences, profile } = useI18n();
+  const { ui, experiences: contextExperiences, profile, isLoading } = useI18n();
   const experiences = initialExperiences || contextExperiences;
   const education = initialEducation || profile.education;
+
+  if (isLoading && !initialExperiences) {
+    return <ExperienceTimelineSkeleton />;
+  }
 
   return (
     <section id="experience" className="py-20 sm:py-28 bg-slate-100/40 dark:bg-slate-900/20 border-y border-slate-200/80 dark:border-slate-800/80 relative">
