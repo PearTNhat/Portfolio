@@ -18,7 +18,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Modal } from '@/components/ui/modal';
 import { projectsService } from '@/services/projects.service';
-import { Project, ProjectCategory } from '@/types/project';
+import { ProjectCategory, ProjectSummary } from '@/types/project';
 
 const categoryLabels: Record<Exclude<ProjectCategory, 'all'>, string> = {
   blockchain: 'Blockchain',
@@ -27,12 +27,12 @@ const categoryLabels: Record<Exclude<ProjectCategory, 'all'>, string> = {
 };
 
 export function ProjectsManager() {
-  const [projects, setProjects] = React.useState<Project[]>([]);
+  const [projects, setProjects] = React.useState<ProjectSummary[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
   const [query, setQuery] = React.useState('');
   const [category, setCategory] = React.useState<ProjectCategory>('all');
-  const [projectToDelete, setProjectToDelete] = React.useState<Project | null>(null);
+  const [projectToDelete, setProjectToDelete] = React.useState<ProjectSummary | null>(null);
   const [isDeleting, setIsDeleting] = React.useState(false);
 
   const loadProjects = React.useCallback(async () => {

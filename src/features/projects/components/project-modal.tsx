@@ -6,7 +6,7 @@ import { Modal } from '@/components/ui/modal';
 import { Button } from '@/components/ui/button';
 import { getTechIcon } from '@/components/ui/tech-icons';
 import { GithubIcon } from '@/components/ui/icons';
-import { CheckCircle2, ExternalLink, Layers, Smartphone } from 'lucide-react';
+import { AlertCircle, CheckCircle2, ExternalLink, Layers, Loader2, Smartphone } from 'lucide-react';
 import { useI18n } from '@/store/i18n-provider';
 import { RichTextContent } from '@/features/projects/components/rich-text-content';
 import { formatMediaUrl } from '@/services/upload.service';
@@ -14,12 +14,40 @@ import { formatMediaUrl } from '@/services/upload.service';
 export interface ProjectModalProps {
   project: Project | null;
   isOpen: boolean;
+  isLoading?: boolean;
+  error?: string | null;
   onClose: () => void;
 }
 
-export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
+export function ProjectModal({ project, isOpen, isLoading = false, error, onClose }: ProjectModalProps) {
   const { ui, language } = useI18n();
-  if (!project) return null;
+
+  if (!project) {
+    return (
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        maxWidth="3xl"
+        title={language === 'vi' ? 'Chi tiết dự án' : 'Project details'}
+      >
+        <div className="flex min-h-48 items-center justify-center p-6 text-center">
+          {isLoading ? (
+            <div className="space-y-3 text-slate-500 dark:text-slate-400">
+              <Loader2 className="mx-auto h-7 w-7 animate-spin text-cyan-500" />
+              <p className="text-sm">
+                {language === 'vi' ? 'Đang tải chi tiết dự án…' : 'Loading project details…'}
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-3 text-rose-600 dark:text-rose-400">
+              <AlertCircle className="mx-auto h-7 w-7" />
+              <p className="text-sm">{error || (language === 'vi' ? 'Không có dữ liệu dự án.' : 'Project data is unavailable.')}</p>
+            </div>
+          )}
+        </div>
+      </Modal>
+    );
+  }
 
   const title = project.titleI18n?.[language] || project.title;
   const subtitle = project.subtitleI18n?.[language] || project.subtitle;

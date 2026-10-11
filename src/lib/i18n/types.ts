@@ -1,5 +1,5 @@
 import { Profile } from '@/types/profile';
-import { Project } from '@/types/project';
+import { ProjectSummary } from '@/types/project';
 import { Experience } from '@/types/experience';
 import { SkillCategory } from '@/types/skill';
 
@@ -144,7 +144,7 @@ export interface I18nUiDictionary {
 export interface I18nDataBundle {
   ui: I18nUiDictionary;
   profile?: Profile;
-  projects?: Project[];
+  projects?: ProjectSummary[];
   experiences?: Experience[];
   skillCategories?: SkillCategory[];
 }

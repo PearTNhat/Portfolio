@@ -63,3 +63,25 @@ export interface Project {
   contributionsI18n?: I18nSlice;
   architectureI18n?: I18nArchitectureDetail;
 }
+
+export type ProjectSummary = Pick<
+  Project,
+  | 'id'
+  | 'slug'
+  | 'title'
+  | 'subtitle'
+  | 'description'
+  | 'type'
+  | 'category'
+  | 'featured'
+  | 'order'
+  | 'metrics'
+  | 'technologies'
+  | 'githubUrl'
+  | 'githubServerUrl'
+  | 'liveUrl'
+  | 'playStoreUrl'
+  | 'thumbnail'
+  | 'badgeText'
+  | 'verificationStatus'
+>;

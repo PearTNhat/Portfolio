@@ -2,17 +2,17 @@
 
 import * as React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Project, ProjectCategory } from '@/types/project';
+import { ProjectCategory, ProjectSummary } from '@/types/project';
 import { Container } from '@/components/layouts/container';
 import { SectionHeader } from '@/components/layouts/section-header';
 import { ProjectCard } from '@/features/projects/components/project-card';
 import { ProjectFilter } from '@/features/projects/components/project-filter';
-import { ProjectModal } from '@/features/projects/components/project-modal';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useI18n } from '@/store/i18n-provider';
+import { useRouter } from 'next/navigation';
 
 export interface ProjectGridProps {
-  initialProjects?: Project[];
+  initialProjects?: ProjectSummary[];
 }
 
 export function ProjectGridSkeleton() {
@@ -67,14 +67,12 @@ export function ProjectGridSkeleton() {
 export function ProjectGrid({ initialProjects }: ProjectGridProps) {
   const { ui, projects: contextProjects, isLoading } = useI18n();
   const projects = initialProjects || contextProjects;
+  const [selectedCategory, setSelectedCategory] = React.useState<ProjectCategory>('all');
+  const router = useRouter();
 
   if (isLoading && !initialProjects) {
     return <ProjectGridSkeleton />;
   }
-
-  const [selectedCategory, setSelectedCategory] = React.useState<ProjectCategory>('all');
-  const [activeProjectId, setActiveProjectId] = React.useState<string | null>(null);
-  const [modalOpen, setModalOpen] = React.useState(false);
 
   // Compute counts per category
   const counts: Record<ProjectCategory, number> = {
@@ -88,14 +86,8 @@ export function ProjectGrid({ initialProjects }: ProjectGridProps) {
     ? projects
     : projects.filter((p) => p.category === selectedCategory);
 
-  const activeProject = React.useMemo(
-    () => projects.find((p) => p.id === activeProjectId) || null,
-    [projects, activeProjectId]
-  );
-
-  const handleViewDetails = (project: Project) => {
-    setActiveProjectId(project.id);
-    setModalOpen(true);
+  const handleViewDetails = (project: ProjectSummary) => {
+    router.push(`/projects/${encodeURIComponent(project.slug)}`);
   };
 
   return (
@@ -139,12 +131,6 @@ export function ProjectGrid({ initialProjects }: ProjectGridProps) {
           </AnimatePresence>
         </motion.div>
 
-        {/* Project Details Modal */}
-        <ProjectModal
-          project={activeProject}
-          isOpen={modalOpen}
-          onClose={() => setModalOpen(false)}
-        />
       </Container>
     </section>
   );

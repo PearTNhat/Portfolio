@@ -5,7 +5,7 @@ import { Language, I18nDataBundle, I18nUiDictionary } from '@/lib/i18n/types';
 import { VI_DATA } from '@/lib/i18n/dictionaries/vi';
 import { EN_DATA } from '@/lib/i18n/dictionaries/en';
 import { Profile, DEFAULT_PROFILE } from '@/types/profile';
-import { Project } from '@/types/project';
+import { ProjectSummary } from '@/types/project';
 import { Experience } from '@/types/experience';
 import { SkillCategory } from '@/types/skill';
 import { projectsService } from '@/services/projects.service';
@@ -21,7 +21,7 @@ interface I18nContextType {
   toggleLanguage: () => void;
   ui: I18nUiDictionary;
   profile: Profile;
-  projects: Project[];
+  projects: ProjectSummary[];
   experiences: Experience[];
   skillCategories: SkillCategory[];
   isHydrated: boolean;
@@ -65,7 +65,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   const language = React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   // Live database data loaded from real Go Backend APIs
-  const [liveProjects, setLiveProjects] = React.useState<Project[] | null>(null);
+  const [liveProjects, setLiveProjects] = React.useState<ProjectSummary[] | null>(null);
   const [liveProfile, setLiveProfile] = React.useState<Profile | null>(null);
   const [liveExperiences, setLiveExperiences] = React.useState<Experience[] | null>(null);
   const [liveSkills, setLiveSkills] = React.useState<SkillCategory[] | null>(null);
@@ -215,4 +215,3 @@ export function invalidatePortfolioCache() {
     // Ignore
   }
 }
-

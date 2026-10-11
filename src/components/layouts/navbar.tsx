@@ -17,10 +17,6 @@ export function Navbar() {
   const { ui } = useI18n();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
-  if (pathname?.startsWith('/admin')) {
-    return null;
-  }
-
   const navItems = React.useMemo(
     () => [
       { label: ui.navbar.overview, href: '#overview' },
@@ -35,13 +31,15 @@ export function Navbar() {
   const sectionIds = navItems.map((item) => item.href.replace('#', ''));
   const activeSection = useScrollSpy(sectionIds);
 
+  if (pathname?.startsWith('/admin')) return null;
+
   return (
     <header className="fixed top-0 left-0 right-0 z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md transition-colors">
       <Container size="xl">
         <div className="flex h-16 items-center justify-between gap-2 sm:gap-4">
           {/* Logo / Brand Monogram */}
           <Link
-            href="#overview"
+            href="/#overview"
             className="flex items-center gap-2.5 group shrink-0"
             aria-label="Lê Tuấn Nhật (LTN) Portfolio"
           >
@@ -69,7 +67,7 @@ export function Navbar() {
               return (
                 <Link
                   key={item.href}
-                  href={item.href}
+                  href={pathname === '/' ? item.href : `/${item.href}`}
                   className={`px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-all duration-150 ${
                     isActive
                       ? 'text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 font-semibold'
@@ -137,7 +135,7 @@ export function Navbar() {
               return (
                 <Link
                   key={item.href}
-                  href={item.href}
+                  href={pathname === '/' ? item.href : `/${item.href}`}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                     isActive

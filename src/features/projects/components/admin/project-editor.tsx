@@ -38,6 +38,7 @@ import {
   processAndUploadPendingBlobs,
 } from '@/services/upload.service';
 import { Project, ProjectCategory, ProjectType } from '@/types/project';
+import { ProjectDetail } from '@/features/projects/components/project-detail';
 import { invalidatePortfolioCache } from '@/store/i18n-provider';
 import { Category } from '@/types/category';
 
@@ -324,6 +325,7 @@ interface ProjectEditorProps {
 }
 
 export function ProjectEditor({ mode, projectId }: ProjectEditorProps) {
+  const [showPreview, setShowPreview] = React.useState(false);
   const router = useRouter();
   const [project, setProject] = React.useState<Project | null>(null);
   const [values, setValues] = React.useState<ProjectFormValues>(emptyValues);
@@ -523,6 +525,11 @@ export function ProjectEditor({ mode, projectId }: ProjectEditorProps) {
 
   const activeTitle = values[editorLang].title || values.vi.title || values.en.title;
 
+  if (showPreview) {
+    const preview = { ...buildPayload(values, project, editorLang), id: project?.id || 'preview' };
+    return <div><div className="sticky top-14 z-30 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-cyan-500/30 bg-slate-950/95 p-4 backdrop-blur"><div><p className="font-semibold text-cyan-300">Xem trước bản đang soạn</p><p className="text-xs text-slate-400 mt-1">Chưa lưu lên website · {editorLang.toUpperCase()}</p></div><Button type="button" onClick={() => setShowPreview(false)}>← Tiếp tục chỉnh sửa</Button></div><ProjectDetail project={preview} previewLanguage={editorLang} /></div>;
+  }
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-6xl mx-auto pb-16">
       {/* Sticky Top Action Bar */}
@@ -556,6 +563,7 @@ export function ProjectEditor({ mode, projectId }: ProjectEditorProps) {
 
         {/* Action buttons */}
         <div className="flex items-center gap-2.5 shrink-0">
+          <Button type="button" variant="outline" size="sm" onClick={() => setShowPreview(true)}>Xem trước</Button>
           <Button
             type="button"
             variant="ghost"
@@ -581,6 +589,12 @@ export function ProjectEditor({ mode, projectId }: ProjectEditorProps) {
       </div>
 
       {/* Alert Banners */}
+      <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-5 text-sm text-slate-300">
+        <h2 className="font-semibold text-cyan-300">Kể câu chuyện dự án theo thứ tự người đọc cần</h2>
+        <p className="mt-2 leading-6">Tổng quan: sản phẩm làm gì, dành cho ai và giải quyết vấn đề gì. Đóng góp: phần bạn trực tiếp thực hiện. Kiến trúc: cách các thành phần phối hợp và lý do chọn giải pháp. Cuối cùng thêm ảnh giao diện, sơ đồ và link demo để minh hoạ.</p>
+        <p className="mt-2 text-xs text-slate-400">Dùng “Xem trước” để kiểm tra bố cục trước khi lưu. Phần không có nội dung sẽ được ẩn. Số liệu nên có ngữ cảnh đo và nguồn xác thực.</p>
+        {project?.slug && <a href={`/projects/${encodeURIComponent(project.slug)}`} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-cyan-400 hover:underline">Mở trang đã xuất bản ↗</a>}
+      </div>
       {error && (
         <div className="p-4 rounded-2xl border border-rose-500/30 bg-rose-500/10 text-rose-300 text-xs flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">

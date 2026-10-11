@@ -1,17 +1,17 @@
 import { apiClient } from '@/services/api-client';
-import { Project, ProjectCategory } from '@/types/project';
+import { Project, ProjectCategory, ProjectSummary } from '@/types/project';
 
 export class ProjectsService {
-  async getAdminProjects(lang?: string): Promise<Project[]> {
-    const response = await apiClient.get<Project[]>('/projects', {
+  async getAdminProjects(lang?: string): Promise<ProjectSummary[]> {
+    const response = await apiClient.get<ProjectSummary[]>('/projects', {
       params: lang ? { lang } : undefined,
     });
     return response.data || [];
   }
 
-  async getProjects(category: ProjectCategory = 'all', lang: string = 'vi'): Promise<Project[]> {
+  async getProjects(category: ProjectCategory = 'all', lang: string = 'vi'): Promise<ProjectSummary[]> {
     try {
-      const response = await apiClient.get<Project[]>('/projects', {
+      const response = await apiClient.get<ProjectSummary[]>('/projects', {
         params: {
           category: category !== 'all' ? category : undefined,
           lang,
@@ -31,8 +31,7 @@ export class ProjectsService {
       });
       return response.data || null;
     } catch {
-      const list = await this.getAdminProjects(lang);
-      return list.find((p) => p.id === id) || null;
+      return null;
     }
   }
 

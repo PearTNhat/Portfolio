@@ -1,12 +1,13 @@
 'use client';
 
 import * as React from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ChevronRight, Zap, HardDrive, ShoppingCart, Database, Server, UserCheck, Briefcase, ExternalLink, CheckCircle2, Smartphone } from 'lucide-react';
+import { ChevronRight, Zap, HardDrive, ShoppingCart, UserCheck, Briefcase, ExternalLink, CheckCircle2, Smartphone } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 import { getTechIcon } from '@/components/ui/tech-icons';
-import { Project } from '@/types/project';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import { ProjectSummary } from '@/types/project';
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { RichTextContent } from '@/features/projects/components/rich-text-content';
@@ -14,17 +15,17 @@ import { formatMediaUrl } from '@/services/upload.service';
 import { useI18n } from '@/store/i18n-provider';
 
 export interface ProjectCardProps {
-  project: Project;
-  onViewDetails: (project: Project) => void;
+  project: ProjectSummary;
+  onViewDetails: (project: ProjectSummary) => void;
 }
 
 export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
-  const { ui, language } = useI18n();
+  const { ui } = useI18n();
 
-  const title = project.titleI18n?.[language] || project.title;
-  const subtitle = project.subtitleI18n?.[language] || project.subtitle;
-  const description = project.descriptionI18n?.[language] || project.description;
-  const badgeText = project.badgeTextI18n?.[language] || project.badgeText;
+  const title = project.title;
+  const subtitle = project.subtitle;
+  const description = project.description;
+  const badgeText = project.badgeText;
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
@@ -40,7 +41,7 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
   };
 
   const isPersonal = project.type === 'personal';
-  const coverImage = project.thumbnail || (project.images && project.images.length > 0 ? project.images[0] : null);
+  const coverImage = project.thumbnail;
   const isLogo = Boolean(
     coverImage &&
       (coverImage.toLowerCase().endsWith('.png') ||
@@ -121,7 +122,7 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
             </div>
 
             <CardTitle className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
-              {title}
+              <Link href={`/projects/${encodeURIComponent(project.slug)}`} prefetch={false} onClick={(event) => event.stopPropagation()}>{title}</Link>
             </CardTitle>
             <div className="text-xs font-mono text-cyan-600 dark:text-cyan-400 font-semibold pt-0.5">
               {subtitle}
