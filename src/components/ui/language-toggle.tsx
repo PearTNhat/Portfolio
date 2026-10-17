@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { ChevronDown, Check, Globe } from 'lucide-react';
 import { useI18n } from '@/store/i18n-provider';
 import { Language } from '@/lib/i18n/types';
@@ -14,6 +15,8 @@ export function LanguageToggle({ className = '', align = 'right' }: LanguageTogg
   const { language, setLanguage } = useI18n();
   const [isOpen, setIsOpen] = React.useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const options: { id: Language; code: string; flag: string; label: string; subLabel: string }[] = [
     { id: 'vi', code: 'VI', flag: '🇻🇳', label: 'Tiếng Việt', subLabel: 'Mặc định' },
@@ -34,8 +37,24 @@ export function LanguageToggle({ className = '', align = 'right' }: LanguageTogg
   }, []);
 
   const handleSelect = (langId: Language) => {
+    if (langId === language) {
+      setIsOpen(false);
+      return;
+    }
+
     setLanguage(langId);
     setIsOpen(false);
+
+    if (!pathname) return;
+
+    const segments = pathname.split('/');
+    if (segments[1] === 'vi' || segments[1] === 'en') {
+      segments[1] = langId;
+      const newPath = segments.join('/') || `/${langId}`;
+      router.push(newPath);
+    } else {
+      router.push(`/${langId}${pathname === '/' ? '' : pathname}`);
+    }
   };
 
   return (

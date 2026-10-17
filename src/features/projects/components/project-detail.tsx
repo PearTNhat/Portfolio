@@ -44,7 +44,7 @@ export function ProjectDetail({ project: p, previewLanguage }: { project: Projec
   const sectionClass = 'scroll-mt-44 lg:scroll-mt-28 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/60 p-4 sm:p-6 shadow-sm';
   return (
     <article className="mx-auto max-w-6xl px-4 sm:px-6 pt-24 pb-14">
-      <Link href="/#projects" className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-cyan-500"><ArrowLeft size={16} />{vi ? 'Tất cả dự án' : 'All projects'}</Link>
+      <Link href={`/${locale}#projects`} className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-cyan-500"><ArrowLeft size={16} />{vi ? 'Tất cả dự án' : 'All projects'}</Link>
       <header className="relative overflow-hidden mt-5 rounded-3xl border border-violet-400/30 bg-gradient-to-br from-indigo-950 via-slate-950 to-cyan-950 p-5 sm:p-7 text-white shadow-xl shadow-violet-500/10">
         <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-fuchsia-400" />
         <div aria-hidden="true" className="absolute -right-20 -top-32 h-96 w-96 rounded-full bg-fuchsia-500/20 blur-3xl" />

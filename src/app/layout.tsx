@@ -1,9 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import { ThemeProvider } from '@/store/theme-provider';
-import { I18nProvider } from '@/store/i18n-provider';
-import { Navbar } from '@/components/layouts/navbar';
-import { Footer } from '@/components/layouts/footer';
-import { AnimatedBackground } from '@/components/ui/animated-background';
 import { SITE_METADATA } from '@/lib/constants';
 import './globals.css';
 
@@ -66,14 +62,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <I18nProvider>
-            <AnimatedBackground />
-            <div className="flex flex-col min-h-screen relative z-10">
-              <Navbar />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
-          </I18nProvider>
+          {children}
         </ThemeProvider>
       </body>
     </html>

@@ -61,8 +61,14 @@ function getServerSnapshot(): Language {
   return 'vi';
 }
 
-export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const language = React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+export function I18nProvider({
+  children,
+  initialLanguage = 'vi',
+}: {
+  children: React.ReactNode;
+  initialLanguage?: Language;
+}) {
+  const [language, setLanguageState] = React.useState<Language>(initialLanguage);
 
   // Live database data loaded from real Go Backend APIs
   const [liveProjects, setLiveProjects] = React.useState<ProjectSummary[] | null>(null);
@@ -70,6 +76,12 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   const [liveExperiences, setLiveExperiences] = React.useState<Experience[] | null>(null);
   const [liveSkills, setLiveSkills] = React.useState<SkillCategory[] | null>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    if (initialLanguage && initialLanguage !== language) {
+      setLanguageState(initialLanguage);
+    }
+  }, [initialLanguage, language]);
 
   React.useEffect(() => {
     document.documentElement.lang = language;
@@ -161,9 +173,11 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   }, [language]);
 
   const setLanguage = React.useCallback((lang: Language) => {
+    setLanguageState(lang);
     if (typeof window === 'undefined') return;
     try {
       localStorage.setItem(STORAGE_KEY, lang);
+      document.cookie = `portfolio_language=${lang}; path=/; max-age=31536000; SameSite=Lax`;
       document.documentElement.lang = lang;
       window.dispatchEvent(new Event('portfolio-language-change'));
     } catch {
@@ -200,7 +214,18 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
 export function useI18n(): I18nContextType {
   const context = React.useContext(I18nContext);
   if (!context) {
-    throw new Error('useI18n must be used within an I18nProvider');
+    return {
+      language: 'vi',
+      setLanguage: () => {},
+      toggleLanguage: () => {},
+      ui: VI_DATA.ui,
+      profile: DEFAULT_PROFILE,
+      projects: [],
+      experiences: [],
+      skillCategories: [],
+      isHydrated: true,
+      isLoading: false,
+    };
   }
   return context;
 }

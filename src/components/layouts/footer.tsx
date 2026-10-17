@@ -10,7 +10,7 @@ import { useI18n } from '@/store/i18n-provider';
 
 export function Footer() {
   const pathname = usePathname();
-  const { ui, profile } = useI18n();
+  const { ui, profile, language } = useI18n();
 
   if (pathname?.startsWith('/admin')) {
     return null;
@@ -23,7 +23,7 @@ export function Footer() {
           {/* Brand & Summary */}
           <div className="md:col-span-2 space-y-4">
             <Link
-              href="/#overview"
+              href={`/${language}#overview`}
               className="flex items-center gap-2.5 group"
             >
               <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 via-indigo-500 to-purple-600 p-[1.5px] shadow-sm shadow-cyan-500/20">
@@ -72,27 +72,27 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/#overview" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">
+                <Link href={`/${language}#overview`} className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">
                   {ui.navbar.overview}
                 </Link>
               </li>
               <li>
-                <Link href="/#skills" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">
+                <Link href={`/${language}#skills`} className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">
                   {ui.navbar.skills}
                 </Link>
               </li>
               <li>
-                <Link href="/#projects" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">
+                <Link href={`/${language}#projects`} className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">
                   {ui.navbar.projects}
                 </Link>
               </li>
               <li>
-                <Link href="/#experience" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">
+                <Link href={`/${language}#experience`} className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">
                   {ui.navbar.experience}
                 </Link>
               </li>
               <li>
-                <Link href="/#contact" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">
+                <Link href={`/${language}#contact`} className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">
                   {ui.navbar.contact}
                 </Link>
               </li>
@@ -132,7 +132,7 @@ export function Footer() {
               {ui.footer.availableForWork}
             </span>
             <Link
-              href="/#overview"
+              href={`/${language}#overview`}
               className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
               aria-label={ui.footer.backToTop}
             >

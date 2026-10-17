@@ -14,7 +14,7 @@ import { useI18n } from '@/store/i18n-provider';
 
 export function Navbar() {
   const pathname = usePathname();
-  const { ui } = useI18n();
+  const { ui, language } = useI18n();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   const navItems = React.useMemo(
@@ -39,7 +39,7 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between gap-2 sm:gap-4">
           {/* Logo / Brand Monogram */}
           <Link
-            href="/#overview"
+            href={`/${language}#overview`}
             className="flex items-center gap-2.5 group shrink-0"
             aria-label="Lê Tuấn Nhật (LTN) Portfolio"
           >
@@ -67,7 +67,7 @@ export function Navbar() {
               return (
                 <Link
                   key={item.href}
-                  href={pathname === '/' ? item.href : `/${item.href}`}
+                  href={pathname === `/${language}` || pathname === '/' ? item.href : `/${language}${item.href}`}
                   className={`px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-all duration-150 ${
                     isActive
                       ? 'text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 font-semibold'
@@ -135,7 +135,7 @@ export function Navbar() {
               return (
                 <Link
                   key={item.href}
-                  href={pathname === '/' ? item.href : `/${item.href}`}
+                  href={pathname === `/${language}` || pathname === '/' ? item.href : `/${language}${item.href}`}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                     isActive

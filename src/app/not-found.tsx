@@ -28,7 +28,7 @@ export default function NotFound() {
           </p>
         </div>
         <div className="pt-2">
-          <Link href="/">
+          <Link href="/vi">
             <Button variant="primary" leftIcon={<ArrowLeft className="w-4 h-4" />}>
               {ui.notFound.returnHome}
             </Button>
